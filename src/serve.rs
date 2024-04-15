@@ -2,7 +2,14 @@ use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
 
 #[derive(OpenApi)]
-#[openapi(paths(crate::render::render_html, crate::render::render_text))]
+#[openapi(
+    paths(
+        crate::render::render_html, crate::render::render_text
+    ),
+    tags(
+        (name = "mb-mail-service", description = "MusicBrains Mail Service API")
+    )
+)]
 
 struct ApiDoc;
 
