@@ -60,7 +60,7 @@ impl IntoResponse for EngineError {
     )
 )]
 pub async fn render_html(Path(template_id): Path<String>) -> Response {
-    let path = dbg!(template_id) + ".mjml";
+    let path = template_id + ".mjml";
     if let Some(template) = TemplateFiles::get(&path)
         .map(|f| String::from_utf8(f.data.to_vec()).expect("Template was not valid UTF-8"))
     {
@@ -89,7 +89,7 @@ pub async fn render_html(Path(template_id): Path<String>) -> Response {
     )
 )]
 pub async fn render_text(Path(template_id): Path<String>) -> Response {
-    let path = dbg!(template_id) + ".mjml";
+    let path = template_id + ".mjml";
     if let Some(template) = TemplateFiles::get(&path)
         .map(|f| String::from_utf8(f.data.to_vec()).expect("Template was not valid UTF-8"))
     {
