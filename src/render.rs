@@ -9,7 +9,7 @@ use rust_embed::RustEmbed;
 
 use handlebars::Handlebars;
 use mrml::prelude::parser::{loader::IncludeLoader, ParserOptions};
-use serde_json::value::{Map, Value as JsonValue};
+use serde_json::value::Map;
 
 #[derive(RustEmbed, Debug)]
 #[folder = "templates"]

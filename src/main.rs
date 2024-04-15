@@ -1,12 +1,3 @@
-use std::{
-    fs::File,
-    net::{IpAddr, Ipv4Addr},
-    sync::Arc,
-    time::Duration,
-};
-
-use axum::{response::IntoResponse, routing::get, Json};
-
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 mod render;
@@ -21,7 +12,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .with(tracing_subscriber::fmt::layer().without_time())
         .init();
 
-    let mut rt = tokio::runtime::Runtime::new().unwrap();
+    let rt = tokio::runtime::Runtime::new().unwrap();
 
     rt.block_on(serve::serve());
     Ok(())
