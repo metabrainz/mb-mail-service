@@ -18,6 +18,8 @@ use crate::render::{render_html, render_text};
 use axum::routing::get;
 
 pub(crate) async fn serve() {
+    // If possible, we want to use a socket passed to the app by, eg, SystemD or ListenFD.
+    // Otherwise, we will use [address] to get a socket.
     let mut listenfd = listenfd::ListenFd::from_env();
     let listener = if let Ok(Some(listener)) = listenfd.take_tcp_listener(0) {
         tracing::info!("server listening on socket");
@@ -30,11 +32,16 @@ pub(crate) async fn serve() {
     };
 
     let app = axum::Router::new()
+        // OpenAPI docs
         .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", ApiDoc::openapi()))
+        // Our routes
         .route("/templates/:template_id/html", get(render_html))
         .route("/templates/:template_id/text", get(render_text))
         .layer((
+            // Logging
             TraceLayer::new_for_http(),
+            // Give a universal timeout to prevent
+            // DOS and for graceful shutdown
             TimeoutLayer::new(Duration::from_secs(60)),
         ));
 
@@ -44,6 +51,11 @@ pub(crate) async fn serve() {
         .unwrap()
 }
 
+/// Get the socket address for the server.
+/// This will try to get an IP address from the
+/// `HOST` environment variable and a port from
+/// the `PORT` variable, but will otherwise
+/// default to `127.0.0.1:3000`.
 fn address() -> SocketAddr {
     let host = std::env::var("HOST")
         .ok()
@@ -57,6 +69,10 @@ fn address() -> SocketAddr {
     SocketAddr::from((host, port))
 }
 
+/// This future resolves when either
+/// Ctrl+C or SIGTERM is recieved. It is
+/// intended for Axum's `with_graceful_shutdown`
+/// function.
 async fn shutdown_signal() {
     let ctrl_c = async {
         signal::ctrl_c()
