@@ -1,6 +1,10 @@
 use std::fs::File;
 
-use axum::{extract::Path, http::{header, StatusCode}, response::{IntoResponse, Response}};
+use axum::{
+    extract::Path,
+    http::{header, StatusCode},
+    response::{IntoResponse, Response},
+};
 use rust_embed::RustEmbed;
 
 use handlebars::Handlebars;
@@ -57,20 +61,17 @@ impl IntoResponse for EngineError {
 )]
 pub async fn render_html(Path(template_id): Path<String>) -> Response {
     let path = dbg!(template_id) + ".mjml";
-    if let Some(template) = TemplateFiles::get(&path).map(|f| String::from_utf8(f.data.to_vec()).expect("Template was not valid UTF-8")) {
+    if let Some(template) = TemplateFiles::get(&path)
+        .map(|f| String::from_utf8(f.data.to_vec()).expect("Template was not valid UTF-8"))
+    {
         let opts = ParserOptions {
             include_loader: Box::new(TemplateFiles),
         };
-        let root = mrml::parse_with_options(
-            template,
-            &opts,
-        )
-        .expect("parse template");
+        let root = mrml::parse_with_options(template, &opts).expect("parse template");
         let opts = mrml::prelude::render::RenderOptions::default();
         let content = root.render(&opts).unwrap();
-    
+
         ([(header::CONTENT_TYPE, "text/html")], content).into_response()
-        
     } else {
         (StatusCode::NOT_FOUND, format!("Not Found: {}", path)).into_response()
     }
@@ -89,23 +90,23 @@ pub async fn render_html(Path(template_id): Path<String>) -> Response {
 )]
 pub async fn render_text(Path(template_id): Path<String>) -> Response {
     let path = dbg!(template_id) + ".mjml";
-    if let Some(template) = TemplateFiles::get(&path).map(|f| String::from_utf8(f.data.to_vec()).expect("Template was not valid UTF-8")) {
+    if let Some(template) = TemplateFiles::get(&path)
+        .map(|f| String::from_utf8(f.data.to_vec()).expect("Template was not valid UTF-8"))
+    {
         let opts = ParserOptions {
             include_loader: Box::new(TemplateFiles),
         };
-        let root = mrml::parse_with_options(
-            template,
-            &opts,
-        )
-        .expect("parse template");
+        let root = mrml::parse_with_options(template, &opts).expect("parse template");
         let opts = mrml::prelude::render::RenderOptions::default();
         let content = root.render(&opts).unwrap();
-    
-        ([(header::CONTENT_TYPE, "text/plain; charset=UTF-8")], 
-        html2text::config::plain()
-            .string_from_read(content.as_bytes(), 50)
-            .expect("Failed to convert to HTML")).into_response()
-        
+
+        (
+            [(header::CONTENT_TYPE, "text/plain; charset=UTF-8")],
+            html2text::config::plain()
+                .string_from_read(content.as_bytes(), 50)
+                .expect("Failed to convert to HTML"),
+        )
+            .into_response()
     } else {
         (StatusCode::NOT_FOUND, format!("Not Found: {}", path)).into_response()
     }
@@ -128,11 +129,7 @@ fn render() -> Result<(), Box<dyn std::error::Error>> {
     let opts = ParserOptions {
         include_loader: Box::new(TemplateFiles),
     };
-    let root = mrml::parse_with_options(
-        "",
-        &opts,
-    )
-    .expect("parse template");
+    let root = mrml::parse_with_options("", &opts).expect("parse template");
     let opts = mrml::prelude::render::Options::default();
     match root.render(&opts) {
         Ok(content) => println!("{}", content),
