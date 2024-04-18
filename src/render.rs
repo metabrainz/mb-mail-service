@@ -130,7 +130,7 @@ fn render() -> Result<(), Box<dyn std::error::Error>> {
         include_loader: Box::new(TemplateFiles),
     };
     let root = mrml::parse_with_options("", &opts).expect("parse template");
-    let opts = mrml::prelude::render::Options::default();
+    let opts = mrml::prelude::render::RenderOptions::default();
     match root.render(&opts) {
         Ok(content) => println!("{}", content),
         Err(_) => println!("couldn't render mjml template"),
