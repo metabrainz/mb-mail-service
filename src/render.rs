@@ -1,5 +1,3 @@
-use std::fs::File;
-
 use axum::{
     extract::Path,
     http::{header, StatusCode},
@@ -7,9 +5,7 @@ use axum::{
 };
 use rust_embed::RustEmbed;
 
-use handlebars::Handlebars;
 use mrml::prelude::parser::{loader::IncludeLoader, ParserOptions};
-use serde_json::value::Map;
 
 #[derive(RustEmbed, Debug)]
 #[folder = "templates"]
@@ -114,7 +110,12 @@ pub async fn render_text(Path(template_id): Path<String>) -> Result<Response, En
     }
 }
 
+#[test]
 fn render() -> Result<(), Box<dyn std::error::Error>> {
+    use handlebars::Handlebars;
+    use serde_json::Map;
+    use std::fs::File;
+
     let mut handlebars = Handlebars::new();
 
     handlebars
@@ -128,19 +129,11 @@ fn render() -> Result<(), Box<dyn std::error::Error>> {
     let mut output_file = File::create("target/test.html")?;
     handlebars.render_to_write("test.hbs", &data, &mut output_file)?;
     println!("target/test.html generated");
-    let opts = ParserOptions {
-        include_loader: Box::new(TemplateFiles),
-    };
-    let root = mrml::parse_with_options("", &opts).expect("parse template");
-    let opts = mrml::prelude::render::RenderOptions::default();
-    match root.render(&opts) {
-        Ok(content) => println!("{}", content),
-        Err(_) => println!("couldn't render mjml template"),
-    };
 
     Ok(())
 }
-fn render_mrml() {
-    // TODO: Iterate over and prerender all the templates?
-    // TemplateFiles::iter().map(f)
-}
+
+// TODO: Iterate over and prerender all the templates?
+// fn render_mrml() {
+//     TemplateFiles::iter().map(f)
+// }
