@@ -1,5 +1,5 @@
 <mjml>
     <mj-body>
-      <mj-include path="basic.mjml" />
+      <mj-include path="include_snippet.mjml" />
     </mj-body>
   </mjml>

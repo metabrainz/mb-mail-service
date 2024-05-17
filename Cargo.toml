@@ -7,6 +7,7 @@ edition = "2021"
 
 [dependencies]
 axum = { version = "0.7.5", features = ["tracing", "macros"] }
+expect-test = "1.5.0"
 handlebars = { version = "5.1.2", features = ["rust-embed"] }
 html2text = "0.12.4"
 listenfd = "1.0.1"

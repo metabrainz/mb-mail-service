@@ -4,7 +4,7 @@ use utoipa_swagger_ui::SwaggerUi;
 #[derive(OpenApi)]
 #[openapi(
     paths(
-        crate::render::render_html, crate::render::render_text
+        crate::render::render_html_route, crate::render::render_text_route
     ),
     tags(
         (name = "mb-mail-service", description = "MusicBrains Mail Service API")
@@ -21,7 +21,7 @@ use std::{
 };
 use tokio::{net::TcpListener, signal};
 
-use crate::render::{render_html, render_text};
+use crate::render::{render_html_route, render_text_route};
 use axum::routing::get;
 
 pub(crate) async fn serve() {
@@ -42,8 +42,8 @@ pub(crate) async fn serve() {
         // OpenAPI docs
         .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", ApiDoc::openapi()))
         // Our routes
-        .route("/templates/:template_id/html", get(render_html))
-        .route("/templates/:template_id/text", get(render_text))
+        .route("/templates/:template_id/html", get(render_html_route))
+        .route("/templates/:template_id/text", get(render_text_route))
         .layer((
             // Logging
             TraceLayer::new_for_http(),
