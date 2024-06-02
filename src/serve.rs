@@ -64,7 +64,7 @@ pub(crate) async fn serve() {
     axum::serve(listener, app.into_make_service())
         .with_graceful_shutdown(shutdown_signal())
         .await
-        .unwrap()
+        .unwrap();
 }
 
 /// Get the socket address for the server.
@@ -126,7 +126,7 @@ fn mailer() -> MailTransport {
         }
         None => {
             if host.is_some() {
-                warn!("SMTP connection mode not specified, defaulting to unsafe plain text!")
+                warn!("SMTP connection mode not specified, defaulting to unsafe plain text!");
             }
             MailTransport::builder_dangerous(host.as_deref().unwrap_or("localhost"))
         }
@@ -159,7 +159,7 @@ async fn shutdown_signal() {
     let terminate = std::future::pending::<()>();
 
     tokio::select! {
-        _ = ctrl_c => {},
-        _ = terminate => {},
+        () = ctrl_c => {},
+        () = terminate => {},
     }
 }
