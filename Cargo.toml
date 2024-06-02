@@ -10,10 +10,13 @@ axum = { version = "0.7.5", features = ["tracing", "macros"] }
 expect-test = "1.5.0"
 handlebars = { version = "5.1.2", features = ["rust-embed"] }
 html2text = "0.12.4"
+lettre = { version = "0.11.7", features = ["tokio1", "builder", "smtp-transport", "pool", "tokio1-rustls-tls", "tracing"], default-features = false }
 listenfd = "1.0.1"
 mrml = { version = "3.1.4", features = [] }
 rust-embed = { version = "8.3.0", features = ["include-exclude"] }
 serde_json = "1.0.115"
+strum = "0.26.2"
+strum_macros = "0.26.3"
 thiserror = "1.0.58"
 tokio = { version = "1.37.0", features = ["full"] }
 tower = { version = "0.4.13", features = ["util"] }

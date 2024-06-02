@@ -46,7 +46,7 @@ impl IntoResponse for EngineError {
         .into_response()
     }
 }
-pub async fn render_html(template_id: String) -> Result<String, EngineError> {
+pub async fn render_html(template_id: String) -> Result<(String, Option<String>), EngineError> {
     let path = template_id + ".mjml";
     let template = TemplateFiles::get(&path)
         .map(|f| String::from_utf8(f.data.to_vec()).expect("Template was not valid UTF-8"))
@@ -57,7 +57,7 @@ pub async fn render_html(template_id: String) -> Result<String, EngineError> {
     let root = mrml::parse_with_options(template, &opts)?;
     let opts = mrml::prelude::render::RenderOptions::default();
     let content = root.render(&opts)?;
-    Ok(content)
+    Ok((content, root.get_title()))
 }
 
 #[utoipa::path(
@@ -72,13 +72,12 @@ pub async fn render_html(template_id: String) -> Result<String, EngineError> {
     )
 )]
 pub async fn render_html_route(Path(template_id): Path<String>) -> Result<Response, EngineError> {
-    let content = render_html(template_id).await?;
+    let (content, _title) = render_html(template_id).await?;
 
     Ok(([(header::CONTENT_TYPE, "text/html")], content).into_response())
 }
 
-pub async fn render_text(html: String) -> Result<String, EngineError> {
-
+pub async fn render_text(html: &str) -> Result<String, EngineError> {
     let text = html2text::config::plain().string_from_read(html.as_bytes(), 50)?;
     Ok(text)
 }
@@ -95,8 +94,8 @@ pub async fn render_text(html: String) -> Result<String, EngineError> {
     )
 )]
 pub async fn render_text_route(Path(template_id): Path<String>) -> Result<Response, EngineError> {
-    let html = render_html(template_id).await?;
-    let content = render_text(html).await?;
+    let (html, _title) = render_html(template_id).await?;
+    let content = render_text(&html).await?;
 
     Ok((
         [(header::CONTENT_TYPE, "text/plain; charset=UTF-8")],
@@ -104,36 +103,37 @@ pub async fn render_text_route(Path(template_id): Path<String>) -> Result<Respon
     )
         .into_response())
 }
+
 #[cfg(test)]
 mod test {
     use expect_test::expect_file;
 
     #[tokio::test]
     async fn basic_template_html() {
-        let res: String = super::render_html("basic".to_string()).await.unwrap();
+        let (res, _) = super::render_html("basic".to_string()).await.unwrap();
         let expected = expect_file!["../fixtures/basic.html"];
         expected.assert_eq(&res);
     }
 
     #[tokio::test]
     async fn include_template_html() {
-        let res = super::render_html("include".to_string()).await.unwrap();
+        let (res, _) = super::render_html("include".to_string()).await.unwrap();
         let expected = expect_file!["../fixtures/include.html"];
         expected.assert_eq(&res);
     }
 
     #[tokio::test]
     async fn basic_template_text() {
-        let html: String = super::render_html("basic".to_string()).await.unwrap();
-        let res: String = super::render_text(html).await.unwrap();
+        let (html, _) = super::render_html("basic".to_string()).await.unwrap();
+        let res: String = super::render_text(&html).await.unwrap();
         let expected = expect_file!["../fixtures/basic.txt"];
         expected.assert_eq(&res);
     }
 
     #[tokio::test]
     async fn include_template_text() {
-        let html = super::render_html("include".to_string()).await.unwrap();
-        let res = super::render_text(html).await.unwrap();
+        let (html, _) = super::render_html("include".to_string()).await.unwrap();
+        let res = super::render_text(&html).await.unwrap();
         let expected = expect_file!["../fixtures/include.txt"];
         expected.assert_eq(&res);
     }

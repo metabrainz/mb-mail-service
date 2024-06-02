@@ -1,17 +1,6 @@
+use tracing::warn;
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
-
-#[derive(OpenApi)]
-#[openapi(
-    paths(
-        crate::render::render_html_route, crate::render::render_text_route
-    ),
-    tags(
-        (name = "mb-mail-service", description = "MusicBrains Mail Service API")
-    )
-)]
-
-struct ApiDoc;
 
 use tower_http::{timeout::TimeoutLayer, trace::TraceLayer};
 
@@ -21,8 +10,26 @@ use std::{
 };
 use tokio::{net::TcpListener, signal};
 
-use crate::render::{render_html_route, render_text_route};
+use crate::{
+    render::{render_html_route, render_text_route},
+    send::{send_mail_route, MailTransport},
+};
 use axum::routing::get;
+
+use std::str::FromStr;
+use strum_macros::EnumString;
+
+#[derive(OpenApi)]
+#[openapi(
+    paths(
+        crate::render::render_html_route, crate::render::render_text_route,
+        crate::send::send_mail_route
+    ),
+    tags(
+        (name = "mb-mail-service", description = "MusicBrains Mail Service API")
+    )
+)]
+struct ApiDoc;
 
 pub(crate) async fn serve() {
     // If possible, we want to use a socket passed to the app by, eg, SystemD or ListenFD.
@@ -44,6 +51,8 @@ pub(crate) async fn serve() {
         // Our routes
         .route("/templates/:template_id/html", get(render_html_route))
         .route("/templates/:template_id/text", get(render_text_route))
+        .route("/send/:template_id", get(send_mail_route))
+        .with_state(mailer())
         .layer((
             // Logging
             TraceLayer::new_for_http(),
@@ -74,6 +83,57 @@ fn address() -> SocketAddr {
         .unwrap_or(3000);
 
     SocketAddr::from((host, port))
+}
+
+#[derive(Debug, PartialEq, EnumString)]
+#[strum(serialize_all = "snake_case")]
+enum SmtpConnectionMode {
+    Plaintext,
+    Startls,
+    Tls,
+}
+
+/// Get the configuration for the mailer.
+/// Options:
+///
+/// `SMTP_MODE`: `plaintext`, `startls` or `tls`.
+/// Defaults to `plaintext`. \
+/// `SMTP_HOST`: The SMTP relay to connect to.
+/// Defaults to localhost \
+/// `SMTP_PORT`: The port on the relay to
+/// connect to. Defaults to 25
+fn mailer() -> MailTransport {
+    let host = std::env::var("SMTP_HOST").ok();
+    let port = std::env::var("SMTP_PORT")
+        .ok()
+        .and_then(|v| v.parse::<u16>().ok())
+        .unwrap_or(25);
+    let mode = std::env::var("SMTP_MODE").ok().and_then(|v| {
+        SmtpConnectionMode::from_str(&v)
+            .inspect_err(|_| eprintln!("Unrecognised connection mode: {v}"))
+            .ok()
+    });
+
+    match mode {
+        Some(SmtpConnectionMode::Plaintext) => {
+            MailTransport::builder_dangerous(host.as_deref().unwrap_or("localhost"))
+        }
+        Some(SmtpConnectionMode::Startls) => {
+            MailTransport::starttls_relay(host.as_deref().unwrap_or("localhost")).unwrap()
+        }
+        Some(SmtpConnectionMode::Tls) => {
+            MailTransport::relay(host.as_deref().unwrap_or("localhost")).unwrap()
+        }
+        None => {
+            if host.is_some() {
+                warn!("SMTP connection mode not specified, defaulting to unsafe plain text!")
+            }
+            MailTransport::builder_dangerous(host.as_deref().unwrap_or("localhost"))
+        }
+    }
+    .timeout(Some(Duration::from_secs(10)))
+    .port(port)
+    .build()
 }
 
 /// This future resolves when either
