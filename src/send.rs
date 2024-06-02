@@ -81,8 +81,8 @@ pub async fn send_mail(
     template_id: String,
     mailer: MailTransport,
 ) -> Result<lettre::transport::smtp::response::Response, SendError> {
-    let (html, title) = render_html(template_id).await.unwrap();
-    let text = render_text(&html).await.unwrap();
+    let (html, title) = render_html(template_id).await?;
+    let text = render_text(&html).await?;
     let email = Message::builder()
         .from("Test Sender <sender@example.com>".parse().unwrap())
         .to("Test Reciever <reciever@example.com>".parse().unwrap())
