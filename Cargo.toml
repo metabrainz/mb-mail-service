@@ -24,7 +24,7 @@ tower-http = { version = "0.5.2", features = ["timeout", "trace"] }
 tracing = "0.1.40"
 tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
 utoipa = { version = "4.2.0", features = ["axum_extras"] }
-utoipa-swagger-ui = { version = "6.0.0", features = ["axum"] }
+utoipa-swagger-ui = { version = "7.0.0", features = ["axum"] }
 
 [profile.release]
 lto = true
