@@ -77,10 +77,9 @@ pub async fn render_html_route(Path(template_id): Path<String>) -> Result<Respon
     Ok(([(header::CONTENT_TYPE, "text/html")], content).into_response())
 }
 
-pub async fn render_text(template_id: String) -> Result<String, EngineError> {
-    let content = render_html(template_id).await?;
+pub async fn render_text(html: String) -> Result<String, EngineError> {
 
-    let text = html2text::config::plain().string_from_read(content.as_bytes(), 50)?;
+    let text = html2text::config::plain().string_from_read(html.as_bytes(), 50)?;
     Ok(text)
 }
 
@@ -96,7 +95,8 @@ pub async fn render_text(template_id: String) -> Result<String, EngineError> {
     )
 )]
 pub async fn render_text_route(Path(template_id): Path<String>) -> Result<Response, EngineError> {
-    let content = render_text(template_id).await?;
+    let html = render_html(template_id).await?;
+    let content = render_text(html).await?;
 
     Ok((
         [(header::CONTENT_TYPE, "text/plain; charset=UTF-8")],
@@ -124,14 +124,16 @@ mod test {
 
     #[tokio::test]
     async fn basic_template_text() {
-        let res: String = super::render_text("basic".to_string()).await.unwrap();
+        let html: String = super::render_html("basic".to_string()).await.unwrap();
+        let res: String = super::render_text(html).await.unwrap();
         let expected = expect_file!["../fixtures/basic.txt"];
         expected.assert_eq(&res);
     }
 
     #[tokio::test]
     async fn include_template_text() {
-        let res = super::render_text("include".to_string()).await.unwrap();
+        let html = super::render_html("include".to_string()).await.unwrap();
+        let res = super::render_text(html).await.unwrap();
         let expected = expect_file!["../fixtures/include.txt"];
         expected.assert_eq(&res);
     }
