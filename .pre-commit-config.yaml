@@ -39,3 +39,11 @@ repos:
         args: [--all-targets, --all-features, "--", "-D", "warnings"]
       - id: build
       - id: test
+  - repo: https://github.com/EmbarkStudios/cargo-deny
+    rev: 0.14.24
+    hooks:
+      - id: cargo-deny
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.22.0
+    hooks:
+      - id: typos
