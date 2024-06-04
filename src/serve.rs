@@ -137,7 +137,7 @@ fn mailer() -> MailTransport {
 }
 
 /// This future resolves when either
-/// Ctrl+C or SIGTERM is recieved. It is
+/// Ctrl+C or SIGTERM is received. It is
 /// intended for Axum's `with_graceful_shutdown`
 /// function.
 async fn shutdown_signal() {

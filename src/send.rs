@@ -85,7 +85,7 @@ pub async fn send_mail(
     let text = render_text(&html).await?;
     let email = Message::builder()
         .from("Test Sender <sender@example.com>".parse().unwrap())
-        .to("Test Reciever <reciever@example.com>".parse().unwrap())
+        .to("Test Receiver <reciever@example.com>".parse().unwrap())
         .subject_opt(title.as_deref())
         .multipart(
             MultiPart::alternative() // This is composed of two parts.
