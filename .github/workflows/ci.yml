@@ -17,6 +17,7 @@ jobs:
     name: Test for ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
@@ -50,6 +51,6 @@ jobs:
       - name: Tests
         run: cargo test 
       - uses: pre-commit-ci/lite-action@v1.0.2
-        if: always()
+        if: matrix.os == 'ubuntu-latest'
         with:
           msg: "chore: Apply automatic fixes"
