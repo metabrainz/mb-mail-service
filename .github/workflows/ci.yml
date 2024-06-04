@@ -51,6 +51,6 @@ jobs:
       - name: Tests
         run: cargo test 
       - uses: pre-commit-ci/lite-action@v1.0.2
-        if: matrix.os == 'ubuntu-latest'
+        if: always() && matrix.os == 'ubuntu-latest'
         with:
           msg: "chore: Apply automatic fixes"
