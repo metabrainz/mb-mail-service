@@ -26,7 +26,9 @@ jobs:
           fetch-depth: 0
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
-      
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-deny
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
