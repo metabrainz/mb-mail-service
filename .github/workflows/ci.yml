@@ -40,9 +40,9 @@ jobs:
           path: ~/.cache/pre-commit
           key: pre-commit-3|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}
       - name: pre-commit validation
-        run: pre-commit run --show-diff-on-failure --color=always --from-ref ${{ github.event.pull_request.base.sha || github.event.before || github.sha }}~ --to-ref ${{ github.sha }}
+        run: pre-commit run --show-diff-on-failure --color=always --from-ref ${{ github.event.pull_request.base.sha || github.event.before || format('{0}~', github.sha) }} --to-ref ${{ github.sha }}
       - name: gitlint validation
-        run: gitlint --commits ${{ github.event.pull_request.base.sha || github.event.before || github.sha }}~..${{ github.sha }}
+        run: gitlint --commits ${{ github.event.pull_request.base.sha || github.event.before || format('{0}~', github.sha) }}..${{ github.sha }}
         if: always()
       - name: Formatting
         run: cargo fmt --all --check
