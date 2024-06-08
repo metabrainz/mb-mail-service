@@ -1,5 +1,27 @@
 # Operations
 
+## Installation
+
+### Building from source
+
+- Install dependencies:
+  - [Rust](https://rustup.rs)
+  - [git](https://git-scm.com/)
+- Clone the repository:
+  
+  ```shell
+  git clone https://github.com/JadedBlueEyes/mb-mail-service.git
+  cd mb-mail-service
+  ```
+  
+- Build in release mode:
+  
+  ```shell
+  cargo build --release
+  ```
+
+- The executable will be in `target/release/mb-mail-service`.
+
 ## Configuration
 
 This service is primarily configured through environment variables.
