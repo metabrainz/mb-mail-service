@@ -45,13 +45,11 @@ jobs:
         run: gitlint --commits ${{ github.event.pull_request.base.sha || github.event.before || format('{0}~', github.sha) }}..${{ github.sha }}
         if: always()
       - name: Formatting
-        run: cargo fmt --all --check
+        run: pre-commit run --show-diff-on-failure --color=always --hook-stage push fmt
       - name: Linting
-        run: cargo clippy --all-targets --all-features
-      - name: Check
-        run: cargo check 
+        run: pre-commit run --show-diff-on-failure --color=always --hook-stage push clippy
       - name: Tests
-        run: cargo test 
+        run: pre-commit run --show-diff-on-failure --color=always --hook-stage push test 
       - uses: pre-commit-ci/lite-action@v1.0.2
         if: always() && matrix.os == 'ubuntu-latest'
         with:
