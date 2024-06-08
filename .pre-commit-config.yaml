@@ -38,7 +38,6 @@ repos:
       - id: clippy
         args: [--all-targets, --all-features, "--", "-D", "warnings"]
       - id: build
-      - id: test
   - repo: local
     hooks:
       - id: cargo-deny
@@ -50,6 +49,15 @@ repos:
         files: Cargo\.(toml|lock)
         pass_filenames: false
         args: ["--all-features", "check"]
+        
+      - id: test
+        name: test
+        description: Run tests with cargo test
+        entry: cargo test
+        language: system
+        types: [rust]
+        pass_filenames: false
+        stages: ["push"]
   - repo: https://github.com/crate-ci/typos
     rev: v1.22.0
     hooks:
