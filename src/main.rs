@@ -3,6 +3,7 @@ use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 mod render;
 mod send;
 mod serve;
+mod templates;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // let console_layer = console_subscriber::spawn();

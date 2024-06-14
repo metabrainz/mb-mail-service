@@ -3,31 +3,11 @@ use axum::{
     http::{header, StatusCode},
     response::{IntoResponse, Response},
 };
-use rust_embed::RustEmbed;
 
-use mrml::prelude::parser::{loader::IncludeLoader, ParserOptions};
-
-#[derive(RustEmbed, Debug)]
-#[folder = "templates"]
-#[include = "*.hbs"]
-#[include = "*.mjml"]
-struct TemplateFiles;
-impl IncludeLoader for TemplateFiles {
-    fn resolve(
-        &self,
-        path: &str,
-    ) -> Result<String, mrml::prelude::parser::loader::IncludeLoaderError> {
-        tracing::debug!("Loading path {path:?}");
-        TemplateFiles::get(path)
-            .map(|f| String::from_utf8(f.data.to_vec()).expect("Template was not valid UTF-8"))
-            .ok_or_else(|| mrml::prelude::parser::loader::IncludeLoaderError::not_found(path))
-    }
-}
+use crate::templates;
 
 #[derive(Debug, thiserror::Error)]
 pub(crate) enum EngineError {
-    #[error("Failed to parse template: {0}")]
-    Parse(#[from] mrml::prelude::parser::Error),
     #[error("Failed to render template: {0}")]
     Render(#[from] mrml::prelude::render::Error),
     #[error("Template not found: {0}")]
@@ -47,14 +27,9 @@ impl IntoResponse for EngineError {
     }
 }
 pub async fn render_html(template_id: String) -> Result<(String, Option<String>), EngineError> {
-    let path = template_id + ".mjml";
-    let template = TemplateFiles::get(&path)
-        .map(|f| String::from_utf8(f.data.to_vec()).expect("Template was not valid UTF-8"))
-        .ok_or(EngineError::TemplateNotFound(path))?;
-    let opts = ParserOptions {
-        include_loader: Box::new(TemplateFiles),
-    };
-    let root = mrml::parse_with_options(template, &opts)?;
+    let template =
+        templates::get(&template_id).ok_or(EngineError::TemplateNotFound(template_id))?;
+    let root = template();
     let opts = mrml::prelude::render::RenderOptions::default();
     let content = root.render(&opts)?;
     Ok((content, root.get_title()))
@@ -116,9 +91,11 @@ mod test {
     }
 
     #[tokio::test]
-    async fn include_template_html() {
-        let (res, _) = super::render_html("include".to_string()).await.unwrap();
-        let expected = expect_file!["../fixtures/include.html"];
+    async fn subscription_template_html() {
+        let (res, _) = super::render_html("subscription".to_string())
+            .await
+            .unwrap();
+        let expected = expect_file!["../fixtures/subscription.html"];
         expected.assert_eq(&res);
     }
 
@@ -131,38 +108,12 @@ mod test {
     }
 
     #[tokio::test]
-    async fn include_template_text() {
-        let (html, _) = super::render_html("include".to_string()).await.unwrap();
+    async fn subscription_template_text() {
+        let (html, _) = super::render_html("subscription".to_string())
+            .await
+            .unwrap();
         let res = super::render_text(&html).await.unwrap();
-        let expected = expect_file!["../fixtures/include.txt"];
+        let expected = expect_file!["../fixtures/subscription.txt"];
         expected.assert_eq(&res);
     }
-
-    #[test]
-    fn render() -> Result<(), Box<dyn std::error::Error>> {
-        use handlebars::Handlebars;
-        use serde_json::Map;
-        use std::fs::File;
-
-        let mut handlebars = Handlebars::new();
-
-        handlebars
-            .register_embed_templates::<crate::render::TemplateFiles>()
-            .unwrap();
-
-        println!("Loaded templates");
-
-        let mut data = Map::new();
-        data.insert("bin_name".into(), env!("CARGO_BIN_NAME").into());
-        let mut output_file = File::create("target/test.html")?;
-        handlebars.render_to_write("test.hbs", &data, &mut output_file)?;
-        println!("target/test.html generated");
-
-        Ok(())
-    }
-
-    // TODO: Iterate over and prerender all the templates?
-    // fn render_mrml() {
-    //     TemplateFiles::iter().map(f)
-    // }
 }
