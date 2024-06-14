@@ -11,7 +11,9 @@ on:
     
 env:
   CARGO_TERM_COLOR: always
-  
+  FROM_REF: ${{ github.event.pull_request.base.sha || (!github.event.forced && ( github.event.before != '0000000000000000000000000000000000000000'  && github.event.before || github.sha )) || format('{0}~', github.sha) }}
+  TO_REF: ${{ github.sha }}
+
 jobs:
   test:
     name: Test for ${{ matrix.os }}
@@ -40,9 +42,9 @@ jobs:
           path: ~/.cache/pre-commit
           key: pre-commit-3|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}
       - name: pre-commit validation
-        run: pre-commit run --show-diff-on-failure --color=always --from-ref ${{ github.event.pull_request.base.sha || (!github.event.forced && ( github.event.before != '0000000000000000000000000000000000000000'  && github.event.before || github.sha )) || format('{0}~', github.sha) }} --to-ref ${{ github.sha }}
+        run: pre-commit run --show-diff-on-failure --color=always
       - name: gitlint validation
-        run: gitlint --commits ${{ github.event.pull_request.base.sha || (!github.event.forced && ( github.event.before != '0000000000000000000000000000000000000000'  && github.event.before || github.sha )) || format('{0}~', github.sha) }}..${{ github.sha }}
+        run: gitlint --commits ${{ env.FROM_REF }}..${{ env.TO_REF }}
         if: always()
       - name: Formatting
         run: pre-commit run --show-diff-on-failure --color=always --hook-stage push fmt
