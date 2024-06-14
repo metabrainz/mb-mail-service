@@ -14,7 +14,7 @@ use crate::{
     render::{render_html_route, render_text_route},
     send::{send_mail_route, MailTransport},
 };
-use axum::routing::get;
+use axum::{response::Redirect, routing::get};
 
 use std::str::FromStr;
 use strum_macros::EnumString;
@@ -46,6 +46,7 @@ pub(crate) async fn serve() {
     };
 
     let app = axum::Router::new()
+        .route("/", get(|| async { Redirect::temporary("/swagger-ui") }))
         // OpenAPI docs
         .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", ApiDoc::openapi()))
         // Our routes
