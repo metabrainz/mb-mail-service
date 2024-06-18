@@ -1,5 +1,5 @@
 use axum::{
-    extract::{Path, State},
+    extract::{Path, Query, State},
     http::{header, StatusCode},
     response::{IntoResponse, Response},
 };
@@ -7,7 +7,9 @@ use lettre::{
     message::{MessageBuilder, MultiPart, SinglePart},
     AsyncSmtpTransport, AsyncTransport, Message, Tokio1Executor,
 };
+use serde::Deserialize;
 use tracing::trace;
+use utoipa::IntoParams;
 
 use crate::render::{render_html, render_text, EngineError};
 
@@ -35,6 +37,7 @@ trait OptionalSubject {
     where
         S: Into<String>;
 }
+
 impl OptionalSubject for MessageBuilder {
     fn subject_opt<S: Into<String>>(self, subject: Option<S>) -> Self {
         if let Some(subject) = subject {
@@ -44,6 +47,16 @@ impl OptionalSubject for MessageBuilder {
         }
     }
 }
+
+/// Todo search query
+#[derive(Deserialize, IntoParams)]
+pub(crate) struct SendMailQuery {
+    /// Address to send mail from.
+    from: Option<String>,
+    /// Address to send mail to.
+    to: Option<String>,
+}
+
 #[utoipa::path(
     get,
     path = "/send/{template_id}",
@@ -53,13 +66,15 @@ impl OptionalSubject for MessageBuilder {
     ),
     params(
         ("template_id" = String, Path, description = "Template to send"),
+        SendMailQuery
     )
 )]
 pub async fn send_mail_route(
     Path(template_id): Path<String>,
     State(mailer): State<MailTransport>,
+    Query(options): Query<SendMailQuery>,
 ) -> Result<Response, SendError> {
-    let res = send_mail(template_id, mailer).await?;
+    let res = send_mail(template_id, mailer, options).await?;
     let code = res.code();
     trace!("{:?}", res);
     Ok((
@@ -80,12 +95,20 @@ pub async fn send_mail_route(
 pub async fn send_mail(
     template_id: String,
     mailer: MailTransport,
+    SendMailQuery { from, to }: SendMailQuery,
 ) -> Result<lettre::transport::smtp::response::Response, SendError> {
     let (html, title) = render_html(template_id).await?;
     let text = render_text(&html).await?;
     let email = Message::builder()
-        .from("Test Sender <sender@example.com>".parse().unwrap())
-        .to("Test Receiver <reciever@example.com>".parse().unwrap())
+        .from(
+            from.unwrap_or_else(|| "Test Sender <sender@example.com>".to_string())
+                .parse()
+                .unwrap(),
+        )
+        .to(to
+            .unwrap_or_else(|| "Test Receiver <reciever@example.com>".to_string())
+            .parse()
+            .unwrap())
         .subject_opt(title.as_deref())
         .multipart(
             MultiPart::alternative() // This is composed of two parts.

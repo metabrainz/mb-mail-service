@@ -930,6 +930,7 @@ dependencies = [
  "mrml",
  "mrmx",
  "mrmx-macros",
+ "serde",
  "serde_json",
  "strum",
  "strum_macros",
