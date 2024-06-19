@@ -1,5 +1,6 @@
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
+mod components;
 mod render;
 mod send;
 mod serve;
