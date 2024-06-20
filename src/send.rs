@@ -2,12 +2,14 @@ use axum::{
     extract::{Path, Query, State},
     http::{header, StatusCode},
     response::{IntoResponse, Response},
+    Json,
 };
 use lettre::{
     message::{MessageBuilder, MultiPart, SinglePart},
     AsyncSmtpTransport, AsyncTransport, Message, Tokio1Executor,
 };
 use serde::Deserialize;
+use serde_json::Value;
 use tracing::trace;
 use utoipa::IntoParams;
 
@@ -58,7 +60,7 @@ pub(crate) struct SendMailQuery {
 }
 
 #[utoipa::path(
-    get,
+    post,
     path = "/send/{template_id}",
     responses(
         (status = 200, description = "Email sent successfully"),
@@ -67,14 +69,17 @@ pub(crate) struct SendMailQuery {
     params(
         ("template_id" = String, Path, description = "Template to send"),
         SendMailQuery
-    )
+    ),
+    request_body = Value
 )]
 pub async fn send_mail_route(
     Path(template_id): Path<String>,
     State(mailer): State<MailTransport>,
     Query(options): Query<SendMailQuery>,
+    Json(body): Json<Value>,
 ) -> Result<Response, SendError> {
-    let res = send_mail(template_id, mailer, options).await?;
+    dbg!(&body);
+    let res = send_mail(template_id, mailer, options, body).await?;
     let code = res.code();
     trace!("{:?}", res);
     Ok((
@@ -96,8 +101,9 @@ pub async fn send_mail(
     template_id: String,
     mailer: MailTransport,
     SendMailQuery { from, to }: SendMailQuery,
+    params: Value,
 ) -> Result<lettre::transport::smtp::response::Response, SendError> {
-    let (html, title) = render_html(template_id).await?;
+    let (html, title) = render_html(template_id, params).await?;
     let text = render_text(&html).await?;
     let email = Message::builder()
         .from(

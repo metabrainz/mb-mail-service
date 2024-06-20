@@ -1,10 +1,18 @@
 use mrml::mjml;
 use mrmx::WithAttribute;
 use mrmx_macros::view;
+use serde::Deserialize;
+use serde_json::Value;
 
 use crate::components::header;
 
-pub(crate) fn subscription() -> mjml::Mjml {
+#[derive(Deserialize, Debug)]
+struct Subscription {
+    name: Option<String>,
+}
+
+pub(crate) fn subscription(params: Value) -> mjml::Mjml {
+    let ctx: Subscription = serde_json::from_value(params).unwrap(); // TODO: error handling
     view! {
         <mjml>
         <mj-head>
@@ -34,7 +42,9 @@ pub(crate) fn subscription() -> mjml::Mjml {
                 { header().into() }
 
                 <mj-text>
-                    <p>Hello Jade,</p>
+                    <p>"Hello "{ mrml::text::Text::from(
+                        ctx.name.unwrap_or("Jade".into())
+                    ).into()},</p>
                     <p>"New edits have been added for artists that you've subscribed to."</p>
                 </mj-text>
 

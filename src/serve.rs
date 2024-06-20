@@ -14,7 +14,10 @@ use crate::{
     render::{render_html_route, render_text_route},
     send::{send_mail_route, MailTransport},
 };
-use axum::{response::Redirect, routing::get};
+use axum::{
+    response::Redirect,
+    routing::{get, post},
+};
 
 use std::str::FromStr;
 use strum_macros::EnumString;
@@ -52,7 +55,7 @@ pub(crate) async fn serve() {
         // Our routes
         .route("/templates/:template_id/html", get(render_html_route))
         .route("/templates/:template_id/text", get(render_text_route))
-        .route("/send/:template_id", get(send_mail_route))
+        .route("/send/:template_id", post(send_mail_route))
         .with_state(mailer())
         .layer((
             // Logging

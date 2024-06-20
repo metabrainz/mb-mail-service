@@ -3,6 +3,7 @@ use axum::{
     http::{header, StatusCode},
     response::{IntoResponse, Response},
 };
+use serde_json::Value;
 
 use crate::templates;
 
@@ -26,10 +27,13 @@ impl IntoResponse for EngineError {
         .into_response()
     }
 }
-pub async fn render_html(template_id: String) -> Result<(String, Option<String>), EngineError> {
+pub async fn render_html(
+    template_id: String,
+    params: Value,
+) -> Result<(String, Option<String>), EngineError> {
     let template =
         templates::get(&template_id).ok_or(EngineError::TemplateNotFound(template_id))?;
-    let root = template();
+    let root = template(params);
     let opts = mrml::prelude::render::RenderOptions::default();
     let content = root.render(&opts)?;
     Ok((content, root.get_title()))
@@ -47,7 +51,7 @@ pub async fn render_html(template_id: String) -> Result<(String, Option<String>)
     )
 )]
 pub async fn render_html_route(Path(template_id): Path<String>) -> Result<Response, EngineError> {
-    let (content, _title) = render_html(template_id).await?;
+    let (content, _title) = render_html(template_id, Value::Null).await?;
 
     Ok(([(header::CONTENT_TYPE, "text/html")], content).into_response())
 }
@@ -69,7 +73,7 @@ pub async fn render_text(html: &str) -> Result<String, EngineError> {
     )
 )]
 pub async fn render_text_route(Path(template_id): Path<String>) -> Result<Response, EngineError> {
-    let (html, _title) = render_html(template_id).await?;
+    let (html, _title) = render_html(template_id, Value::Null).await?;
     let content = render_text(&html).await?;
 
     Ok((
@@ -82,17 +86,20 @@ pub async fn render_text_route(Path(template_id): Path<String>) -> Result<Respon
 #[cfg(test)]
 mod test {
     use expect_test::expect_file;
+    use serde_json::{Map, Value};
 
     #[tokio::test]
     async fn basic_template_html() {
-        let (res, _) = super::render_html("basic".to_string()).await.unwrap();
+        let (res, _) = super::render_html("basic".to_string(), Value::Null)
+            .await
+            .unwrap();
         let expected = expect_file!["../fixtures/basic.html"];
         expected.assert_eq(&res);
     }
 
     #[tokio::test]
     async fn subscription_template_html() {
-        let (res, _) = super::render_html("subscription".to_string())
+        let (res, _) = super::render_html("subscription".to_string(), Value::Object(Map::new()))
             .await
             .unwrap();
         let expected = expect_file!["../fixtures/subscription.html"];
@@ -101,7 +108,9 @@ mod test {
 
     #[tokio::test]
     async fn basic_template_text() {
-        let (html, _) = super::render_html("basic".to_string()).await.unwrap();
+        let (html, _) = super::render_html("basic".to_string(), Value::Null)
+            .await
+            .unwrap();
         let res: String = super::render_text(&html).await.unwrap();
         let expected = expect_file!["../fixtures/basic.txt"];
         expected.assert_eq(&res);
@@ -109,7 +118,7 @@ mod test {
 
     #[tokio::test]
     async fn subscription_template_text() {
-        let (html, _) = super::render_html("subscription".to_string())
+        let (html, _) = super::render_html("subscription".to_string(), Value::Object(Map::new()))
             .await
             .unwrap();
         let res = super::render_text(&html).await.unwrap();

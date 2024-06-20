@@ -1,7 +1,8 @@
 use mrml::mjml;
 use mrmx_macros::view;
+use serde_json::Value;
 
-pub(crate) fn basic() -> mjml::Mjml {
+pub(crate) fn basic(_: Value) -> mjml::Mjml {
     view! {
         <mjml>
           <mj-body>
