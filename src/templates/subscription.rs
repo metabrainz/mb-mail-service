@@ -6,14 +6,18 @@ use serde_json::Value;
 
 use crate::components::header;
 
-#[derive(Deserialize, Debug)]
+use super::TemplateError;
+
+#[derive(Deserialize, Debug, Default)]
+#[serde(default)]
 struct Subscription {
     name: Option<String>,
 }
 
-pub(crate) fn subscription(params: Value) -> mjml::Mjml {
-    let ctx: Subscription = serde_json::from_value(params).unwrap(); // TODO: error handling
-    view! {
+pub(crate) fn subscription(params: Value) -> Result<mjml::Mjml, TemplateError> {
+    let ctx: Option<Subscription> = serde_json::from_value(params)?;
+    let ctx = ctx.unwrap_or_default();
+    Ok(view! {
         <mjml>
         <mj-head>
             <mj-font name="Inter" href="https://fonts.googleapis.com/css?family=Inter" />
@@ -87,5 +91,5 @@ pub(crate) fn subscription(params: Value) -> mjml::Mjml {
         </mj-body>
       </mjml>
 
-    }
+    })
 }

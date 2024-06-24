@@ -5,11 +5,13 @@ use axum::{
 };
 use serde_json::Value;
 
-use crate::templates;
+use crate::templates::{self, TemplateError};
 
 #[derive(Debug, thiserror::Error)]
 pub(crate) enum EngineError {
     #[error("Failed to render template: {0}")]
+    Template(#[from] TemplateError),
+    #[error("Failed to render MJML: {0}")]
     Render(#[from] mrml::prelude::render::Error),
     #[error("Template not found: {0}")]
     TemplateNotFound(String),
@@ -33,7 +35,7 @@ pub async fn render_html(
 ) -> Result<(String, Option<String>), EngineError> {
     let template =
         templates::get(&template_id).ok_or(EngineError::TemplateNotFound(template_id))?;
-    let root = template(params);
+    let root = template(params)?;
     let opts = mrml::prelude::render::RenderOptions::default();
     let content = root.render(&opts)?;
     Ok((content, root.get_title()))
