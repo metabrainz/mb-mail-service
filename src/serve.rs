@@ -11,7 +11,10 @@ use std::{
 use tokio::{net::TcpListener, signal};
 
 use crate::{
-    render::{render_html_route, render_text_route},
+    render::{
+        render_html_route_get, render_html_route_post, render_text_route_get,
+        render_text_route_post,
+    },
     send::{send_mail_route, MailTransport},
 };
 use axum::{
@@ -25,7 +28,8 @@ use strum_macros::EnumString;
 #[derive(OpenApi)]
 #[openapi(
     paths(
-        crate::render::render_html_route, crate::render::render_text_route,
+        crate::render::render_html_route_get,
+        crate::render::render_html_route_post,crate::render::render_text_route_get,crate::render::render_text_route_post,
         crate::send::send_mail_route
     ),
     tags(
@@ -53,8 +57,10 @@ pub(crate) async fn serve() {
         // OpenAPI docs
         .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", ApiDoc::openapi()))
         // Our routes
-        .route("/templates/:template_id/html", get(render_html_route))
-        .route("/templates/:template_id/text", get(render_text_route))
+        .route("/templates/:template_id/html", post(render_html_route_post))
+        .route("/templates/:template_id/html", get(render_html_route_get))
+        .route("/templates/:template_id/text", get(render_text_route_get))
+        .route("/templates/:template_id/text", post(render_text_route_post))
         .route("/send/:template_id", post(send_mail_route))
         .with_state(mailer())
         .layer((

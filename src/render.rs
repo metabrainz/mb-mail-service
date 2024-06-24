@@ -2,6 +2,7 @@ use axum::{
     extract::Path,
     http::{header, StatusCode},
     response::{IntoResponse, Response},
+    Json,
 };
 use serde_json::Value;
 
@@ -52,8 +53,31 @@ pub async fn render_html(
         ("template_id" = String, Path, description = "Template to render"),
     )
 )]
-pub async fn render_html_route(Path(template_id): Path<String>) -> Result<Response, EngineError> {
+pub async fn render_html_route_get(
+    Path(template_id): Path<String>,
+) -> Result<Response, EngineError> {
     let (content, _title) = render_html(template_id, Value::Null).await?;
+
+    Ok(([(header::CONTENT_TYPE, "text/html")], content).into_response())
+}
+
+#[utoipa::path(
+    post,
+    path = "/templates/{template_id}/html",
+    responses(
+        (status = 200, description = "Template rendered successfully"),
+        (status = NOT_FOUND, description = "Template was not found")
+    ),
+    params(
+        ("template_id" = String, Path, description = "Template to render"),
+    ),
+    request_body = Value
+)]
+pub async fn render_html_route_post(
+    Path(template_id): Path<String>,
+    Json(body): Json<Value>,
+) -> Result<Response, EngineError> {
+    let (content, _title) = render_html(template_id, body).await?;
 
     Ok(([(header::CONTENT_TYPE, "text/html")], content).into_response())
 }
@@ -74,8 +98,36 @@ pub async fn render_text(html: &str) -> Result<String, EngineError> {
         ("template_id" = String, Path, description = "Template to render"),
     )
 )]
-pub async fn render_text_route(Path(template_id): Path<String>) -> Result<Response, EngineError> {
+pub async fn render_text_route_get(
+    Path(template_id): Path<String>,
+) -> Result<Response, EngineError> {
     let (html, _title) = render_html(template_id, Value::Null).await?;
+    let content = render_text(&html).await?;
+
+    Ok((
+        [(header::CONTENT_TYPE, "text/plain; charset=UTF-8")],
+        content,
+    )
+        .into_response())
+}
+
+#[utoipa::path(
+    post,
+    path = "/templates/{template_id}/text",
+    responses(
+        (status = 200, description = "Template rendered successfully"),
+        (status = NOT_FOUND, description = "Template was not found")
+    ),
+    params(
+        ("template_id" = String, Path, description = "Template to render"),
+    ),
+    request_body = Value
+)]
+pub async fn render_text_route_post(
+    Path(template_id): Path<String>,
+    Json(body): Json<Value>,
+) -> Result<Response, EngineError> {
+    let (html, _title) = render_html(template_id, body).await?;
     let content = render_text(&html).await?;
 
     Ok((
