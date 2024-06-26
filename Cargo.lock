@@ -860,20 +860,20 @@ dependencies = [
 [[package]]
 name = "mrml"
 version = "4.0.0"
-source = "git+https://github.com/JadedBlueEyes/mrml.git?branch=jade/fragment#bca0a0a219dc86a69e58a5eb195537492ad8b777"
+source = "git+https://github.com/JadedBlueEyes/mrml.git?branch=jade/fragment#850661fd9cfa58e1a2ae02178543077ff3155f9a"
 dependencies = [
  "enum-as-inner",
  "enum_dispatch",
  "indexmap",
  "itertools",
- "rustc-hash",
+ "rustc-hash 2.0.0",
  "thiserror",
 ]
 
 [[package]]
 name = "mrmx"
 version = "0.1.0"
-source = "git+https://github.com/JadedBlueEyes/mrmx.git#65ac65223c5478bf6187f44b18f5f28a910748ed"
+source = "git+https://github.com/JadedBlueEyes/mrmx.git#40ac6b716bc0a947f4ccddf997dc235c2b877803"
 dependencies = [
  "mrml",
  "mrmx-macros",
@@ -882,7 +882,7 @@ dependencies = [
 [[package]]
 name = "mrmx-macros"
 version = "0.1.0"
-source = "git+https://github.com/JadedBlueEyes/mrmx.git#65ac65223c5478bf6187f44b18f5f28a910748ed"
+source = "git+https://github.com/JadedBlueEyes/mrmx.git#40ac6b716bc0a947f4ccddf997dc235c2b877803"
 dependencies = [
  "convert_case",
  "proc-macro-error",
@@ -1175,7 +1175,7 @@ dependencies = [
  "pin-project-lite",
  "quinn-proto",
  "quinn-udp",
- "rustc-hash",
+ "rustc-hash 1.1.0",
  "rustls",
  "thiserror",
  "tokio",
@@ -1191,7 +1191,7 @@ dependencies = [
  "bytes",
  "rand",
  "ring",
- "rustc-hash",
+ "rustc-hash 1.1.0",
  "rustls",
  "slab",
  "thiserror",
@@ -1427,6 +1427,12 @@ name = "rustc-hash"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "08d43f7aa6b08d49f382cde6a7982047c3426db949b1424bc4b7ec9ae12c6ce2"
+
+[[package]]
+name = "rustc-hash"
+version = "2.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "583034fd73374156e66797ed8e5b0d5690409c9226b22d87cb7f19821c05d152"
 
 [[package]]
 name = "rustls"
