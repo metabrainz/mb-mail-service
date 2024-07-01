@@ -860,7 +860,7 @@ dependencies = [
 [[package]]
 name = "mrml"
 version = "4.0.0"
-source = "git+https://github.com/JadedBlueEyes/mrml.git?branch=jade/fragment#850661fd9cfa58e1a2ae02178543077ff3155f9a"
+source = "git+https://github.com/JadedBlueEyes/mrml.git?branch=jade/fragment#726ef4eb64151d852aa34e2869b3cdaefbf8bade"
 dependencies = [
  "enum-as-inner",
  "enum_dispatch",
@@ -873,7 +873,7 @@ dependencies = [
 [[package]]
 name = "mrmx"
 version = "0.1.0"
-source = "git+https://github.com/JadedBlueEyes/mrmx.git#40ac6b716bc0a947f4ccddf997dc235c2b877803"
+source = "git+https://github.com/JadedBlueEyes/mrmx.git#2777237da8c22ec764a4b5a9432f646daebbadf8"
 dependencies = [
  "mrml",
  "mrmx-macros",
@@ -882,7 +882,7 @@ dependencies = [
 [[package]]
 name = "mrmx-macros"
 version = "0.1.0"
-source = "git+https://github.com/JadedBlueEyes/mrmx.git#40ac6b716bc0a947f4ccddf997dc235c2b877803"
+source = "git+https://github.com/JadedBlueEyes/mrmx.git#2777237da8c22ec764a4b5a9432f646daebbadf8"
 dependencies = [
  "convert_case",
  "proc-macro-error",
