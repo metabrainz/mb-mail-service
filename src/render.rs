@@ -1,10 +1,13 @@
 use axum::{
-    extract::Path,
+    extract::{Path, Query},
     http::{header, StatusCode},
     response::{IntoResponse, Response},
     Json,
 };
+use serde::Deserialize;
 use serde_json::Value;
+use std::str::FromStr;
+use utoipa::IntoParams;
 
 use crate::templates::{self, TemplateError};
 
@@ -30,13 +33,22 @@ impl IntoResponse for EngineError {
         .into_response()
     }
 }
+
+/// Todo search query
+#[derive(Deserialize, IntoParams)]
+pub(crate) struct RenderQuery {
+    /// Language to render the template with
+    lang: Option<String>,
+}
+
 pub async fn render_html(
     template_id: String,
     params: Value,
+    lang: &crate::Mf1Keys,
 ) -> Result<(String, Option<String>), EngineError> {
     let template =
         templates::get(&template_id).ok_or(EngineError::TemplateNotFound(template_id))?;
-    let root = template(params)?;
+    let root = template(params, lang)?;
     let opts = mrml::prelude::render::RenderOptions::default();
     let content = root.render(&opts)?;
     Ok((content, root.get_title()))
@@ -51,12 +63,19 @@ pub async fn render_html(
     ),
     params(
         ("template_id" = String, Path, description = "Template to render"),
+        RenderQuery
     )
 )]
 pub async fn render_html_route_get(
     Path(template_id): Path<String>,
+    Query(RenderQuery { lang }): Query<RenderQuery>,
 ) -> Result<Response, EngineError> {
-    let (content, _title) = render_html(template_id, Value::Null).await?;
+    let lang = lang
+        .map(|l| crate::Locale::from_str(&l).unwrap())
+        .unwrap_or_default()
+        .get_strings();
+
+    let (content, _title) = render_html(template_id, Value::Null, lang).await?;
 
     Ok(([(header::CONTENT_TYPE, "text/html")], content).into_response())
 }
@@ -70,14 +89,20 @@ pub async fn render_html_route_get(
     ),
     params(
         ("template_id" = String, Path, description = "Template to render"),
+        RenderQuery
     ),
     request_body = Value
 )]
 pub async fn render_html_route_post(
     Path(template_id): Path<String>,
+    Query(RenderQuery { lang }): Query<RenderQuery>,
     Json(body): Json<Value>,
 ) -> Result<Response, EngineError> {
-    let (content, _title) = render_html(template_id, body).await?;
+    let lang = lang
+        .map(|l| crate::Locale::from_str(&l).unwrap())
+        .unwrap_or_default()
+        .get_strings();
+    let (content, _title) = render_html(template_id, body, lang).await?;
 
     Ok(([(header::CONTENT_TYPE, "text/html")], content).into_response())
 }
@@ -96,12 +121,18 @@ pub async fn render_text(html: &str) -> Result<String, EngineError> {
     ),
     params(
         ("template_id" = String, Path, description = "Template to render"),
+        RenderQuery
     )
 )]
 pub async fn render_text_route_get(
     Path(template_id): Path<String>,
+    Query(RenderQuery { lang }): Query<RenderQuery>,
 ) -> Result<Response, EngineError> {
-    let (html, _title) = render_html(template_id, Value::Null).await?;
+    let lang = lang
+        .map(|l| crate::Locale::from_str(&l).unwrap())
+        .unwrap_or_default()
+        .get_strings();
+    let (html, _title) = render_html(template_id, Value::Null, lang).await?;
     let content = render_text(&html).await?;
 
     Ok((
@@ -120,14 +151,20 @@ pub async fn render_text_route_get(
     ),
     params(
         ("template_id" = String, Path, description = "Template to render"),
+        RenderQuery
     ),
     request_body = Value
 )]
 pub async fn render_text_route_post(
     Path(template_id): Path<String>,
+    Query(RenderQuery { lang }): Query<RenderQuery>,
     Json(body): Json<Value>,
 ) -> Result<Response, EngineError> {
-    let (html, _title) = render_html(template_id, body).await?;
+    let lang = lang
+        .map(|l| crate::Locale::from_str(&l).unwrap())
+        .unwrap_or_default()
+        .get_strings();
+    let (html, _title) = render_html(template_id, body, lang).await?;
     let content = render_text(&html).await?;
 
     Ok((
@@ -142,29 +179,43 @@ mod test {
     use expect_test::expect_file;
     use serde_json::{Map, Value};
 
+    use crate::Locale;
+
     #[tokio::test]
     async fn basic_template_html() {
-        let (res, _) = super::render_html("basic".to_string(), Value::Null)
-            .await
-            .unwrap();
+        let (res, _) = super::render_html(
+            "basic".to_string(),
+            Value::Null,
+            Locale::default().get_strings(),
+        )
+        .await
+        .unwrap();
         let expected = expect_file!["../fixtures/basic.html"];
         expected.assert_eq(&res);
     }
 
     #[tokio::test]
     async fn subscription_template_html() {
-        let (res, _) = super::render_html("subscription".to_string(), Value::Object(Map::new()))
-            .await
-            .unwrap();
+        let (res, _) = super::render_html(
+            "subscription".to_string(),
+            Value::Object(Map::new()),
+            Locale::default().get_strings(),
+        )
+        .await
+        .unwrap();
         let expected = expect_file!["../fixtures/subscription.html"];
         expected.assert_eq(&res);
     }
 
     #[tokio::test]
     async fn basic_template_text() {
-        let (html, _) = super::render_html("basic".to_string(), Value::Null)
-            .await
-            .unwrap();
+        let (html, _) = super::render_html(
+            "basic".to_string(),
+            Value::Null,
+            Locale::default().get_strings(),
+        )
+        .await
+        .unwrap();
         let res: String = super::render_text(&html).await.unwrap();
         let expected = expect_file!["../fixtures/basic.txt"];
         expected.assert_eq(&res);
@@ -172,9 +223,13 @@ mod test {
 
     #[tokio::test]
     async fn subscription_template_text() {
-        let (html, _) = super::render_html("subscription".to_string(), Value::Object(Map::new()))
-            .await
-            .unwrap();
+        let (html, _) = super::render_html(
+            "subscription".to_string(),
+            Value::Object(Map::new()),
+            Locale::default().get_strings(),
+        )
+        .await
+        .unwrap();
         let res = super::render_text(&html).await.unwrap();
         let expected = expect_file!["../fixtures/subscription.txt"];
         expected.assert_eq(&res);

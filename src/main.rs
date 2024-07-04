@@ -6,6 +6,8 @@ mod send;
 mod serve;
 mod templates;
 
+mf1::load_locales!();
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // let console_layer = console_subscriber::spawn();
     tracing_subscriber::registry()

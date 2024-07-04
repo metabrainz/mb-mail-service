@@ -4,7 +4,7 @@ use mrmx_macros::view;
 use serde::Deserialize;
 use serde_json::Value;
 
-use crate::components::header;
+use crate::{components::header, Mf1Keys};
 
 use super::TemplateError;
 
@@ -14,7 +14,7 @@ struct Subscription {
     name: Option<String>,
 }
 
-pub(crate) fn subscription(params: Value) -> Result<mjml::Mjml, TemplateError> {
+pub(crate) fn subscription(params: Value, _t: &Mf1Keys) -> Result<mjml::Mjml, TemplateError> {
     let ctx: Option<Subscription> = serde_json::from_value(params)?;
     let ctx = ctx.unwrap_or_default();
     Ok(view! {

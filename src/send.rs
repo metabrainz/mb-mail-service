@@ -10,6 +10,7 @@ use lettre::{
 };
 use serde::Deserialize;
 use serde_json::Value;
+use std::str::FromStr;
 use tracing::trace;
 use utoipa::IntoParams;
 
@@ -57,6 +58,8 @@ pub(crate) struct SendMailQuery {
     from: Option<String>,
     /// Address to send mail to.
     to: Option<String>,
+    /// Language to render the template with
+    lang: Option<String>,
 }
 
 #[utoipa::path(
@@ -100,10 +103,14 @@ pub async fn send_mail_route(
 pub async fn send_mail(
     template_id: String,
     mailer: MailTransport,
-    SendMailQuery { from, to }: SendMailQuery,
+    SendMailQuery { from, to, lang }: SendMailQuery,
     params: Value,
 ) -> Result<lettre::transport::smtp::response::Response, SendError> {
-    let (html, title) = render_html(template_id, params).await?;
+    let lang = lang
+        .map(|l| crate::Locale::from_str(&l).unwrap())
+        .unwrap_or_default()
+        .get_strings();
+    let (html, title) = render_html(template_id, params, lang).await?;
     let text = render_text(&html).await?;
     let email = Message::builder()
         .from(
