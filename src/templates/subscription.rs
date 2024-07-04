@@ -56,7 +56,7 @@ pub(crate) fn subscription(params: Value, _t: &Mf1Keys) -> Result<mjml::Mjml, Te
                     <mj-text>
                         <h2 >"Changes for your subscribed artists:"</h2>
                         <ul>
-                            <li><a href="https://musicbrainz.org/artist/8d8d8a80-f74f-4f21-a44c-518cd6944ed2/edits">Nathan (English EDM artist)</a>" (0 open, 1 applied)"</li>
+                            <li><a href="https://musicbrainz.org/artist/8d8d8a80-f74f-4f21-a44c-518cd6944ed2/edits">"Nathan (English EDM artist)"</a>" (0 open, 1 applied)"</li>
                         </ul>
                     </mj-text>
                 </mj-wrapper>
@@ -78,9 +78,8 @@ pub(crate) fn subscription(params: Value, _t: &Mf1Keys) -> Result<mjml::Mjml, Te
                 <mj-divider padding="10px 15px" border-color="#F5F5F5" border-width="3px" />
                 <mj-text font-size="12px" color="#8D8D8D">
                     <p>
-                        "This is a notification that edits have been added for artists, labels,
-                        collections and editors to whom you subscribed on the MusicBrainz web site. "
-                        <a href="https://musicbrainz.org/user/Jellis16/subscriptions">Click here to view or edit your subscription list</a>.
+                        "This is a notification that edits have been added for artists, labels, collections and editors to whom you subscribed on the MusicBrainz web site. "
+                        <a href="https://musicbrainz.org/user/Jellis16/subscriptions">Click here to view or edit your subscription list</a>"."
                     </p>
                     <p>"Do not reply to this message. If you need help, please "<a href="https://metabrainz.org/contact">contact us</a>.</p>
 
