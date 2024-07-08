@@ -108,8 +108,7 @@ pub async fn send_mail(
 ) -> Result<lettre::transport::smtp::response::Response, SendError> {
     let lang = lang
         .map(|l| crate::Locale::from_str(&l).unwrap())
-        .unwrap_or_default()
-        .get_strings();
+        .unwrap_or_default();
     let (html, title) = render_html(template_id, params, lang).await?;
     let text = render_text(&html).await?;
     let email = Message::builder()
