@@ -1,0 +1,8 @@
+languageIds:
+  - rust
+
+usageMatchRegex:
+  - "[^\\w\\d]t(?:_[a-z]+)?!\\(\\s*[\\w.:]*,\\s*([\\w.]*)"
+  - "[^\\w\\d]tl(?:_[a-z]+)?!\\(\\s*[\\w.:]*,\\s*([\\w.]*)"
+
+monopoly: true
