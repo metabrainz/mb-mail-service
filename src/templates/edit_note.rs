@@ -33,6 +33,22 @@ pub(crate) fn edit_note(params: Value, l: Locale) -> Result<Mjml, TemplateError>
         <mj-head>
             { head().into() }
             <mj-title>{ tl!(l, edit_note_title, edit_id = edit_id.to_string() ).borrow() }</mj-title>
+            <mj-style>"
+                div.speech {
+                    position: relative;
+                }
+                div .speech::after {
+                    display: block;
+                    width: 0;
+                    content: \"\";
+                    border: 15px solid transparent;
+                    border-left-color: #F5F5F5;
+                    position: absolute;
+                    bottom: -15px;
+                    left: 15px;
+                    z-index: -1;
+                }
+            "</mj-style>
         </mj-head>
         <mj-body width="500px" padding="0">
             <mj-section padding="20px 0">
@@ -44,7 +60,7 @@ pub(crate) fn edit_note(params: Value, l: Locale) -> Result<Mjml, TemplateError>
                     <p>{ Text::from(tl!(l, edit_note_top, edit_id = edit_id.to_string() )).into() }</p>
                 </mj-text>
 
-                <mj-wrapper mj-class="wrapper" >
+                <mj-wrapper mj-class="wrapper" css-class="speech" >
                     <mj-text>
                         <strong >{ Text::from(from_username + ": ").into()}</strong>
                         <p>
