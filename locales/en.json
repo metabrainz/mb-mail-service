@@ -1,3 +1,10 @@
 {
-    "lang": "English"
+    "lang": "English",
+    "greeting_line": "Hello { name },",
+    "metabrainz_signoff": "—  The MetaBrainz community",
+    "do_not_reply": "Do not reply to this message. For assistance please contact the team or the community.",
+    "change_subscription_settings": "Click here to change your subscription email settings.",
+    "edit_note_title": "Note added to your edit #{ edit_id }",
+    "edit_note_top": "The following note has been added to edit #{ edit_id }:",
+    "edit_note_reply": "To reply, please add your note here."
 }

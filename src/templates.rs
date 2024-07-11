@@ -4,6 +4,7 @@ use serde_json::Value;
 use crate::Locale;
 
 mod basic;
+mod edit_note;
 mod subscription;
 
 #[derive(Debug, thiserror::Error)]
@@ -17,6 +18,7 @@ pub fn get(template_id: &str) -> Option<Template> {
     match template_id {
         "basic" => Some(basic::basic),
         "subscription" => Some(subscription::subscription),
+        "edit-note" => Some(edit_note::edit_note),
         _ => None,
     }
 }

@@ -1,10 +1,11 @@
-use mrml::mjml;
+use mf1::t_l_string as tl;
+use mrml::{mjml::Mjml, text::Text};
 use mrmx::WithAttribute;
 use mrmx_macros::view;
 use serde::Deserialize;
 use serde_json::Value;
 
-use crate::{components::header, Locale};
+use crate::{components::*, Locale};
 
 use super::TemplateError;
 
@@ -14,31 +15,13 @@ struct Subscription {
     name: Option<String>,
 }
 
-pub(crate) fn subscription(params: Value, _l: Locale) -> Result<mjml::Mjml, TemplateError> {
+pub(crate) fn subscription(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
     let ctx: Option<Subscription> = serde_json::from_value(params)?;
     let ctx = ctx.unwrap_or_default();
     Ok(view! {
         <mjml>
         <mj-head>
-            <mj-font name="Inter" href="https://fonts.googleapis.com/css?family=Inter" />
-
-            <mj-attributes>
-            <mj-all padding="10px 30px" />
-                <mj-text font-size="12px" line-height="14.52px" font-weight="400" font-size="12px" font-family="Inter" />
-                <mj-class name="wrapper" border-radius="8px" background-color="#F5F5F5" padding="10px 15px" />
-            </mj-attributes>
-            <mj-style inline="inline">"
-                h2 {
-                    font-size: 12px;
-                    font-weight: 700;
-                }
-                p {
-                    margin: 6px 0;
-                }
-                ul {
-                    padding-left: 20px;
-                }
-            "</mj-style>
+            { head().into() }
         </mj-head>
         <mj-body width="500px" padding="0">
             <mj-section padding="20px 0">
@@ -46,9 +29,7 @@ pub(crate) fn subscription(params: Value, _l: Locale) -> Result<mjml::Mjml, Temp
                 { header().into() }
 
                 <mj-text>
-                    <p>"Hello "{ mrml::text::Text::from(
-                        ctx.name.unwrap_or("Jade".into())
-                    ).into()},</p>
+                    <p>{ Text::from(tl!(l, greeting_line, name = ctx.name.unwrap_or("Jade".into()) )).into() }</p>
                     <p>"New edits have been added for artists that you've subscribed to."</p>
                 </mj-text>
 
