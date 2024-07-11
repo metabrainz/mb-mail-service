@@ -982,7 +982,7 @@ checksum = "78ca9ab1a0babb1e7d5695e3530886289c18cf2f87ec19a575a0abdce112e3a3"
 [[package]]
 name = "mf1"
 version = "0.1.0"
-source = "git+https://github.com/JadedBlueEyes/messageformat.git#a35a618ee255fa239a40ddee5309a40f778e53f4"
+source = "git+https://github.com/JadedBlueEyes/messageformat.git#941223468282210ee239ccfef496f6908e74c19e"
 dependencies = [
  "mf1-macros",
 ]
@@ -990,7 +990,7 @@ dependencies = [
 [[package]]
 name = "mf1-macros"
 version = "0.1.0"
-source = "git+https://github.com/JadedBlueEyes/messageformat.git#a35a618ee255fa239a40ddee5309a40f778e53f4"
+source = "git+https://github.com/JadedBlueEyes/messageformat.git#941223468282210ee239ccfef496f6908e74c19e"
 dependencies = [
  "convert_case",
  "mf1-parser",
@@ -1006,7 +1006,7 @@ dependencies = [
 [[package]]
 name = "mf1-parser"
 version = "0.1.0"
-source = "git+https://github.com/JadedBlueEyes/messageformat.git#a35a618ee255fa239a40ddee5309a40f778e53f4"
+source = "git+https://github.com/JadedBlueEyes/messageformat.git#941223468282210ee239ccfef496f6908e74c19e"
 dependencies = [
  "icu_plurals",
  "logos",
