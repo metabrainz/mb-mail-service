@@ -6,6 +6,7 @@ use crate::Locale;
 mod basic;
 mod edit_note;
 mod subscription;
+mod verify_email;
 
 #[derive(Debug, thiserror::Error)]
 pub(crate) enum TemplateError {
@@ -19,6 +20,7 @@ pub fn get(template_id: &str) -> Option<Template> {
         "basic" => Some(basic::basic),
         "subscription" => Some(subscription::subscription),
         "edit-note" => Some(edit_note::edit_note),
+        "verify-email" => Some(verify_email::verify_email),
         _ => None,
     }
 }
