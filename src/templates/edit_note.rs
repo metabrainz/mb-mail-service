@@ -15,6 +15,7 @@ use super::TemplateError;
 #[serde(default)]
 struct EditNote {
     name: String,
+    user_id: String,
     edit_id: u32,
     from_username: String,
     message: String,
@@ -24,6 +25,7 @@ pub(crate) fn edit_note(params: Value, l: Locale) -> Result<Mjml, TemplateError>
     let ctx: Option<EditNote> = serde_json::from_value(params)?;
     let EditNote {
         name,
+        user_id,
         edit_id,
         from_username,
         message,
@@ -75,7 +77,7 @@ pub(crate) fn edit_note(params: Value, l: Locale) -> Result<Mjml, TemplateError>
                 <mj-divider padding="10px 15px" border-color="#F5F5F5" border-width="3px" />
                 <mj-text font-size="12px" color="#8D8D8D">
                     <p>
-                        <a href="https://musicbrainz.org/user/Jellis16/subscriptions">{ Text::from(tl!(l, change_subscription_settings)).into() }</a>
+                        <a href={"https://musicbrainz.org/user/".to_owned() + &user_id + "/subscriptions"}>{ Text::from(tl!(l, change_subscription_settings)).into() }</a>
                     </p>
                     <p>{ Text::from(tl!(l, do_not_reply)).into() }</p>
                     // <p>"Do not reply to this message. If you need help, please "<a href="https://metabrainz.org/contact">contact us</a>.</p>
