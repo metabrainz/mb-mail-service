@@ -1,4 +1,6 @@
 ──────────────────────────────────────────────────
+[MusicBrainz]                                     
+──────────────────────────────────────────────────
 Hello Jade,                                       
                                                   
 New edits have been added for artists that you've 
