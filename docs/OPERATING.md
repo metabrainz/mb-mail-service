@@ -38,3 +38,8 @@ If the process is passed a socket, for example by systemd or listenfd, it will l
 - `SMTP_MODE`: `plaintext`, `startls` or `tls`. Defaults to `plaintext`, which is not safe to use over the network.
 - `SMTP_HOST`: The SMTP relay to connect to. Defaults to `localhost`.
 - `SMTP_PORT`: The port to connect to. Defaults to `25`.
+
+### Sentry
+
+- `SENTRY_DSN`: Where to send Sentry events. If unset, no sentry events will be sent.
+- More options are available in the Sentry docs: <https://docs.sentry.io/platforms/rust/configuration/options/>
