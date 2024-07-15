@@ -1,3 +1,4 @@
+use tower::ServiceBuilder;
 use tracing::warn;
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
@@ -9,6 +10,8 @@ use std::{
     time::Duration,
 };
 use tokio::{net::TcpListener, signal};
+
+use sentry::integrations::tower::{NewSentryLayer, SentryHttpLayer};
 
 use crate::{
     render::{
@@ -51,6 +54,9 @@ pub(crate) async fn serve() {
         tracing::info!("server listening on {addr}");
         TcpListener::bind(addr).await.unwrap()
     };
+    let layer = ServiceBuilder::new()
+        .layer(NewSentryLayer::new_from_top())
+        .layer(SentryHttpLayer::with_transaction());
 
     let app = axum::Router::new()
         .route("/", get(|| async { Redirect::temporary("/swagger-ui") }))
@@ -63,6 +69,7 @@ pub(crate) async fn serve() {
         .route("/templates/:template_id/text", post(render_text_route_post))
         .route("/send/:template_id", post(send_mail_route))
         .with_state(mailer())
+        .layer(layer)
         .layer((
             // Logging
             TraceLayer::new_for_http(),

@@ -9,6 +9,10 @@ mod templates;
 mf1::load_locales!();
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let _guard = sentry::init(sentry::ClientOptions {
+        ..sentry::ClientOptions::default()
+    });
+
     // let console_layer = console_subscriber::spawn();
     tracing_subscriber::registry()
         // .with(console_layer)
@@ -17,6 +21,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 .unwrap_or_else(|_| "debug,html5ever=warn,lettre::transport::smtp::client::async_connection=warn,runtime=warn,tokio::task=warn".into()),
         )
         .with(tracing_subscriber::fmt::layer().without_time())
+        .with(sentry::integrations::tracing::layer())
         .init();
 
     let rt = tokio::runtime::Runtime::new()?;
