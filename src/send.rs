@@ -4,15 +4,16 @@ use axum::{
     response::{IntoResponse, Response},
     Json,
 };
+use futures::prelude::*;
 use lettre::{
     message::{MessageBuilder, MultiPart, SinglePart},
     AsyncSmtpTransport, AsyncTransport, Message, Tokio1Executor,
 };
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::str::FromStr;
 use tracing::trace;
-use utoipa::IntoParams;
+use utoipa::{IntoParams, ToSchema};
 
 use crate::render::{render_html, render_text, EngineError};
 
@@ -81,8 +82,7 @@ pub async fn send_mail_route(
     Query(options): Query<SendMailQuery>,
     Json(body): Json<Value>,
 ) -> Result<Response, SendError> {
-    dbg!(&body);
-    let res = send_mail(template_id, mailer, options, body).await?;
+    let res = send_mail(template_id, &mailer, options, body).await?;
     let code = res.code();
     trace!("{:?}", res);
     Ok((
@@ -99,10 +99,98 @@ pub async fn send_mail_route(
     )
         .into_response())
 }
+
+/// A single item in a bulk job
+#[derive(Deserialize, ToSchema, Clone)]
+pub struct BulkSendItem {
+    /// Template to send
+    template_id: String,
+    /// Address to send mail from.
+    from: Option<String>,
+    /// Address to send mail to.
+    to: Option<String>,
+    /// Language to render the template with
+    lang: Option<String>,
+    /// Data to pass to the template
+    params: Value,
+}
+
+#[derive(Serialize, ToSchema, Clone)]
+pub enum BulkSendResultItem {
+    Success { code: u16, message: String },
+    Error { message: String },
+}
+
+const PAR_SENDERS: usize = 6;
+
+#[tracing::instrument(skip(mailer, items))]
+#[utoipa::path(
+    post,
+    path = "/send_bulk",
+    responses(
+        (status = 200, description = "Bulk job ran successfully", body = [BulkSendResultItem])
+    ),
+    request_body = Vec<BulkSendItem>,
+)]
+pub async fn send_mail_bulk_route(
+    State(mailer): State<MailTransport>,
+    Json(items): Json<Vec<BulkSendItem>>,
+) -> Result<Json<Vec<BulkSendResultItem>>, SendError> {
+    let all_results = dashmap::DashMap::new();
+    stream::iter(items)
+        .enumerate()
+        .for_each_concurrent(
+            PAR_SENDERS,
+            |(
+                i,
+                BulkSendItem {
+                    template_id,
+                    from,
+                    to,
+                    lang,
+                    params,
+                },
+            )| {
+                // This is a hack to not move some values
+                // https://stackoverflow.com/questions/58459643/
+                let mailer = &mailer;
+                let all_results = &all_results;
+                async move {
+                    let res = send_mail(
+                        template_id,
+                        mailer,
+                        SendMailQuery { from, to, lang },
+                        params,
+                    )
+                    .await;
+                    all_results.insert(i, res);
+                }
+            },
+        )
+        .await;
+
+    Ok(Json(
+        all_results
+            .into_read_only()
+            .values()
+            .map(|i| match i {
+                Ok(res) => BulkSendResultItem::Success {
+                    code: res.code().into(),
+                    message: res.message().fold(String::new(), |s, n| s + n + "\n"),
+                },
+
+                Err(e) => BulkSendResultItem::Error {
+                    message: e.to_string(),
+                },
+            })
+            .collect(),
+    ))
+}
+
 #[tracing::instrument(skip(mailer))]
 pub async fn send_mail(
     template_id: String,
-    mailer: MailTransport,
+    mailer: &MailTransport,
     SendMailQuery { from, to, lang }: SendMailQuery,
     params: Value,
 ) -> Result<lettre::transport::smtp::response::Response, SendError> {

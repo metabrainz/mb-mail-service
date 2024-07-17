@@ -18,7 +18,7 @@ use crate::{
         render_html_route_get, render_html_route_post, render_text_route_get,
         render_text_route_post,
     },
-    send::{send_mail_route, MailTransport},
+    send::{send_mail_bulk_route, send_mail_route, MailTransport},
 };
 use axum::{
     response::Redirect,
@@ -33,8 +33,10 @@ use strum_macros::EnumString;
     paths(
         crate::render::render_html_route_get,
         crate::render::render_html_route_post,crate::render::render_text_route_get,crate::render::render_text_route_post,
-        crate::send::send_mail_route
+        crate::send::send_mail_route,
+        crate::send::send_mail_bulk_route
     ),
+    components(schemas(crate::send::BulkSendItem)),
     tags(
         (name = "mb-mail-service", description = "MusicBrains Mail Service API")
     )
@@ -68,6 +70,7 @@ pub(crate) async fn serve() {
         .route("/templates/:template_id/text", get(render_text_route_get))
         .route("/templates/:template_id/text", post(render_text_route_post))
         .route("/send/:template_id", post(send_mail_route))
+        .route("/send_bulk", post(send_mail_bulk_route))
         .with_state(mailer())
         .layer(layer)
         .layer((

@@ -33,6 +33,9 @@ utoipa-swagger-ui = { version = "7.1.0", features = ["axum"] }
 serde = { version = "1.0.203", features = ["derive"] }
 mf1 = { git = "https://github.com/JadedBlueEyes/messageformat.git", version = "0.1.0" }
 sentry = { version = "0.34.0", features = ["tracing", "tower", "tower-http"] }
+futures-util = "0.3.30"
+futures = "0.3.30"
+dashmap = { version = "6.0.1", features = ["serde"] }
 [dev-dependencies]
 expect-test = "1.5.0"
 
