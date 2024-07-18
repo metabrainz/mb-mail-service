@@ -1,3 +1,4 @@
+use config::Config;
 use render::EngineError;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
@@ -8,6 +9,15 @@ mod serve;
 mod templates;
 
 mf1::load_locales!();
+
+#[derive(Debug, serde::Deserialize)]
+#[allow(unused)]
+pub struct Settings {
+    #[serde(default)]
+    listen: serve::ListenerConfig,
+    #[serde(default)]
+    smtp: serve::SmtpMailerConfig,
+}
 
 fn locale_from_optional_code(lang: Option<String>) -> Result<Locale, EngineError> {
     Ok(lang
@@ -24,6 +34,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         ..sentry::ClientOptions::default()
     });
 
+    let config = Config::builder()
+        .add_source(
+            config::Environment::with_prefix("APP")
+                .try_parsing(true)
+                .separator("_")
+                .convert_case(convert_case::Case::Snake),
+        )
+        .build()
+        .unwrap();
+
+    let settings: Settings = config.try_deserialize().unwrap();
+    dbg!(&settings);
+
     // let console_layer = console_subscriber::spawn();
     tracing_subscriber::registry()
         // .with(console_layer)
@@ -37,6 +60,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let rt = tokio::runtime::Runtime::new()?;
 
-    rt.block_on(serve::serve());
+    rt.block_on(serve::serve(settings.listen, settings.smtp));
     Ok(())
 }

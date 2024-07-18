@@ -28,16 +28,27 @@ This service is primarily configured through environment variables.
 
 ### Listening
 
-If the process is passed a socket, for example by systemd or listenfd, it will listen on that. Otherwise, it will create a socket from the following options.
+By default the server will use the `automatic_selection`
+mode, which will use a passed file descriptor if available,
+but otherwise will listen on the TCP port configured
+(by default 127.0.0.1:3000)
 
-- `HOST`: The IP address that the service will listen on. Defaults to `127.0.0.1`. Set to `0.0.0.0` to listen on all addresses.
-- `PORT`: The Port that the service will listen on. Defaults to `3000`.
+| Setting name | Value                                                     | Default value                                                                             |
+| ------------ | --------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| APP_LISTEN_MODE         | `file_descriptor` \| `automatic_selection` \| `tcp_listener` | `automatic_selection`                                                                      |
+| APP_LISTEN_PORT         | unsigned integer                                          | `file_descriptor`: Ignored<br>`automatic_selection`: `3000`<br>`tcp_listener`: required      |
+| APP_LISTEN_HOST         | IP address                                                | `file_descriptor`: Ignored<br>`automatic_selection`: `127.0.0.1`<br>`tcp_listener`: required |
 
 ### Mailing
 
-- `SMTP_MODE`: `plaintext`, `startls` or `tls`. Defaults to `plaintext`, which is not safe to use over the network.
-- `SMTP_HOST`: The SMTP relay to connect to. Defaults to `localhost`.
-- `SMTP_PORT`: The port to connect to. Defaults to `25`.
+> ⚠️ `APP_SMTP_MODE` defaults to `plaintext`, which is not safe to use over the network.
+
+| Setting name      | Value                                             | Default value |
+| ----------------- | ------------------------------------------------- | ------------- |
+| APP_SMTP_MODE     | `plaintext` \| `startls` \| `tls`                 | `plaintext`   |
+| SMTP_PORT         | The port of the SMTP relay to connect to          | `25`          |
+| SMTP_HOST         | The hostname of the SMTP relay to connect to      | `localhost`   |
+| SMTP_TIMEOUT      | The timeout duration                              | 5 seconds     |
 
 ### Sentry
 
