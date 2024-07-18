@@ -6,11 +6,13 @@ use lettre::{
 };
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
-use std::str::FromStr;
 use tracing::trace;
 use utoipa::ToSchema;
 
-use crate::render::{render_html, render_text, EngineError};
+use crate::{
+    locale_from_optional_code,
+    render::{render_html, render_text, EngineError},
+};
 
 #[derive(Debug, thiserror::Error)]
 pub(crate) enum SendError {
@@ -157,9 +159,7 @@ pub async fn send_mail(
         params,
     }: SendItem,
 ) -> Result<lettre::transport::smtp::response::Response, SendError> {
-    let lang = lang
-        .map(|l| crate::Locale::from_str(&l).unwrap())
-        .unwrap_or_default();
+    let lang = locale_from_optional_code(lang)?;
     let (html, title) = render_html(template_id, params, lang).await?;
     let text = render_text(&html).await?;
     let email = Message::builder()

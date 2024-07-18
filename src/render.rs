@@ -6,13 +6,18 @@ use axum::{
 };
 use serde::Deserialize;
 use serde_json::Value;
-use std::str::FromStr;
+use std::borrow::Cow;
 use utoipa::IntoParams;
 
-use crate::templates::{self, TemplateError};
+use crate::{
+    locale_from_optional_code,
+    templates::{self, TemplateError},
+};
 
 #[derive(Debug, thiserror::Error)]
 pub(crate) enum EngineError {
+    #[error("Unsupported or invalid language    : {0}")]
+    BadLanguageCode(Cow<'static, str>),
     #[error("Failed to render template: {0}")]
     Template(#[from] TemplateError),
     #[error("Failed to render MJML: {0}")]
@@ -70,9 +75,7 @@ pub async fn render_html_route_get(
     Path(template_id): Path<String>,
     Query(RenderQuery { lang }): Query<RenderQuery>,
 ) -> Result<Response, EngineError> {
-    let lang = lang
-        .map(|l| crate::Locale::from_str(&l).unwrap())
-        .unwrap_or_default();
+    let lang = locale_from_optional_code(lang)?;
 
     let (content, _title) = render_html(template_id, Value::Null, lang).await?;
 
@@ -97,9 +100,7 @@ pub async fn render_html_route_post(
     Query(RenderQuery { lang }): Query<RenderQuery>,
     Json(body): Json<Value>,
 ) -> Result<Response, EngineError> {
-    let lang = lang
-        .map(|l| crate::Locale::from_str(&l).unwrap())
-        .unwrap_or_default();
+    let lang = locale_from_optional_code(lang)?;
     let (content, _title) = render_html(template_id, body, lang).await?;
 
     Ok(([(header::CONTENT_TYPE, "text/html")], content).into_response())
@@ -126,9 +127,7 @@ pub async fn render_text_route_get(
     Path(template_id): Path<String>,
     Query(RenderQuery { lang }): Query<RenderQuery>,
 ) -> Result<Response, EngineError> {
-    let lang = lang
-        .map(|l| crate::Locale::from_str(&l).unwrap())
-        .unwrap_or_default();
+    let lang = locale_from_optional_code(lang)?;
     let (html, _title) = render_html(template_id, Value::Null, lang).await?;
     let content = render_text(&html).await?;
 
@@ -157,9 +156,7 @@ pub async fn render_text_route_post(
     Query(RenderQuery { lang }): Query<RenderQuery>,
     Json(body): Json<Value>,
 ) -> Result<Response, EngineError> {
-    let lang = lang
-        .map(|l| crate::Locale::from_str(&l).unwrap())
-        .unwrap_or_default();
+    let lang = locale_from_optional_code(lang)?;
     let (html, _title) = render_html(template_id, body, lang).await?;
     let content = render_text(&html).await?;
 

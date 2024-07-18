@@ -1,3 +1,4 @@
+use render::EngineError;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 mod components;
@@ -7,6 +8,16 @@ mod serve;
 mod templates;
 
 mf1::load_locales!();
+
+fn locale_from_optional_code(lang: Option<String>) -> Result<Locale, EngineError> {
+    Ok(lang
+        .map(|l| {
+            <Locale as std::str::FromStr>::from_str(&l)
+                .map_err(|_| EngineError::BadLanguageCode(std::borrow::Cow::Owned(l)))
+        })
+        .transpose()?
+        .unwrap_or_default())
+}
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let _guard = sentry::init(sentry::ClientOptions {
