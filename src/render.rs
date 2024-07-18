@@ -16,7 +16,7 @@ use crate::{
 
 #[derive(Debug, thiserror::Error)]
 pub(crate) enum EngineError {
-    #[error("Unsupported or invalid language    : {0}")]
+    #[error("Unsupported or invalid language: {0}")]
     BadLanguageCode(Cow<'static, str>),
     #[error("Failed to render template: {0}")]
     Template(#[from] TemplateError),
