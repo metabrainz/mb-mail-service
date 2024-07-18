@@ -19,7 +19,9 @@ pub(crate) enum SendError {
     #[error("Failed to render template: {0}")]
     FailedTemplate(#[from] EngineError),
     #[error("Failed to send mail: {0}")]
-    SendError(#[from] lettre::transport::smtp::Error),
+    SmtpError(#[from] lettre::transport::smtp::Error),
+    #[error("Bad email address: {0}")]
+    AddressError(#[from] lettre::address::AddressError),
 }
 
 impl IntoResponse for SendError {
@@ -165,13 +167,11 @@ pub async fn send_mail(
     let email = Message::builder()
         .from(
             from.unwrap_or_else(|| "Test Sender <sender@example.com>".to_string())
-                .parse()
-                .unwrap(),
+                .parse()?,
         )
         .to(to
             .unwrap_or_else(|| "Test Receiver <reciever@example.com>".to_string())
-            .parse()
-            .unwrap())
+            .parse()?)
         .subject_opt(title.as_deref())
         .multipart(
             MultiPart::alternative() // This is composed of two parts.
