@@ -105,9 +105,9 @@ const PAR_SENDERS: usize = 16;
     post,
     path = "/send_bulk",
     responses(
-        (status = 200, description = "Bulk job ran successfully", body = [BulkSendResultItem])
+        (status = 200, description = "Bulk job ran successfully", body = [SendResponse])
     ),
-    request_body = Vec<BulkSendItem>,
+    request_body = Vec<SendItem>,
 )]
 pub async fn send_mail_bulk_route(
     State(mailer): State<MailTransport>,
