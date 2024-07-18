@@ -1,9 +1,4 @@
-use axum::{
-    extract::{Path, Query, State},
-    http::{header, StatusCode},
-    response::{IntoResponse, Response},
-    Json,
-};
+use axum::{extract::State, http::StatusCode, response::IntoResponse, Json};
 use futures::prelude::*;
 use lettre::{
     message::{MessageBuilder, MultiPart, SinglePart},
@@ -13,7 +8,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use std::str::FromStr;
 use tracing::trace;
-use utoipa::{IntoParams, ToSchema};
+use utoipa::ToSchema;
 
 use crate::render::{render_html, render_text, EngineError};
 
@@ -52,57 +47,9 @@ impl OptionalSubject for MessageBuilder {
     }
 }
 
-/// Todo search query
-#[derive(Deserialize, IntoParams)]
-pub(crate) struct SendMailQuery {
-    /// Address to send mail from.
-    from: Option<String>,
-    /// Address to send mail to.
-    to: Option<String>,
-    /// Language to render the template with
-    lang: Option<String>,
-}
-
-#[utoipa::path(
-    post,
-    path = "/send/{template_id}",
-    responses(
-        (status = 200, description = "Email sent successfully"),
-        (status = NOT_FOUND, description = "Template was not found")
-    ),
-    params(
-        ("template_id" = String, Path, description = "Template to send"),
-        SendMailQuery
-    ),
-    request_body = Value
-)]
-pub async fn send_mail_route(
-    Path(template_id): Path<String>,
-    State(mailer): State<MailTransport>,
-    Query(options): Query<SendMailQuery>,
-    Json(body): Json<Value>,
-) -> Result<Response, SendError> {
-    let res = send_mail(template_id, &mailer, options, body).await?;
-    let code = res.code();
-    trace!("{:?}", res);
-    Ok((
-        if res.is_positive() {
-            StatusCode::OK
-        } else {
-            StatusCode::INTERNAL_SERVER_ERROR
-        },
-        [(header::CONTENT_TYPE, "text/plain; charset=UTF-8")],
-        format!(
-            "{code}: {code:?}\n{}",
-            res.message().fold(String::new(), |s, n| s + n + "\n")
-        ),
-    )
-        .into_response())
-}
-
-/// A single item in a bulk job
+/// All the data needed to send a single email
 #[derive(Deserialize, ToSchema, Clone)]
-pub struct BulkSendItem {
+pub struct SendItem {
     /// Template to send
     template_id: String,
     /// Address to send mail from.
@@ -116,12 +63,42 @@ pub struct BulkSendItem {
 }
 
 #[derive(Serialize, ToSchema, Clone)]
-pub enum BulkSendResultItem {
+#[serde(tag = "t", content = "c")]
+pub enum SendResponse {
     Success { code: u16, message: String },
     Error { message: String },
 }
 
-const PAR_SENDERS: usize = 6;
+#[utoipa::path(
+    post,
+    path = "/send_single",
+    responses(
+        (status = 200, description = "Email sent successfully"),
+        (status = NOT_FOUND, description = "Template was not found")
+    ),
+    request_body = SendItem,
+)]
+pub async fn send_mail_route(
+    State(mailer): State<MailTransport>,
+    Json(item): Json<SendItem>,
+) -> Result<(StatusCode, Json<SendResponse>), SendError> {
+    let res = send_mail(&mailer, item).await?;
+    trace!("{:?}", res);
+
+    Ok((
+        if res.is_positive() {
+            StatusCode::OK
+        } else {
+            StatusCode::INTERNAL_SERVER_ERROR
+        },
+        Json(SendResponse::Success {
+            code: res.code().into(),
+            message: res.message().fold(String::new(), |s, n| s + n + "\n"),
+        }),
+    ))
+}
+
+const PAR_SENDERS: usize = 16;
 
 #[tracing::instrument(skip(mailer, items))]
 #[utoipa::path(
@@ -134,39 +111,21 @@ const PAR_SENDERS: usize = 6;
 )]
 pub async fn send_mail_bulk_route(
     State(mailer): State<MailTransport>,
-    Json(items): Json<Vec<BulkSendItem>>,
-) -> Result<Json<Vec<BulkSendResultItem>>, SendError> {
+    Json(items): Json<Vec<SendItem>>,
+) -> Result<Json<Vec<SendResponse>>, SendError> {
     let all_results = dashmap::DashMap::new();
     stream::iter(items)
         .enumerate()
-        .for_each_concurrent(
-            PAR_SENDERS,
-            |(
-                i,
-                BulkSendItem {
-                    template_id,
-                    from,
-                    to,
-                    lang,
-                    params,
-                },
-            )| {
-                // This is a hack to not move some values
-                // https://stackoverflow.com/questions/58459643/
-                let mailer = &mailer;
-                let all_results = &all_results;
-                async move {
-                    let res = send_mail(
-                        template_id,
-                        mailer,
-                        SendMailQuery { from, to, lang },
-                        params,
-                    )
-                    .await;
-                    all_results.insert(i, res);
-                }
-            },
-        )
+        .for_each_concurrent(PAR_SENDERS, |(i, item)| {
+            // This is a hack to not move some values
+            // https://stackoverflow.com/questions/58459643/
+            let mailer = &mailer;
+            let all_results = &all_results;
+            async move {
+                let res = send_mail(mailer, item).await;
+                all_results.insert(i, res);
+            }
+        })
         .await;
 
     Ok(Json(
@@ -174,12 +133,12 @@ pub async fn send_mail_bulk_route(
             .into_read_only()
             .values()
             .map(|i| match i {
-                Ok(res) => BulkSendResultItem::Success {
+                Ok(res) => SendResponse::Success {
                     code: res.code().into(),
                     message: res.message().fold(String::new(), |s, n| s + n + "\n"),
                 },
 
-                Err(e) => BulkSendResultItem::Error {
+                Err(e) => SendResponse::Error {
                     message: e.to_string(),
                 },
             })
@@ -189,10 +148,14 @@ pub async fn send_mail_bulk_route(
 
 #[tracing::instrument(skip(mailer))]
 pub async fn send_mail(
-    template_id: String,
     mailer: &MailTransport,
-    SendMailQuery { from, to, lang }: SendMailQuery,
-    params: Value,
+    SendItem {
+        template_id,
+        from,
+        to,
+        lang,
+        params,
+    }: SendItem,
 ) -> Result<lettre::transport::smtp::response::Response, SendError> {
     let lang = lang
         .map(|l| crate::Locale::from_str(&l).unwrap())

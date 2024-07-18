@@ -36,7 +36,7 @@ use strum_macros::EnumString;
         crate::send::send_mail_route,
         crate::send::send_mail_bulk_route
     ),
-    components(schemas(crate::send::BulkSendItem)),
+    components(schemas(crate::send::SendItem, crate::send::SendResponse)),
     tags(
         (name = "mb-mail-service", description = "MusicBrains Mail Service API")
     )
@@ -69,7 +69,7 @@ pub(crate) async fn serve() {
         .route("/templates/:template_id/html", get(render_html_route_get))
         .route("/templates/:template_id/text", get(render_text_route_get))
         .route("/templates/:template_id/text", post(render_text_route_post))
-        .route("/send/:template_id", post(send_mail_route))
+        .route("/send_single", post(send_mail_route))
         .route("/send_bulk", post(send_mail_bulk_route))
         .with_state(mailer())
         .layer(layer)
