@@ -46,9 +46,9 @@ but otherwise will listen on the TCP port configured
 | Setting name      | Value                                             | Default value |
 | ----------------- | ------------------------------------------------- | ------------- |
 | APP_SMTP_MODE     | `plaintext` \| `startls` \| `tls`                 | `plaintext`   |
-| SMTP_PORT         | The port of the SMTP relay to connect to          | `25`          |
-| SMTP_HOST         | The hostname of the SMTP relay to connect to      | `localhost`   |
-| SMTP_TIMEOUT      | The timeout duration                              | 5 seconds     |
+| APP_SMTP_PORT         | The port of the SMTP relay to connect to          | `25`          |
+| APP_SMTP_HOST         | The hostname of the SMTP relay to connect to      | `localhost`   |
+| APP_SMTP_TIMEOUT      | The timeout duration                              | 5 seconds     |
 
 ### Sentry
 
