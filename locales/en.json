@@ -4,10 +4,16 @@
     "metabrainz_signoff": "—  The MetaBrainz community",
     "do_not_reply": "Do not reply to this message. For assistance please contact the team or the community.",
     "change_subscription_settings": "Click here to change your subscription email settings.",
+    "link_copy_info": "If clicking the link above doesn't work, please copy and paste the URL into a new browser window instead.",
     "edit_note_title": "Note added to your edit #{ edit_id }",
     "edit_note_top": "The following note has been added to edit #{ edit_id }:",
     "edit_note_reply": "To reply, please add your note here.",
     "verify_email_title": "Verify your email",
-    "verify_email_top": "Click on the link below to verify your email address:",
-    "verify_email_welcome": "Welcome!"
+    "verify_email_top": "Click on the link below to verify your email address:",
+    "verify_email_welcome": "Welcome!",
+    "reset_password_title": "Password reset request",
+    "reset_password_info": "Someone, probably you, asked that your MusicBrainz password be reset.",
+    "reset_password_action": "Click on the link below to reset your password:",
+    "reset_password_in_error": "If you didn't initiate this request and feel that you've received this email in error, don't worry, you don't need to take any further action and can safely disregard this email.",
+    "reset_password_contact": "If you still have problems logging in, please drop us a line."
 }

@@ -44,6 +44,11 @@ pub(crate) fn verify_email(params: Value, l: Locale) -> Result<Mjml, TemplateErr
                         </p>
                     </mj-text>
                 </mj-wrapper>
+
+                <mj-text>
+                    <p>{ Text::from(tl!(l, link_copy_info)).into() }</p>
+                </mj-text>
+
                 <mj-text>
                     <p>{ Text::from(tl!(l, verify_email_welcome)).into() }</p>
                     <p><em>{ Text::from(tl!(l, metabrainz_signoff)).into() }</em></p>
