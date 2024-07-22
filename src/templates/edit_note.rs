@@ -34,7 +34,7 @@ pub(crate) fn edit_note(params: Value, l: Locale) -> Result<Mjml, TemplateError>
         <mjml>
         <mj-head>
             { head().into() }
-            <mj-title>{ tl!(l, edit_note_title, edit_id = edit_id.to_string() ).borrow() }</mj-title>
+            <mj-title>{ tl!(l, edit_note.title, edit_id = edit_id.to_string() ).borrow() }</mj-title>
             <mj-style>"
                 div.speech {
                     position: relative;
@@ -59,7 +59,7 @@ pub(crate) fn edit_note(params: Value, l: Locale) -> Result<Mjml, TemplateError>
 
                 <mj-text>
                     <p>{ Text::from(tl!(l, greeting_line, name)).into() }</p>
-                    <p>{ Text::from(tl!(l, edit_note_top, edit_id = edit_id.to_string() )).into() }</p>
+                    <p>{ Text::from(tl!(l, edit_note.top, edit_id = edit_id.to_string() )).into() }</p>
                 </mj-text>
 
                 <mj-wrapper mj-class="wrapper" css-class="speech" >
@@ -71,7 +71,7 @@ pub(crate) fn edit_note(params: Value, l: Locale) -> Result<Mjml, TemplateError>
                     </mj-text>
                 </mj-wrapper>
                 <mj-text>
-                    <p><a href={"https://musicbrainz.org/edit/".to_owned() + &edit_id.to_string()}>{ Text::from(tl!(l, edit_note_reply )).into() }</a></p>
+                    <p><a href={"https://musicbrainz.org/edit/".to_owned() + &edit_id.to_string()}>{ Text::from(tl!(l, edit_note.reply )).into() }</a></p>
                     <p><em>{ Text::from(tl!(l, metabrainz_signoff)).into() }</em></p>
                 </mj-text>
                 <mj-divider padding="10px 15px" border-color="#F5F5F5" border-width="3px" />

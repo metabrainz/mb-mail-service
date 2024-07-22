@@ -25,7 +25,7 @@ pub(crate) fn reset_password(params: Value, l: Locale) -> Result<Mjml, TemplateE
         <mjml>
         <mj-head>
             { head().into() }
-            <mj-title>{ tl!(l, reset_password_title ).borrow() }</mj-title>
+            <mj-title>{ tl!(l, reset_password.title ).borrow() }</mj-title>
         </mj-head>
         <mj-body width="500px" padding="0">
             <mj-section padding="20px 0">
@@ -34,8 +34,8 @@ pub(crate) fn reset_password(params: Value, l: Locale) -> Result<Mjml, TemplateE
 
                 <mj-text>
                     <p>{ Text::from(tl!(l, greeting_line, name)).into() }</p>
-                    <p>{ Text::from(tl!(l, reset_password_info )).into() }</p>
-                    <p>{ Text::from(tl!(l, reset_password_action )).into() }</p>
+                    <p>{ Text::from(tl!(l, reset_password.info )).into() }</p>
+                    <p>{ Text::from(tl!(l, reset_password.action )).into() }</p>
                 </mj-text>
 
                 <mj-wrapper mj-class="wrapper">
@@ -48,8 +48,8 @@ pub(crate) fn reset_password(params: Value, l: Locale) -> Result<Mjml, TemplateE
 
                 <mj-text>
                     <p>{ Text::from(tl!(l, link_copy_info)).into() }</p>
-                    <p>{ Text::from(tl!(l, reset_password_in_error)).into() }</p>
-                    <p>{ Text::from(tl!(l, reset_password_contact)).into() }</p>
+                    <p>{ Text::from(tl!(l, reset_password.in_error)).into() }</p>
+                    <p>{ Text::from(tl!(l, reset_password.contact)).into() }</p>
                 </mj-text>
 
                 <mj-text>

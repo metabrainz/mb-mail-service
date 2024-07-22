@@ -25,7 +25,7 @@ pub(crate) fn verify_email(params: Value, l: Locale) -> Result<Mjml, TemplateErr
         <mjml>
         <mj-head>
             { head().into() }
-            <mj-title>{ tl!(l, verify_email_title ).borrow() }</mj-title>
+            <mj-title>{ tl!(l, verify_email.title ).borrow() }</mj-title>
         </mj-head>
         <mj-body width="500px" padding="0">
             <mj-section padding="20px 0">
@@ -34,7 +34,7 @@ pub(crate) fn verify_email(params: Value, l: Locale) -> Result<Mjml, TemplateErr
 
                 <mj-text>
                     <p>{ Text::from(tl!(l, greeting_line, name)).into() }</p>
-                    <p>{ Text::from(tl!(l, verify_email_top )).into() }</p>
+                    <p>{ Text::from(tl!(l, verify_email.top )).into() }</p>
                 </mj-text>
 
                 <mj-wrapper mj-class="wrapper">
@@ -50,7 +50,7 @@ pub(crate) fn verify_email(params: Value, l: Locale) -> Result<Mjml, TemplateErr
                 </mj-text>
 
                 <mj-text>
-                    <p>{ Text::from(tl!(l, verify_email_welcome)).into() }</p>
+                    <p>{ Text::from(tl!(l, verify_email.welcome)).into() }</p>
                     <p><em>{ Text::from(tl!(l, metabrainz_signoff)).into() }</em></p>
                 </mj-text>
                 <mj-divider padding="10px 15px" border-color="#F5F5F5" border-width="3px" />
