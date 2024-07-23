@@ -24,11 +24,13 @@ use crate::{
 use axum::{
     response::Redirect,
     routing::{get, post},
+    Json,
 };
 
 #[derive(OpenApi)]
 #[openapi(
     paths(
+        available_locales,
         crate::render::render_html_route_get,
         crate::render::render_html_route_post,crate::render::render_text_route_get,crate::render::render_text_route_post,
         crate::send::send_mail_route,
@@ -40,6 +42,17 @@ use axum::{
     )
 )]
 struct ApiDoc;
+
+#[utoipa::path(
+    get,
+    path = "/available_locales",
+    responses(
+        (status = 200, description = "All available locales", body = [String]),
+    )
+)]
+pub async fn available_locales() -> Json<Vec<&'static str>> {
+    Json(crate::Locale::VALUES.iter().map(|l| l.as_str()).collect())
+}
 
 /// How the server should listen for requests
 ///
@@ -112,6 +125,7 @@ pub(crate) async fn serve(config: ListenerConfig, mailer_config: SmtpMailerConfi
         // OpenAPI docs
         .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", ApiDoc::openapi()))
         // Our routes
+        .route("/available_locales", get(available_locales))
         .route("/templates/:template_id/html", post(render_html_route_post))
         .route("/templates/:template_id/html", get(render_html_route_get))
         .route("/templates/:template_id/text", get(render_text_route_get))
