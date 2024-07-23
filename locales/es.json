@@ -9,5 +9,8 @@
         "top": "Se agregó la siguiente nota a la edición #{ edit_id }:",
         "reply": "Para responder, por favor agregue su nota aquí."
     },
-    "link_copy_info": "Si hacer clic en el enlace de arriba no funciona, copie y pegue la URL en una nueva ventana del navegador."
+    "link_copy_info": "Si hacer clic en el enlace de arriba no funciona, copie y pegue la URL en una nueva ventana del navegador.",
+    "edit_note": {
+        "reply": "Para responder, agregue su nota aquí."
+    }
 }
