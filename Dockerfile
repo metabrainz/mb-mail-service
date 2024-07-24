@@ -32,4 +32,6 @@ ENV APP_LISTEN_PORT=3000
 ENV APP_LISTEN_HOST=0.0.0.0
 EXPOSE 3000
 
+HEALTHCHECK --interval=15s --timeout=30s --start-period=5s --retries=4 CMD ["/app/app", "healthcheck"]
+
 CMD ["/app/app"]

@@ -13,9 +13,9 @@ mf1::load_locales!();
 
 #[derive(Debug, serde::Deserialize)]
 #[allow(unused)]
-pub struct Settings {
+pub(crate) struct Settings {
     #[serde(default)]
-    listen: serve::ListenerConfig,
+    pub listen: serve::ListenerConfig,
     #[serde(default)]
     smtp: serve::SmtpMailerConfig,
 }
@@ -60,6 +60,35 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .init();
 
     let rt = tokio::runtime::Runtime::new()?;
+
+    let mut args = std::env::args().skip(1);
+    if args.next() == Some("healthcheck".to_owned()) {
+        rt.block_on(async {
+            let endpoint = args.next().unwrap_or(
+                "http://".to_owned()
+                    + &match settings.listen {
+                        serve::ListenerConfig::FileDescriptor { mode: _ } => {
+                            "localhost:3000".to_owned()
+                        }
+                        serve::ListenerConfig::TcpListener {
+                            mode: _,
+                            port,
+                            host,
+                        } => host.to_string() + ":" + &port.to_string(),
+                        serve::ListenerConfig::AutomaticSelection { port, host } => {
+                            host.to_string() + ":" + &port.to_string()
+                        }
+                    }
+                    + "/healthcheck",
+            );
+            let res = reqwest::get(&endpoint).await;
+
+            if res.is_err() {
+                panic!("Can't reach route {}", endpoint);
+            };
+        });
+        return Ok(());
+    };
 
     rt.block_on(serve::serve(settings.listen, settings.smtp));
     Ok(())

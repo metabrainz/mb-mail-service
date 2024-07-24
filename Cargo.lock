@@ -1211,6 +1211,7 @@ dependencies = [
  "mrml",
  "mrmx",
  "mrmx-macros",
+ "reqwest",
  "sentry",
  "serde",
  "serde_json",

@@ -11,6 +11,7 @@ services:
       - smtp-relay
     ports:
       - 3000:3000
+    restart: unless-stopped
   smtp-relay:
     # This would be an actual SMTP relay in production
     image: axllent/mailpit
