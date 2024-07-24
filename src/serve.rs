@@ -47,7 +47,7 @@ struct ApiDoc;
     get,
     path = "/available_locales",
     responses(
-        (status = 200, description = "All available locales", body = [String]),
+        (status = 200, description = "All available locales", body = [String], example = json!(["en", "es"])),
     )
 )]
 pub async fn available_locales() -> Json<Vec<&'static str>> {
