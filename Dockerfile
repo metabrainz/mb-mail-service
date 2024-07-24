@@ -25,8 +25,9 @@ WORKDIR /app
 # Copy our build
 COPY --from=builder /mb-mail-service ./app 
 
-ENV PORT=3000
-ENV HOST=0.0.0.0
+ENV APP_LISTEN_MODE=tcp_listener
+ENV APP_LISTEN_PORT=3000
+ENV APP_LISTEN_HOST=0.0.0.0
 EXPOSE 3000
 
 CMD ["/app/app"]
