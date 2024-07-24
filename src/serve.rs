@@ -34,7 +34,8 @@ use axum::{
         crate::render::render_html_route_get,
         crate::render::render_html_route_post,crate::render::render_text_route_get,crate::render::render_text_route_post,
         crate::send::send_mail_route,
-        crate::send::send_mail_bulk_route
+        crate::send::send_mail_bulk_route,
+        healthcheck
     ),
     components(schemas(crate::send::SendItem, crate::send::SendResponse)),
     tags(
@@ -54,6 +55,16 @@ pub async fn available_locales() -> Json<Vec<&'static str>> {
     Json(crate::Locale::VALUES.iter().map(|l| l.as_str()).collect())
 }
 
+#[utoipa::path(
+    get,
+    path = "/healthcheck",
+    responses(
+        (status = 200, body = String, example = json!("ok")),
+    )
+)]
+pub async fn healthcheck() -> &'static str {
+    "ok"
+}
 /// How the server should listen for requests
 ///
 /// By default the server will use the `AutomaticSelection`
@@ -140,7 +151,9 @@ pub(crate) async fn serve(config: ListenerConfig, mailer_config: SmtpMailerConfi
             // Give a universal timeout to prevent
             // DOS and for graceful shutdown
             TimeoutLayer::new(Duration::from_secs(60)),
-        ));
+        ))
+        // Place the healthcheck last to bypass previously set layers
+        .route("/healthcheck", get(healthcheck));
 
     axum::serve(listener, app.into_make_service())
         .with_graceful_shutdown(shutdown_signal())
