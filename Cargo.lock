@@ -746,12 +746,12 @@ dependencies = [
 
 [[package]]
 name = "html2text"
-version = "0.12.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8c66ee488a63a92237d5b48875b7e05bb293be8fb2894641c8118b60c08ab5ef"
+version = "0.13.0-alpha.1"
+source = "git+https://github.com/JadedBlueEyes/rust-html2text.git?branch=jade/no-wrap-links#a97ac8e9bbe3d8fa2f10f2489998b0ed1942e6d4"
 dependencies = [
  "html5ever",
  "markup5ever",
+ "nom",
  "tendril",
  "thiserror",
  "unicode-width",

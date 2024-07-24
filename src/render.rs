@@ -1,3 +1,4 @@
+use super::text::PlainDecorator;
 use axum::{
     extract::{Path, Query},
     http::{header, StatusCode},
@@ -107,7 +108,14 @@ pub async fn render_html_route_post(
 }
 
 pub async fn render_text(html: &str) -> Result<String, EngineError> {
-    let text = html2text::config::plain().string_from_read(html.as_bytes(), 50)?;
+    let config = html2text::config::with_decorator(PlainDecorator::new())
+        .no_table_borders()
+        .allow_width_overflow()
+        .no_link_wrapping();
+    let dom = config.parse_html(html.as_bytes())?;
+    let tree = config.dom_to_render_tree(&dom)?;
+    let text = config.render_to_string(tree, 50)?;
+
     Ok(text)
 }
 

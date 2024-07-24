@@ -13,7 +13,7 @@ locales = ["en", "es"]
 
 [dependencies]
 axum = { version = "0.7.5", features = ["tracing", "macros"] }
-html2text = "0.12.5"
+html2text = { version = "0.13.0-alpha.1", git = "https://github.com/JadedBlueEyes/rust-html2text.git", branch = "jade/no-wrap-links" }
 lettre = { version = "0.11.7", features = ["tokio1", "builder", "smtp-transport", "pool", "tokio1-rustls-tls", "tracing"], default-features = false }
 listenfd = "1.0.1"
 mrmx-macros = { version = "0.1.0", git = "https://github.com/JadedBlueEyes/mrmx.git" }

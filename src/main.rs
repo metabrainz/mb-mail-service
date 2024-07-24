@@ -7,6 +7,7 @@ mod render;
 mod send;
 mod serve;
 mod templates;
+mod text;
 
 mf1::load_locales!();
 
