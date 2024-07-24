@@ -79,12 +79,23 @@ pub async fn healthcheck() -> &'static str {
 /// | host         | IP address                                                | `FileDescriptor`: Ignored<br>`AutomaticSelection`: `127.0.0.1`<br>`TcpListener`: required |
 
 #[derive(Debug, serde::Deserialize)]
-#[serde(tag = "mode")]
+#[serde(untagged)]
 #[serde(rename_all = "snake_case")]
 pub(crate) enum ListenerConfig {
-    FileDescriptor,
-    AutomaticSelection { port: u16, host: IpAddr },
-    TcpListener { port: u16, host: IpAddr },
+    FileDescriptor {
+        #[allow(dead_code)]
+        mode: MustBe!("file_descriptor"),
+    },
+    TcpListener {
+        #[allow(dead_code)]
+        mode: MustBe!("tcp_listener"),
+        port: u16,
+        host: IpAddr,
+    },
+    AutomaticSelection {
+        port: u16,
+        host: IpAddr,
+    },
 }
 
 impl Default for ListenerConfig {
@@ -101,7 +112,7 @@ pub(crate) async fn serve(config: ListenerConfig, mailer_config: SmtpMailerConfi
     // Otherwise, we will use [address] to get a socket.
     let mut listenfd = listenfd::ListenFd::from_env();
     let listener = match config {
-        ListenerConfig::FileDescriptor => {
+        ListenerConfig::FileDescriptor { .. } => {
             let listener = listenfd.take_tcp_listener(0).unwrap().unwrap();
             tracing::info!("server listening on socket");
             listener.set_nonblocking(true).unwrap();
@@ -118,7 +129,7 @@ pub(crate) async fn serve(config: ListenerConfig, mailer_config: SmtpMailerConfi
                 TcpListener::bind(addr).await.unwrap()
             }
         }
-        ListenerConfig::TcpListener { port, host } => {
+        ListenerConfig::TcpListener { port, host, .. } => {
             let addr = SocketAddr::from((host, port));
             tracing::info!("server listening on {addr}");
             TcpListener::bind(addr).await.unwrap()
