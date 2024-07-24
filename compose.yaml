@@ -1,0 +1,30 @@
+version: '2.4'
+
+services:
+  mail-service:
+    build:
+      context: .
+    environment:
+      - APP_SMTP_PORT=1025
+      - APP_SMTP_HOST=smtp-relay
+    depends_on:
+      - smtp-relay
+    ports:
+      - 3000:3000
+  smtp-relay:
+    # This would be an actual SMTP relay in production
+    image: axllent/mailpit
+    container_name: smtp-relay
+    restart: unless-stopped
+    # volumes:
+    #   - ./data:/data
+    ports:
+      - 8025:8025
+      - 1025:1025
+    expose:
+      - "8025"
+    environment:
+      MP_MAX_MESSAGES: 5000
+      # MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
