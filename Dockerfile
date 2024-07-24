@@ -12,7 +12,7 @@ RUN --mount=type=cache,target=/usr/local/cargo/registry \
     cargo build --release --target x86_64-unknown-linux-gnu && \
     cp ./target/x86_64-unknown-linux-gnu/release/mb-mail-service /mb-mail-service
 
-RUN ls -R /app
+# RUN ls -R /app
 
 # serve
 
