@@ -4,7 +4,7 @@
     "metabrainz_signoff": "—  La comunidad MetaBrainz",
     "do_not_reply": "No responda a este mensaje. Para obtener ayuda, comuníquese con el equipo o la comunidad.",
     "change_subscription_settings": "Haga clic aquí para cambiar la configuración de su correo electrónico de suscripción.",
-    "edit_note_title": {
+    "edit_note": {
         "title": "Nota agregada a tu edición #{ edit_id }",
         "top": "Se agregó la siguiente nota a la edición #{ edit_id }:",
         "reply": "Para responder, por favor agregue su nota aquí."
