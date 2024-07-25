@@ -17,7 +17,7 @@ jobs:
                     console.log(context)
                     const { repo, owner } = context.repo;
                     const { sha } = context;
-                    const { head, base } = { base: "main", head: ${{ github.ref_name }}, }
+                    const { head, base } = { base: "main", head: "${{ github.ref_name }}", }
                     const main = 
                         await github.rest.repos.getBranch({
                             owner,
