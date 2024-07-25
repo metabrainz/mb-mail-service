@@ -93,4 +93,5 @@ jobs:
         if: success() || failure()
         with:
           report_paths: 'target/nextest/ci/junit.xml'
+          check_name: JUnit Test Report for ${{ matrix.os }}
         continue-on-error: true
