@@ -27,6 +27,9 @@ use axum::{
     Json,
 };
 
+use axum_prometheus::PrometheusMetricLayer;
+use metrics::counter;
+
 #[derive(OpenApi)]
 #[openapi(
     paths(
@@ -63,6 +66,7 @@ pub async fn available_locales() -> Json<Vec<&'static str>> {
     )
 )]
 pub async fn healthcheck() -> &'static str {
+    counter!("healthcheck_total").increment(1);
     "ok"
 }
 /// How the server should listen for requests
@@ -138,9 +142,11 @@ pub(crate) async fn serve(config: ListenerConfig, mailer_config: SmtpMailerConfi
 
     let mailer = mailer(mailer_config);
 
-    let layer = ServiceBuilder::new()
+    let sentry_layer = ServiceBuilder::new()
         .layer(NewSentryLayer::new_from_top())
         .layer(SentryHttpLayer::with_transaction());
+
+    let (prometheus_layer, metric_handle) = PrometheusMetricLayer::pair();
 
     let app = axum::Router::new()
         .route("/", get(|| async { Redirect::temporary("/swagger-ui") }))
@@ -155,7 +161,7 @@ pub(crate) async fn serve(config: ListenerConfig, mailer_config: SmtpMailerConfi
         .route("/send_single", post(send_mail_route))
         .route("/send_bulk", post(send_mail_bulk_route))
         .with_state(mailer)
-        .layer(layer)
+        .layer(sentry_layer)
         .layer((
             // Logging
             TraceLayer::new_for_http(),
@@ -164,7 +170,10 @@ pub(crate) async fn serve(config: ListenerConfig, mailer_config: SmtpMailerConfi
             TimeoutLayer::new(Duration::from_secs(60)),
         ))
         // Place the healthcheck last to bypass previously set layers
-        .route("/healthcheck", get(healthcheck));
+        .route("/healthcheck", get(healthcheck))
+        .route("/metrics", get(|| async move { metric_handle.render() }))
+        // Metrics over everything
+        .layer(prometheus_layer);
 
     axum::serve(listener, app.into_make_service())
         .with_graceful_shutdown(shutdown_signal())

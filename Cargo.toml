@@ -39,6 +39,9 @@ config = "0.14.0"
 convert_case = "0.6.0"
 monostate = "0.1.13"
 reqwest = { version = "0.12.5", default-features = false }
+metrics = "0.23.0"
+axum-prometheus = "0.7.0"
+# metrics-exporter-prometheus = { version = "0.15.3", default-features = false, features = ["http-listener"] }
 
 [dev-dependencies]
 expect-test = "1.5.0"

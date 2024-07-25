@@ -4,6 +4,7 @@ use lettre::{
     message::{MessageBuilder, MultiPart, SinglePart},
     AsyncSmtpTransport, AsyncTransport, Message, Tokio1Executor,
 };
+use metrics::counter;
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use tracing::trace;
@@ -86,6 +87,7 @@ pub async fn send_mail_route(
     State(mailer): State<MailTransport>,
     Json(item): Json<SendItem>,
 ) -> Result<(StatusCode, Json<SendResponse>), SendError> {
+    counter!("mails_requested_total").increment(1);
     let res = send_mail(&mailer, item).await?;
     trace!("{:?}", res);
 
@@ -117,6 +119,7 @@ pub async fn send_mail_bulk_route(
     State(mailer): State<MailTransport>,
     Json(items): Json<Vec<SendItem>>,
 ) -> Result<Json<Vec<SendResponse>>, SendError> {
+    counter!("mails_requested_total").increment(items.len().try_into().unwrap());
     let all_results = dashmap::DashMap::new();
     stream::iter(items)
         .enumerate()
@@ -189,5 +192,6 @@ pub async fn send_mail(
         .expect("failed to build email");
     let res = mailer.send(email).await?;
 
+    counter!("mails_sent_total").increment(1);
     Ok(res)
 }
