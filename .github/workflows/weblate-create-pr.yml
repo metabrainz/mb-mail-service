@@ -14,8 +14,19 @@ jobs:
             uses: actions/github-script@v6
             with:
                 script: |
+                    console.log(context)
                     const { repo, owner } = context.repo;
-                    const { head, base } = { base: "main", head: "metabrainz:translations", }
+                    const { sha } = context;
+                    const { head, base } = { base: "main", head: ${{ github.ref_name }}, }
+                    const main = 
+                        await github.rest.repos.getBranch({
+                            owner,
+                            repo,
+                            branch: "main"
+                        });
+                    if (sha == main.data.commit.sha) {
+                        return
+                    }
                     const pulls = await github.rest.pulls.list({ owner, repo, head, base, state: "open" })
                     console.log(pulls.data)
                     if (pulls.data.length == 0) {

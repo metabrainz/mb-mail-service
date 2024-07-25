@@ -5,6 +5,8 @@ on:
   push:
     # branches:
     #   - main
+    # This is required to run checks on the translations PR.
+    # This is because actions are not triggered on PRs from an action.
   workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened, ready_for_review]
