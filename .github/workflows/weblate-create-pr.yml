@@ -3,7 +3,9 @@ on:
       branches:
         - 'translations'
     workflow_dispatch: 
-      
+permissions:
+    pull-requests: write 
+
 jobs:
     create-pull-request:
         runs-on: ubuntu-latest
