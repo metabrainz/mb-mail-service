@@ -1,0 +1,41 @@
+on:
+    push:
+      branches:
+        - 'translations'
+    workflow_dispatch: 
+permissions:
+    pull-requests: write 
+
+jobs:
+    create-pull-request:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Create Pull Request
+            uses: actions/github-script@v6
+            with:
+                script: |
+                    const { repo, owner } = context.repo;
+                    const { head, base } = { base: "main", head: "metabrainz:translations", }
+                    const pulls = await github.rest.pulls.list({ owner, repo, head, base, state: "open" })
+                    console.log(pulls.data)
+                    if (pulls.data.length == 0) {
+                        console.log("Creating PR!")
+                        const result = await github.rest.pulls.create({
+                            title: 'chore(translations): Update translations',
+                            owner,
+                            repo,
+                            head,
+                            base,
+                            body: [
+                                '**This PR is auto-generated**'
+                            ].join('\n')
+                        });
+                        github.rest.issues.addLabels({
+                            owner,
+                            repo,
+                            issue_number: result.data.number,
+                            labels: ['translations']
+                        });
+                    } else {
+                        console.log("PR exists, skipping!")
+                    }
