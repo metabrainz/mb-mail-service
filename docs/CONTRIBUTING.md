@@ -15,7 +15,7 @@
 - Clone the repository:
   
   ```shell
-  git clone https://github.com/JadedBlueEyes/mb-mail-service.git
+  git clone https://github.com/metabrainz/mb-mail-service.git
   cd mb-mail-service
   ```
 
