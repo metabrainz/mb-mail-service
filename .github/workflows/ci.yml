@@ -83,7 +83,7 @@ jobs:
       - name: Upload code coverage to GitHub
         uses: actions/upload-artifact@v4
         with:
-          name: code-coverage
+          name: code-coverage-${{ matrix.os }}
           path: lcov-${{ matrix.os }}.info
         continue-on-error: true
       - name: Publish Test Report
@@ -106,7 +106,8 @@ jobs:
     - name: Download code coverage from GitHub
       uses: actions/download-artifact@v4
       with:
-        name: code-coverage
+        merge-multiple: true
+        pattern: code-coverage-*
         path: coverage
     - name: Report code coverage
       uses: zgosalvez/github-actions-report-lcov@v4
