@@ -87,8 +87,10 @@ jobs:
           coverage-files: lcov.info
           artifact-name: code-coverage-report-${{ matrix.os }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
         if: success() || failure()
         with:
           report_paths: 'target/nextest/ci/junit.xml'
+        continue-on-error: true
