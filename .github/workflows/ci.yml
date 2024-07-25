@@ -80,6 +80,7 @@ jobs:
       - name: Install LCOV
         if: success() || failure()
         uses: hrishikesh-kadam/setup-lcov@v1
+      - run: mkdir -p ${{ runner.temp }}/__zgosalvez_github-actions-report-lcov/html
       - name: Report code coverage
         uses: zgosalvez/github-actions-report-lcov@v4
         if: success() || failure()
