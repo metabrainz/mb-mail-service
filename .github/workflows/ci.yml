@@ -81,7 +81,7 @@ jobs:
         if: success() || failure()
         uses: hrishikesh-kadam/setup-lcov@v1
       - name: Report code coverage
-        uses: zgosalvez/github-actions-report-lcov@v3
+        uses: zgosalvez/github-actions-report-lcov@v4
         if: success() || failure()
         with:
           coverage-files: lcov.info
