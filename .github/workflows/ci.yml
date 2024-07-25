@@ -85,6 +85,7 @@ jobs:
         if: success() || failure()
         with:
           coverage-files: lcov.info
+          working-directory: ${{ github.workspace }}
           artifact-name: code-coverage-report-${{ matrix.os }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
