@@ -13,10 +13,11 @@ jobs:
             with:
                 script: |
                     const { repo, owner } = context.repo;
-                    const { head, base } = { base: "main", head: "translations", }
+                    const { head, base } = { base: "main", head: "metabrainz:translations", }
                     const pulls = await github.rest.pulls.list({ owner, repo, head, base, state: "open" })
-                    console.log(pulls)
-                    if (pulls.length = 0) {
+                    console.log(pulls.data)
+                    if (pulls.data.length == 0) {
+                        console.log("Creating PR!")
                         const result = await github.rest.pulls.create({
                             title: 'chore(translations): Update translations',
                             owner,
@@ -33,4 +34,6 @@ jobs:
                             issue_number: result.data.number,
                             labels: ['translations']
                         });
+                    } else {
+                        console.log("PR exists, skipping!")
                     }
