@@ -66,17 +66,17 @@ jobs:
         uses: clechasseur/rs-cargo@v2
         with:
           command: check
-          args: --all-targets --all-features
+          args: --all-targets --all-features --locked
         continue-on-error: true
       - name: Linting
         uses: clechasseur/rs-cargo@v2
         with:
           command: clippy
-          args: --all-targets --all-features
+          args: --all-targets --all-features --locked -- -D warnings
         continue-on-error: true
       - name: Tests
         run: |
-          cargo llvm-cov --no-report nextest --profile ci
+          cargo llvm-cov --no-report nextest --profile ci --locked
           # cargo llvm-cov --no-report --doc
           # cargo llvm-cov report --doctests --lcov --output-path lcov-${{ matrix.os }}.info
           cargo llvm-cov report --lcov --output-path lcov-${{ matrix.os }}.info
