@@ -7,6 +7,7 @@ default_install_hook_types:
 default_stages:
   - pre-commit
   - pre-push
+  - manual
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
@@ -34,10 +35,22 @@ repos:
     rev: v1.1.0
     hooks:
       - id: fmt
+        stages:
+        - pre-commit
+        - pre-push
       - id: cargo-check
+        stages:
+        - pre-commit
+        - pre-push
       - id: clippy
+        stages:
+        - pre-commit
+        - pre-push
         args: [--all-targets, "--", "-D", "warnings"]
       - id: build
+        stages:
+        - pre-commit
+        - pre-push
   - repo: local
     hooks:
       - id: cargo-deny
