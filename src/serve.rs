@@ -111,6 +111,41 @@ impl Default for ListenerConfig {
     }
 }
 
+async fn service(mailer: MailTransport) -> axum::Router {
+    let sentry_layer = ServiceBuilder::new()
+        .layer(NewSentryLayer::new_from_top())
+        .layer(SentryHttpLayer::with_transaction());
+
+    let (prometheus_layer, metric_handle) = PrometheusMetricLayer::pair();
+
+    axum::Router::new()
+        .route("/", get(|| async { Redirect::temporary("/swagger-ui") }))
+        // OpenAPI docs
+        .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", ApiDoc::openapi()))
+        // Our routes
+        .route("/available_locales", get(available_locales))
+        .route("/templates/:template_id/html", post(render_html_route_post))
+        .route("/templates/:template_id/html", get(render_html_route_get))
+        .route("/templates/:template_id/text", get(render_text_route_get))
+        .route("/templates/:template_id/text", post(render_text_route_post))
+        .route("/send_single", post(send_mail_route))
+        .route("/send_bulk", post(send_mail_bulk_route))
+        .with_state(mailer)
+        .layer(sentry_layer)
+        .layer((
+            // Logging
+            TraceLayer::new_for_http(),
+            // Give a universal timeout to prevent
+            // DOS and for graceful shutdown
+            TimeoutLayer::new(Duration::from_secs(60)),
+        ))
+        // Place the healthcheck last to bypass previously set layers
+        .route("/healthcheck", get(healthcheck))
+        .route("/metrics", get(|| async move { metric_handle.render() }))
+        // Metrics over everything
+        .layer(prometheus_layer)
+}
+
 pub(crate) async fn serve(config: ListenerConfig, mailer_config: SmtpMailerConfig) {
     // If possible, we want to use a socket passed to the app by, eg, SystemD or ListenFD.
     // Otherwise, we will use [address] to get a socket.
@@ -142,39 +177,7 @@ pub(crate) async fn serve(config: ListenerConfig, mailer_config: SmtpMailerConfi
 
     let mailer = mailer(mailer_config);
 
-    let sentry_layer = ServiceBuilder::new()
-        .layer(NewSentryLayer::new_from_top())
-        .layer(SentryHttpLayer::with_transaction());
-
-    let (prometheus_layer, metric_handle) = PrometheusMetricLayer::pair();
-
-    let app = axum::Router::new()
-        .route("/", get(|| async { Redirect::temporary("/swagger-ui") }))
-        // OpenAPI docs
-        .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", ApiDoc::openapi()))
-        // Our routes
-        .route("/available_locales", get(available_locales))
-        .route("/templates/:template_id/html", post(render_html_route_post))
-        .route("/templates/:template_id/html", get(render_html_route_get))
-        .route("/templates/:template_id/text", get(render_text_route_get))
-        .route("/templates/:template_id/text", post(render_text_route_post))
-        .route("/send_single", post(send_mail_route))
-        .route("/send_bulk", post(send_mail_bulk_route))
-        .with_state(mailer)
-        .layer(sentry_layer)
-        .layer((
-            // Logging
-            TraceLayer::new_for_http(),
-            // Give a universal timeout to prevent
-            // DOS and for graceful shutdown
-            TimeoutLayer::new(Duration::from_secs(60)),
-        ))
-        // Place the healthcheck last to bypass previously set layers
-        .route("/healthcheck", get(healthcheck))
-        .route("/metrics", get(|| async move { metric_handle.render() }))
-        // Metrics over everything
-        .layer(prometheus_layer);
-
+    let app = service(mailer).await;
     axum::serve(listener, app.into_make_service())
         .with_graceful_shutdown(shutdown_signal())
         .await
@@ -300,5 +303,44 @@ async fn shutdown_signal() {
     tokio::select! {
         () = ctrl_c => {},
         () = terminate => {},
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use axum::http::StatusCode;
+    use axum_test::TestServer;
+    use std::error::Error;
+
+    async fn test_server() -> Result<TestServer, Box<dyn Error>> {
+        let mailer = mailer(Default::default());
+
+        let config = axum_test::TestServerConfig::builder()
+            .mock_transport()
+            .build();
+
+        let server = TestServer::new_with_config(service(mailer).await, config)?;
+        Ok(server)
+    }
+
+    #[tokio::test]
+    async fn health_check_is_ok() -> Result<(), Box<dyn Error>> {
+        let server = test_server().await?;
+        let check = server.get("/healthcheck").await;
+        check.assert_status(StatusCode::OK);
+        check.assert_text("ok");
+
+        Ok(())
+    }
+
+    #[tokio::test]
+    async fn list_locales_includes_en() -> Result<(), Box<dyn Error>> {
+        let server = test_server().await?;
+        let check = server.get("/available_locales").await;
+        check.assert_status(StatusCode::OK);
+        let locales: Vec<String> = check.json();
+        assert!(locales.iter().any(|l| l == "en"));
+        Ok(())
     }
 }
