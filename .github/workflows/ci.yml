@@ -100,6 +100,9 @@ jobs:
     name: Generate coverage report
     needs: test
     runs-on: ubuntu-latest
+    permissions: 
+      pull-requests: write
+      checks: write
     steps:
     - name: Install LCOV
       if: success() || failure()
