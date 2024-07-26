@@ -4,7 +4,9 @@ on:
         - 'translations'
     workflow_dispatch: 
 permissions:
-    pull-requests: write 
+    pull-requests: write
+    checks: write
+    issues: write
 
 jobs:
     create-pull-request:
