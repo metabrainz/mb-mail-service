@@ -17,10 +17,14 @@ jobs:
             uses: actions/github-script@v6
             with:
                 script: |
+                    const translationsOwner = "metabrainz"
                     console.log(context)
                     const { repo, owner } = context.repo;
                     const { sha } = context;
-                    const { head, base } = { base: "main", head: "metabrainz:translations", }
+                    const { head, base } = { base: "main", head: translationsOwner + ":translations", }
+                    if (owner != translationsOwner) {
+                        return
+                    }
                     const main = 
                         await github.rest.repos.getBranch({
                             owner,
