@@ -44,6 +44,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
+          cache: 'pip'
       - name: Install pre-commit & gitlint
         run: python -m pip install pre-commit gitlint
       - run: python -m pip freeze --local
