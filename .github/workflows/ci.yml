@@ -81,7 +81,7 @@ jobs:
           # cargo llvm-cov report --doctests --lcov --output-path lcov-${{ matrix.os }}.info
           cargo llvm-cov report --lcov --output-path lcov-${{ matrix.os }}.info
       - name: Replace workspace in lcov
-        run: sed -i "s%${{ github.workspace }}%WORKSPACE%g" lcov-${{ matrix.os }}.info
+        run: sed -e "s%${{ github.workspace }}%WORKSPACE%g" lcov-${{ matrix.os }}.info -i=""
       - name: Upload code coverage to GitHub
         uses: actions/upload-artifact@v4
         with:
@@ -111,7 +111,7 @@ jobs:
         merge-multiple: true
         pattern: code-coverage-*
     - name: Replace placeholder in lcov
-      run: sed -i "s%WORKSPACE%${{ github.workspace }}%g" lcov-*.info
+      run: sed -e "s%WORKSPACE%${{ github.workspace }}%g" lcov-*.info -i=""
     - name: Report code coverage
       uses: zgosalvez/github-actions-report-lcov@v4
       if: success() || failure()
