@@ -101,8 +101,8 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     permissions: 
-      pull-requests: write
       checks: write
+      issues: write
     steps:
     - name: Install LCOV
       if: success() || failure()
