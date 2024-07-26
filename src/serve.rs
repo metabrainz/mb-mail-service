@@ -1,4 +1,5 @@
 use monostate::MustBe;
+#[cfg(not(test))]
 use tower::ServiceBuilder;
 use utoipa::OpenApi;
 use utoipa_swagger_ui::SwaggerUi;
@@ -12,6 +13,7 @@ use std::{
 };
 use tokio::{net::TcpListener, signal};
 
+#[cfg(not(test))]
 use sentry::integrations::tower::{NewSentryLayer, SentryHttpLayer};
 
 use crate::{
@@ -27,6 +29,7 @@ use axum::{
     Json,
 };
 
+#[cfg(not(test))]
 use axum_prometheus::PrometheusMetricLayer;
 use metrics::counter;
 
@@ -112,13 +115,15 @@ impl Default for ListenerConfig {
 }
 
 async fn service(mailer: MailTransport) -> axum::Router {
+    #[cfg(not(test))]
     let sentry_layer = ServiceBuilder::new()
         .layer(NewSentryLayer::new_from_top())
         .layer(SentryHttpLayer::with_transaction());
 
+    #[cfg(not(test))]
     let (prometheus_layer, metric_handle) = PrometheusMetricLayer::pair();
 
-    axum::Router::new()
+    let app = axum::Router::new()
         .route("/", get(|| async { Redirect::temporary("/swagger-ui") }))
         // OpenAPI docs
         .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", ApiDoc::openapi()))
@@ -130,8 +135,11 @@ async fn service(mailer: MailTransport) -> axum::Router {
         .route("/templates/:template_id/text", post(render_text_route_post))
         .route("/send_single", post(send_mail_route))
         .route("/send_bulk", post(send_mail_bulk_route))
-        .with_state(mailer)
-        .layer(sentry_layer)
+        .with_state(mailer);
+
+    #[cfg(not(test))]
+    let app = app.layer(sentry_layer);
+    let app = app
         .layer((
             // Logging
             TraceLayer::new_for_http(),
@@ -140,10 +148,13 @@ async fn service(mailer: MailTransport) -> axum::Router {
             TimeoutLayer::new(Duration::from_secs(60)),
         ))
         // Place the healthcheck last to bypass previously set layers
-        .route("/healthcheck", get(healthcheck))
+        .route("/healthcheck", get(healthcheck));
+    #[cfg(not(test))]
+    let app = app
         .route("/metrics", get(|| async move { metric_handle.render() }))
         // Metrics over everything
-        .layer(prometheus_layer)
+        .layer(prometheus_layer);
+    app
 }
 
 pub(crate) async fn serve(config: ListenerConfig, mailer_config: SmtpMailerConfig) {
