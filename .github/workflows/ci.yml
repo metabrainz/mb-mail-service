@@ -110,8 +110,11 @@ jobs:
       with:
         merge-multiple: true
         pattern: code-coverage-*
+    - uses: taiki-e/install-action@v2
+      with:
+        tool: grcov
     - name: Replace placeholder in lcov
-      run: sed -i "s%WORKSPACE%${{ github.workspace }}%g" lcov-*.info
+      run: find lcov-*.info -type f -print0 | xargs -0 -I {} sh -c 'sed "s%WORKSPACE%\Q${{ github.workspace }}\E%g" {} > ${{ runner.temp }}/{}; grcov.exe ${{ runner.temp }}/{} -s . --guess-directory-when-missing > {}'
     - name: Report code coverage
       uses: zgosalvez/github-actions-report-lcov@v4
       if: success() || failure()
