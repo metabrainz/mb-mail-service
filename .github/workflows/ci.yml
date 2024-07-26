@@ -79,9 +79,9 @@ jobs:
           cargo llvm-cov --no-report nextest --profile ci --locked
           # cargo llvm-cov --no-report --doc
           # cargo llvm-cov report --doctests --lcov --output-path lcov-${{ matrix.os }}.info
-          cargo llvm-cov report --lcov --output-path lcov-${{ matrix.os }}.info
+          cargo llvm-cov report --lcov --output-path lcov-${{ matrix.os }}.source-info
       - name: Replace workspace in lcov
-        run: sed "s%${{ github.workspace }}%WORKSPACE%g" -i lcov-${{ matrix.os }}.info
+        run: perl -i -pe's%${{ github.workspace }}%WORKSPACE%g' lcov-${{ matrix.os }}.info
       - name: Upload code coverage to GitHub
         uses: actions/upload-artifact@v4
         with:
