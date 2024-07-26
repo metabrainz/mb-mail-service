@@ -3,8 +3,9 @@ name: CI
 
 on:
   push:
-    # branches:
-    #   - main
+    branches:
+      - main
+  workflow_call:
     # This is required to run checks on the translations PR.
     # This is because actions are not triggered on PRs from an action.
   workflow_dispatch:

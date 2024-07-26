@@ -9,8 +9,11 @@ permissions:
 jobs:
     create-pull-request:
         runs-on: ubuntu-latest
+        outputs:
+            create-pr: ${{ steps.create-pr.outputs.result }}
         steps:
           - name: Create Pull Request
+            id: create-pr
             uses: actions/github-script@v6
             with:
                 script: |
@@ -47,6 +50,11 @@ jobs:
                             issue_number: result.data.number,
                             labels: ['translations']
                         });
+                        return "created-pr"
                     } else {
                         console.log("PR exists, skipping!")
                     }
+    test:
+        uses: ./.github/workflows/ci.yml
+        needs: create-pull-request
+        if: needs.create-pull-request.outputs.create-pr == 'created-pr'
