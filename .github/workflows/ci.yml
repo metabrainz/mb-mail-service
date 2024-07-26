@@ -79,7 +79,7 @@ jobs:
           cargo llvm-cov --no-report nextest --profile ci --locked
           # cargo llvm-cov --no-report --doc
           # cargo llvm-cov report --doctests --lcov --output-path lcov-${{ matrix.os }}.info
-          cargo llvm-cov report --lcov --output-path lcov-${{ matrix.os }}.source-info
+          cargo llvm-cov report --lcov --output-path lcov-${{ matrix.os }}.info
       - name: Replace workspace in lcov
         run: perl -i -pe's%${{ github.workspace }}%WORKSPACE%g' lcov-${{ matrix.os }}.info
       - name: Upload code coverage to GitHub
