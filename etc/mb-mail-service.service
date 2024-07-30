@@ -1,0 +1,20 @@
+[Service]
+ExecStart=mb-mail-service
+
+Sockets=mb-mail-service.socket
+NotifyAccess=all
+Type=notify
+Restart=always
+
+Environment=APP_LISTEN_MODE=file_descriptor
+
+# WorkingDirectory=
+
+# StandardOutput=
+# StandardError=
+
+[Unit]
+Description=Mail Service
+
+[Install]
+WantedBy=default.target
