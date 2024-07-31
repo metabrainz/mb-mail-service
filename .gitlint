@@ -12,5 +12,5 @@ ignore=body-max-line-length
 
 [ignore-by-title]
 # Dependency names may be very long
-regex=^chore(deps): 
+regex=^chore\(deps\): 
 ignore=title-max-length
