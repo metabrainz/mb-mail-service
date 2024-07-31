@@ -8,6 +8,7 @@ RUN rustc --version
 COPY . .
 
 ENV RUSTFLAGS='-C target-feature=+crt-static'
+ENV CARGO_INCREMENTAL=0
 
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/app/target \
