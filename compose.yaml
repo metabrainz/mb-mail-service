@@ -3,6 +3,7 @@ version: '3.8'
 services:
   mail-service:
     container_name: mail-service
+    image: docker.io/metabrainz/mb-mail-service
     build:
       context: .
     environment:
