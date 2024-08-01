@@ -58,7 +58,7 @@ jobs:
         with:
           cache-map: |
             {
-              "~/.cargo/registry": "/usr/local/cargo/registry",
+              "/home/runner/.cargo/registry": "/usr/local/cargo/registry",
               "./target": "/app/target"
             }
           # skip-extraction: ${{ steps.rust-cache.outputs.cache-hit }}
