@@ -58,13 +58,24 @@ pub struct SendItem {
     /// Template to send
     template_id: String,
     /// Address to send mail from.
-    from: Option<String>,
+    from: String,
     /// Address to send mail to.
-    to: Option<String>,
+    to: String,
+    /// Reply-To email header
+    reply_to: Option<String>,
     /// Language to render the template with
     lang: Option<String>,
     /// Data to pass to the template
     params: Value,
+    /// A unique identifier for the email
+    /// Please see https://www.ietf.org/rfc/rfc2822.html#section-3.6.4
+    message_id: Option<String>,
+    /// The unique identifiers of the emails to which this is replying
+    #[serde(default)]
+    in_reply_to: Vec<String>,
+    /// The unique identifiers of the emails that this email references
+    #[serde(default)]
+    references: Vec<String>,
 }
 
 #[derive(Serialize, ToSchema, Clone)]
@@ -162,20 +173,30 @@ pub async fn send_mail(
         to,
         lang,
         params,
+        reply_to,
+        message_id,
+        in_reply_to,
+        references,
     }: SendItem,
 ) -> Result<lettre::transport::smtp::response::Response, SendError> {
     let lang = locale_from_optional_code(lang)?;
     let (html, title) = render_html(template_id, params, lang).await?;
     let text = render_text(&html).await?;
-    let email = Message::builder()
-        .from(
-            from.unwrap_or_else(|| "Test Sender <sender@example.com>".to_string())
-                .parse()?,
-        )
-        .to(to
-            .unwrap_or_else(|| "Test Receiver <reciever@example.com>".to_string())
-            .parse()?)
-        .subject_opt(title.as_deref())
+    let mut email = Message::builder()
+        .from(from.parse()?)
+        .to(to.parse()?)
+        .subject_opt(title.as_deref());
+    if let Some(reply_to) = reply_to {
+        email = email.reply_to(reply_to.parse()?);
+    }
+    for id in in_reply_to.into_iter() {
+        email = email.in_reply_to(id)
+    }
+    for id in references.into_iter() {
+        email = email.references(id)
+    }
+
+    let email = email
         .multipart(
             MultiPart::alternative() // This is composed of two parts.
                 .singlepart(
