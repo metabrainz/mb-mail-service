@@ -1,4 +1,5 @@
 use config::Config;
+use git_testament::{git_testament, render_testament};
 use render::EngineError;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
@@ -10,6 +11,8 @@ mod templates;
 mod text;
 
 mf1::load_locales!();
+
+git_testament!(TESTAMENT);
 
 #[derive(Debug, serde::Deserialize)]
 #[allow(unused)]
@@ -31,7 +34,9 @@ fn locale_from_optional_code(lang: Option<String>) -> Result<Locale, EngineError
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let version = render_testament!(TESTAMENT).leak();
     let _guard = sentry::init(sentry::ClientOptions {
+        release: Some(std::borrow::Cow::Borrowed(version)),
         ..sentry::ClientOptions::default()
     });
 
