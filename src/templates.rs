@@ -5,6 +5,7 @@ use crate::Locale;
 
 mod basic;
 mod edit_note;
+mod editor_message;
 mod reset_password;
 mod subscription;
 mod verify_email;
@@ -21,6 +22,7 @@ pub fn get(template_id: &str) -> Option<Template> {
         "basic" => Some(basic::basic),
         "subscription" => Some(subscription::subscription),
         "edit-note" => Some(edit_note::edit_note),
+        "editor-message" => Some(editor_message::editor_message),
         "verify-email" => Some(verify_email::verify_email),
         "reset-password" => Some(reset_password::reset_password),
         _ => None,

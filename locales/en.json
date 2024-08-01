@@ -10,6 +10,12 @@
         "top": "The following note has been added to edit #{ edit_id }:",
         "reply": "To reply, please add your note here."
     },
+    "editor_message": {
+        "title": "You've received a new message from {from_name}",
+        "top": "MusicBrainz user ''{from_name}'' has sent you the following message:",
+        "reply_link": "To reply, click here to send {from_name} an email.",
+        "reply_email": "Alternatively, please reply to this message."
+    },
     "verify_email": {
         "title": "Verify your email",
         "top": "Click on the link below to verify your email address:",
