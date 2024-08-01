@@ -15,5 +15,6 @@
       "automerge": true,
       "addLabels": ["will-automerge"]
     }
-  ]
+  ],
+  "platformAutomerge": true
 }
