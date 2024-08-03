@@ -1428,16 +1428,18 @@ dependencies = [
 
 [[package]]
 name = "mf1"
-version = "0.1.3"
-source = "git+https://github.com/JadedBlueEyes/messageformat.git#24d5c7e861196b0b0d4cb53c70897e8510bf199f"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e11864dfd4750f9bf0476fcb6fbacb57e7e5bc1acd12be3e1982bef7eba379f0"
 dependencies = [
  "mf1-macros",
 ]
 
 [[package]]
 name = "mf1-macros"
-version = "0.1.3"
-source = "git+https://github.com/JadedBlueEyes/messageformat.git#24d5c7e861196b0b0d4cb53c70897e8510bf199f"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e5641a32dc09f4e00cd27a3c7c865f514d48fce70874a10ab043e156d59c2870"
 dependencies = [
  "convert_case",
  "mf1-parser",
@@ -1452,8 +1454,9 @@ dependencies = [
 
 [[package]]
 name = "mf1-parser"
-version = "0.1.3"
-source = "git+https://github.com/JadedBlueEyes/messageformat.git#24d5c7e861196b0b0d4cb53c70897e8510bf199f"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "65dabbd818f7a8969107938234d7fd3f2bc6c444b06edd7c6e1dfe4a7ae21d74"
 dependencies = [
  "icu_plurals",
  "logos",
