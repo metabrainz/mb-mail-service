@@ -35,7 +35,7 @@ sentry = { version = "0.34.0", features = ["tracing", "tower", "tower-http"] }
 futures-util = "0.3.30"
 futures = "0.3.30"
 dashmap = { version = "6.0.1", features = ["serde"] }
-config = "0.14.0"
+config = { version = "0.14.0", default-features = false, features = ["convert-case"] }
 convert_case = "0.6.0"
 monostate = "0.1.13"
 reqwest = { version = "0.12.5", default-features = false }
