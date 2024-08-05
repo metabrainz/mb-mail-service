@@ -14,13 +14,13 @@ use super::TemplateError;
 #[derive(Deserialize, Debug, Default)]
 #[serde(default)]
 struct ResetPassword {
-    name: String,
-    reset_link: String,
+    to_name: String,
+    reset_url: String,
 }
 
 pub(crate) fn reset_password(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
     let ctx: Option<ResetPassword> = serde_json::from_value(params)?;
-    let ResetPassword { name, reset_link } = ctx.unwrap_or_default();
+    let ResetPassword { to_name, reset_url } = ctx.unwrap_or_default();
     Ok(view! {
         <mjml>
         <mj-head>
@@ -33,7 +33,7 @@ pub(crate) fn reset_password(params: Value, l: Locale) -> Result<Mjml, TemplateE
                 { header().into() }
 
                 <mj-text>
-                    <p>{ Text::from(tl!(l, greeting_line, name)).into() }</p>
+                    <p>{ Text::from(tl!(l, greeting_line, name = to_name)).into() }</p>
                     <p>{ Text::from(tl!(l, reset_password.info )).into() }</p>
                     <p>{ Text::from(tl!(l, reset_password.action )).into() }</p>
                 </mj-text>
@@ -41,7 +41,7 @@ pub(crate) fn reset_password(params: Value, l: Locale) -> Result<Mjml, TemplateE
                 <mj-wrapper mj-class="wrapper">
                     <mj-text>
                         <p>
-                            <a href={&reset_link}>{ Text::from(reset_link).into()}</a>
+                            <a href={&reset_url}>{ Text::from(reset_url).into()}</a>
                         </p>
                     </mj-text>
                 </mj-wrapper>

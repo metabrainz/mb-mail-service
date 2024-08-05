@@ -14,20 +14,21 @@ use super::TemplateError;
 #[derive(Deserialize, Debug, Default)]
 #[serde(default)]
 struct EditNote {
-    name: String,
-    user_id: String,
+    to_name: String,
+    // to_id: String,
+    subscriptions_url: String,
     edit_id: u32,
-    from_username: String,
+    from_name: String,
     message: String,
 }
 
 pub(crate) fn edit_note(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
     let ctx: Option<EditNote> = serde_json::from_value(params)?;
     let EditNote {
-        name,
-        user_id,
+        to_name,
+        subscriptions_url,
         edit_id,
-        from_username,
+        from_name,
         message,
     } = ctx.unwrap_or_default();
     Ok(view! {
@@ -58,13 +59,13 @@ pub(crate) fn edit_note(params: Value, l: Locale) -> Result<Mjml, TemplateError>
                 { header().into() }
 
                 <mj-text>
-                    <p>{ Text::from(tl!(l, greeting_line, name)).into() }</p>
+                    <p>{ Text::from(tl!(l, greeting_line, name = to_name)).into() }</p>
                     <p>{ Text::from(tl!(l, edit_note.top, edit_id = edit_id.to_string() )).into() }</p>
                 </mj-text>
 
                 <mj-wrapper mj-class="wrapper" css-class="speech" >
                     <mj-text>
-                        <strong >{ Text::from(from_username + ": ").into()}</strong>
+                        <strong >{ Text::from(from_name + ": ").into()}</strong>
                         <p>
                             { Text::from(message).into()}
                         </p>
@@ -77,7 +78,7 @@ pub(crate) fn edit_note(params: Value, l: Locale) -> Result<Mjml, TemplateError>
                 <mj-divider padding="10px 15px" border-color="#F5F5F5" border-width="3px" />
                 <mj-text font-size="12px" color="#8D8D8D">
                     <p>
-                        <a href={"https://musicbrainz.org/user/".to_owned() + &user_id + "/subscriptions"}>{ Text::from(tl!(l, change_subscription_settings)).into() }</a>
+                        <a href={subscriptions_url}>{ Text::from(tl!(l, change_subscription_settings)).into() }</a>
                     </p>
                     <p>{ Text::from(tl!(l, do_not_reply)).into() }</p>
                     // <p>"Do not reply to this message. If you need help, please "<a href="https://metabrainz.org/contact">contact us</a>.</p>

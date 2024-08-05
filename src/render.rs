@@ -178,7 +178,7 @@ pub async fn render_text_route_post(
 #[cfg(test)]
 mod test {
     use expect_test::expect_file;
-    use serde_json::{Map, Value};
+    use serde_json::{json, Value};
 
     use crate::Locale;
 
@@ -195,7 +195,7 @@ mod test {
     async fn subscription_template_html() {
         let (res, _) = super::render_html(
             "subscription".to_string(),
-            Value::Object(Map::new()),
+            json!({"to_name": "Jade"}),
             Locale::default(),
         )
         .await
@@ -218,7 +218,7 @@ mod test {
     async fn subscription_template_text() {
         let (html, _) = super::render_html(
             "subscription".to_string(),
-            Value::Object(Map::new()),
+            json!({"to_name": "Jade"}),
             Locale::default(),
         )
         .await

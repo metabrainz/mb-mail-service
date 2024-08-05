@@ -14,13 +14,16 @@ use super::TemplateError;
 #[derive(Deserialize, Debug, Default)]
 #[serde(default)]
 struct VerifyEmail {
-    name: String,
-    verify_link: String,
+    to_name: String,
+    verification_url: String,
 }
 
 pub(crate) fn verify_email(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
     let ctx: Option<VerifyEmail> = serde_json::from_value(params)?;
-    let VerifyEmail { name, verify_link } = ctx.unwrap_or_default();
+    let VerifyEmail {
+        to_name,
+        verification_url,
+    } = ctx.unwrap_or_default();
     Ok(view! {
         <mjml>
         <mj-head>
@@ -33,14 +36,14 @@ pub(crate) fn verify_email(params: Value, l: Locale) -> Result<Mjml, TemplateErr
                 { header().into() }
 
                 <mj-text>
-                    <p>{ Text::from(tl!(l, greeting_line, name)).into() }</p>
+                    <p>{ Text::from(tl!(l, greeting_line, name = to_name)).into() }</p>
                     <p>{ Text::from(tl!(l, verify_email.top )).into() }</p>
                 </mj-text>
 
                 <mj-wrapper mj-class="wrapper">
                     <mj-text>
                         <p>
-                            <a href={&verify_link}>{ Text::from(verify_link).into()}</a>
+                            <a href={&verification_url}>{ Text::from(verification_url).into()}</a>
                         </p>
                     </mj-text>
                 </mj-wrapper>

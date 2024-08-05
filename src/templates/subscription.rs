@@ -12,12 +12,13 @@ use super::TemplateError;
 #[derive(Deserialize, Debug, Default)]
 #[serde(default)]
 struct Subscription {
-    name: Option<String>,
+    to_name: String,
 }
 
 pub(crate) fn subscription(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
     let ctx: Option<Subscription> = serde_json::from_value(params)?;
-    let ctx = ctx.unwrap_or_default();
+
+    let Subscription { to_name } = ctx.unwrap_or_default();
     Ok(view! {
         <mjml>
         <mj-head>
@@ -29,7 +30,7 @@ pub(crate) fn subscription(params: Value, l: Locale) -> Result<Mjml, TemplateErr
                 { header().into() }
 
                 <mj-text>
-                    <p>{ Text::from(tl!(l, greeting_line, name = ctx.name.unwrap_or("Jade".into()) )).into() }</p>
+                    <p>{ Text::from(tl!(l, greeting_line, name = to_name )).into() }</p>
                     <p>"New edits have been added for artists that you've subscribed to."</p>
                 </mj-text>
 
