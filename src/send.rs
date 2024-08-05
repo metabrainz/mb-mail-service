@@ -185,7 +185,8 @@ pub async fn send_mail(
     let mut email = Message::builder()
         .from(from.parse()?)
         .to(to.parse()?)
-        .subject_opt(title.as_deref());
+        .subject_opt(title.as_deref())
+        .message_id(message_id);
     if let Some(reply_to) = reply_to {
         email = email.reply_to(reply_to.parse()?);
     }
