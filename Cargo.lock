@@ -1486,7 +1486,7 @@ dependencies = [
 [[package]]
 name = "mrmx"
 version = "0.1.0"
-source = "git+https://github.com/JadedBlueEyes/mrmx.git#d1f6fa022a2a84b6447bac7614c0566bf70ab79e"
+source = "git+https://github.com/JadedBlueEyes/mrmx.git#6a13371929b29018821832462e0ec5c4f772b8d4"
 dependencies = [
  "mrml",
  "mrmx-macros",
@@ -1495,7 +1495,7 @@ dependencies = [
 [[package]]
 name = "mrmx-macros"
 version = "0.1.0"
-source = "git+https://github.com/JadedBlueEyes/mrmx.git#d1f6fa022a2a84b6447bac7614c0566bf70ab79e"
+source = "git+https://github.com/JadedBlueEyes/mrmx.git#6a13371929b29018821832462e0ec5c4f772b8d4"
 dependencies = [
  "convert_case",
  "proc-macro-error",
