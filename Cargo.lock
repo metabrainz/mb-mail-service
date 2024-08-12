@@ -840,7 +840,7 @@ dependencies = [
 [[package]]
 name = "html2text"
 version = "0.13.0-alpha.1"
-source = "git+https://github.com/JadedBlueEyes/rust-html2text.git?branch=jade/no-wrap-links#a97ac8e9bbe3d8fa2f10f2489998b0ed1942e6d4"
+source = "git+https://github.com/jugglerchris/rust-html2text.git?branch=main#e10dbe20a9036198eb9b8fa504c6b3bfa898e6d0"
 dependencies = [
  "html5ever",
  "markup5ever",
