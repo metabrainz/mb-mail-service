@@ -16,6 +16,11 @@ This is a service to send automated emails for the MusicBrainz Project.
 
 This project is translated on the MetaBrainz Weblate instance. Join in and help translate for your language!
 
-[![Translation status](https://translations.metabrainz.org/widget/email/email-templates/287x66-white.png#gh-light-mode-only)![Translation status](https://translations.metabrainz.org/widget/email/email-templates/287x66-black.png#gh-dark-mode-only)](https://translations.metabrainz.org/engage/email/)
+<a href="https://translations.metabrainz.org/engage/email/">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://translations.metabrainz.org/widget/email/email-templates/287x66-black.png" alt="Translation status" />
+    <img src="https://translations.metabrainz.org/widget/email/email-templates/287x66-white.png" alt="Translation status" />
+  </picture>
+</a>
 
 [![Translation status](https://translations.metabrainz.org/widget/email/email-templates/multi-auto.svg)](https://translations.metabrainz.org/engage/email/)
