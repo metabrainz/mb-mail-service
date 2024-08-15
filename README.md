@@ -11,3 +11,11 @@ This is a service to send automated emails for the MusicBrainz Project.
 ## Running
 
 [Please see OPERATING.md](./docs/OPERATING.md)
+
+## Translating
+
+This project is translated on the MetaBrainz Weblate instance. Join in and help translate for your language!
+
+[![Translation status](https://translations.metabrainz.org/widget/email/email-templates/287x66-white.png#gh-light-mode-only)![Translation status](https://translations.metabrainz.org/widget/email/email-templates/287x66-black.png#gh-dark-mode-only)](https://translations.metabrainz.org/engage/email/)
+
+[![Translation status](https://translations.metabrainz.org/widget/email/email-templates/multi-auto.svg)](https://translations.metabrainz.org/engage/email/)
