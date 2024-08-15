@@ -95,6 +95,8 @@ jobs:
         with:
           report_paths: 'target/nextest/ci/junit.xml'
           check_name: JUnit Test Report for ${{ matrix.os }}
+          detailed_summary: true
+          job_name: test
         continue-on-error: true
 
   coverage_report:
