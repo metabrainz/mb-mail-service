@@ -19,18 +19,29 @@ struct EditorMessage {
     subject: String,
     message: String,
     contact_url: String,
+    /// If the sender has shared their email address.
+    ///
+    /// If this is true, the user should be able to
+    /// reply to the email to reply to the message.
     revealed_address: bool,
+    /// If this is a copy for the message sender.
+    ///
+    /// If this is true, a banner should be added
+    /// to the email
+    #[serde(default)]
+    is_self_copy: bool,
 }
 
 pub(crate) fn editor_message(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
     let ctx: Option<EditorMessage> = serde_json::from_value(params)?;
     let EditorMessage {
-        to_name,
+        ref to_name,
         ref from_name,
         subject: _,
         message,
         contact_url,
         revealed_address,
+        is_self_copy,
     } = ctx.unwrap_or_default();
     // Reply via email is optional
     Ok(view! {
@@ -59,6 +70,18 @@ pub(crate) fn editor_message(params: Value, l: Locale) -> Result<Mjml, TemplateE
             <mj-section padding="20px 0">
             <mj-column padding="0">
                 { header().into() }
+                { if is_self_copy {
+                    view!{
+                        <mj-wrapper
+                            border="1px solid #E5E5E5"
+                            background-color="#F5F5F5"
+                            padding="5px 15px" >
+                            <mj-text>
+                                <p>{ Text::from(tl!(l, editor_message.message_copy, to_name )).into() }</p>
+                            </mj-text>
+                        </mj-wrapper>
+                    }.into()
+                } else { view!(<></>).into() }}
 
                 <mj-text>
                     <p>{ Text::from(tl!(l, greeting_line, name = to_name)).into() }</p>
@@ -86,7 +109,7 @@ pub(crate) fn editor_message(params: Value, l: Locale) -> Result<Mjml, TemplateE
                     // <p>"Do not reply to this message. If you need help, please "<a href="https://metabrainz.org/contact">contact us</a>.</p>
                 </mj-text>
             </mj-column>
-          </mj-section>
+        </mj-section>
         </mj-body>
       </mjml>
 

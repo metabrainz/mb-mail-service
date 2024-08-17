@@ -14,7 +14,8 @@
         "title": "You've received a new message from {from_name}",
         "top": "MusicBrainz user ''{from_name}'' has sent you the following message:",
         "reply_link": "To reply, click here to send {from_name} an email.",
-        "reply_email": "Alternatively, please reply to this message."
+        "reply_email": "Alternatively, please reply to this message.",
+        "message_copy": "You sent this message to {to_name}"
     },
     "verify_email": {
         "title": "Verify your email",
