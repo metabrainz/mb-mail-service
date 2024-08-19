@@ -28,5 +28,13 @@
         "action": "Click on the link below to reset your password:",
         "in_error": "If you didn't initiate this request and feel that you've received this email in error, don't worry, you don't need to take any further action and can safely disregard this email.",
         "contact": "If you still have problems logging in, please drop us a line."
+    },
+    "email_in_use": {
+        "title": "Email address already in use",
+        "info": "You have requested to verify this email address for the MusicBrainz account {user_name}, but we already have at least one account using this address in our database.",
+        "action_username": "If you have forgotten your old username, you can recover it from the following link:",
+        "action_password": "You can then request a password reset, if needed, from the link below:",
+        "in_error": "If you didn't initiate this request and feel that you've received this email in error, don't worry, you don't need to take any further action and can safely disregard this email.",
+        "second_account": "If you have a specific reason why you need a second account (for example, you want to run a bot and have notes also reach you at this address) please drop us a line. We will look into your specific case."
     }
 }
