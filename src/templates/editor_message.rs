@@ -73,8 +73,8 @@ pub(crate) fn editor_message(params: Value, l: Locale) -> Result<Mjml, TemplateE
                 { if is_self_copy {
                     view!{
                         <mj-wrapper
-                            border="1px solid #E5E5E5"
-                            background-color="#F5F5F5"
+                            border="1px solid #e2ce85"
+                            background-color="#f4ebcb"
                             padding="5px 15px" >
                             <mj-text>
                                 <p>{ Text::from(tl!(l, editor_message.message_copy, to_name )).into() }</p>
