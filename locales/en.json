@@ -36,5 +36,12 @@
         "action_password": "You can then request a password reset, if needed, from the link below:",
         "in_error": "If you didn't initiate this request and feel that you've received this email in error, don't worry, you don't need to take any further action and can safely disregard this email.",
         "second_account": "If you have a specific reason why you need a second account (for example, you want to run a bot and have notes also reach you at this address) please drop us a line. We will look into your specific case."
+    },
+    "lost_username": {
+        "title": "Lost username",
+        "info": "Someone, probably you, asked to look up the username of the MusicBrainz account associated with this email address.",
+        "username_is": "Your MusicBrainz username is: { user_name }",
+        "reset_password": "If you have also forgotten your password, use this username and your email address to reset your password here:",
+        "in_error": "If you didn't initiate this request and feel that you've received this email in error, don't worry, you don't need to take any further action and can safely disregard this email."
     }
 }

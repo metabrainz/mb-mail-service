@@ -7,6 +7,7 @@ mod basic;
 mod edit_note;
 mod editor_message;
 mod email_in_use;
+mod lost_username;
 mod reset_password;
 mod subscription;
 mod verify_email;
@@ -27,6 +28,7 @@ pub fn get(template_id: &str) -> Option<Template> {
         "verify-email" => Some(verify_email::verify_email),
         "email-in-use" => Some(email_in_use::email_in_use),
         "reset-password" => Some(reset_password::reset_password),
+        "lost-username" => Some(lost_username::lost_username),
         _ => None,
     }
 }
