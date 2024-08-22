@@ -46,7 +46,7 @@
     },
     "no_vote": {
         "title": "Someone has voted against your edit #{ edit_id }",
-        "top": "MusicBrainz user ''{voter_name}'' has voted against your edit #{ edit_id }",
+        "top": "MusicBrainz user ''{voter_name}'' has voted against your edit #{ edit_id }.",
         "reply": "To respond, please add your note at:",
         "single_email": "Please note that this email will not be sent for every vote against an edit.",
         "close_time": "To ensure time for you and other editors to respond, the soonest this edit will be rejected, if applicable, is {close_time}, 72 hours from the time of this email."
