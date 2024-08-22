@@ -50,5 +50,15 @@
         "reply": "To respond, please add your note at:",
         "single_email": "Please note that this email will not be sent for every vote against an edit.",
         "close_time": "To ensure time for you and other editors to respond, the soonest this edit will be rejected, if applicable, is {close_time}, 72 hours from the time of this email."
+    },
+    "editor_report": {
+        "title": "Editor {reported_name} has been reported by {from_name}",
+        "copy_title": "Copy of your report of {reported_name}",
+        "top": "Editor {reported_name} has been reported by {from_name} for the following reason:",
+        "reply_email": "You can reply to this message directly.",
+        "reply_no_email": "The reporter chose not to reveal their email address. You’ll have to contact them through their user page if necessary.",
+        "message_copy": "This is a copy of your report of MusicBrainz editor {reported_name}",
+        "reporter_account": "Reporter’s account: ",
+        "reported_account": "Reported user’s account: "
     }
 }

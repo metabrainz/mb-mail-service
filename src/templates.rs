@@ -6,6 +6,7 @@ use crate::Locale;
 mod basic;
 mod edit_note;
 mod editor_message;
+mod editor_report;
 mod email_in_use;
 mod lost_username;
 mod no_vote;
@@ -31,6 +32,7 @@ pub fn get(template_id: &str) -> Option<Template> {
         "reset-password" => Some(reset_password::reset_password),
         "lost-username" => Some(lost_username::lost_username),
         "no-vote" => Some(no_vote::no_vote),
+        "editor-report" => Some(editor_report::editor_report),
         _ => None,
     }
 }
