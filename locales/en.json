@@ -43,5 +43,12 @@
         "username_is": "Your MusicBrainz username is: { user_name }",
         "reset_password": "If you have also forgotten your password, use this username and your email address to reset your password here:",
         "in_error": "If you didn't initiate this request and feel that you've received this email in error, don't worry, you don't need to take any further action and can safely disregard this email."
+    },
+    "no_vote": {
+        "title": "Someone has voted against your edit #{ edit_id }",
+        "top": "MusicBrainz user ''{voter_name}'' has voted against your edit #{ edit_id }",
+        "reply": "To respond, please add your note at:",
+        "single_email": "Please note that this email will not be sent for every vote against an edit.",
+        "close_time": "To ensure time for you and other editors to respond, the soonest this edit will be rejected, if applicable, is {close_time}, 72 hours from the time of this email."
     }
 }

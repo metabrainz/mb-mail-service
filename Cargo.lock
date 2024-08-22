@@ -1374,18 +1374,18 @@ dependencies = [
 
 [[package]]
 name = "mf1"
-version = "0.1.4"
+version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e11864dfd4750f9bf0476fcb6fbacb57e7e5bc1acd12be3e1982bef7eba379f0"
+checksum = "cab2387542eb20eb337a6f46271531d5b923e769ea5c40fb9d0a92b919a4938c"
 dependencies = [
  "mf1-macros",
 ]
 
 [[package]]
 name = "mf1-macros"
-version = "0.1.4"
+version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e5641a32dc09f4e00cd27a3c7c865f514d48fce70874a10ab043e156d59c2870"
+checksum = "8001532d0699fc003e3a9413341e6af7bcb69972c44297d76f9483cb23ed5cb0"
 dependencies = [
  "convert_case",
  "mf1-parser",
