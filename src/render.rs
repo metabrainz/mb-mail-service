@@ -195,7 +195,28 @@ mod test {
     async fn subscription_template_html() {
         let (res, _) = super::render_html(
             "subscription".to_string(),
-            json!({"to_name": "Jade"}),
+            json!({
+                "to_name": "Jade",
+                "subscription_settings_url": "https://example.com/prefs",
+                "edit_subscriptions_url": "https://example.com/subscribed",
+                "edits": {
+                  "artist": [
+                    {
+                      "entity_name": "Nathan",
+                      "entity_comment": "English EDM artist",
+                      "entity_url": "https://musicbrainz.org/artist/8d8d8a80-f74f-4f21-a44c-518cd6944ed2/edits",
+                      "open_size": 0,
+                      "applied_size": 1
+                    },
+                    {
+                      "entity_name": "Example Artist",
+                      "entity_url": "https://musicbrainz.org/artist/8d8d8a80-f74f-4f21-a44c-518cd6944ed2/edits",
+                      "open_size": 0,
+                      "applied_size": 1
+                    }
+                  ]
+                }
+              }),
             Locale::default(),
         )
         .await
@@ -218,7 +239,28 @@ mod test {
     async fn subscription_template_text() {
         let (html, _) = super::render_html(
             "subscription".to_string(),
-            json!({"to_name": "Jade"}),
+            json!({
+                "to_name": "Jade",
+                "subscription_settings_url": "https://example.com/prefs",
+                "edit_subscriptions_url": "https://example.com/subscribed",
+                "edits": {
+                  "artist": [
+                    {
+                      "entity_name": "Nathan",
+                      "entity_comment": "English EDM artist",
+                      "entity_url": "https://musicbrainz.org/artist/8d8d8a80-f74f-4f21-a44c-518cd6944ed2/edits",
+                      "open_size": 0,
+                      "applied_size": 1
+                    },
+                    {
+                      "entity_name": "Example Artist",
+                      "entity_url": "https://musicbrainz.org/artist/8d8d8a80-f74f-4f21-a44c-518cd6944ed2/edits",
+                      "open_size": 0,
+                      "applied_size": 1
+                    }
+                  ]
+                }
+              }),
             Locale::default(),
         )
         .await

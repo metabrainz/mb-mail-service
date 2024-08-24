@@ -63,12 +63,27 @@
     },
     "subscription": {
         "title": "Edits for your subscriptions",
-        "info": "New edits have been added for artists that you've subscribed to.",
-        "subscribed_artists_changes": "Changes for your subscribed artists:",
+        "info": "New edits have been added for entities that you've subscribed to.",
+        "changes_sections": {
+            "subscribed_artists": "Changes for your subscribed artists:",
+            "subscribed_collections": "Changes for your subscribed collections:",
+            "subscribed_labels": "Changes for your subscribed labels:",
+            "subscribed_series": "Changes for your subscribed series:",
+            "subscribed_editors": "Changes by your subscribed editors:"
+        },
+        "deleted_merged": "Deleted and merged artists or labels:",
+        "deleted_merged_info": "Some of your subscribed artists, labels or collections have been merged, deleted or made private:",
+        "deleted_item": "{ item_type, select, artist {Artist} label {Label} series {Series} collection {Collection} other {Unknown} } ''{entity}'' - { reason }",
+        "deleted_item_with_edit": "{ item_type, select, artist {Artist} label {Label} series {Series} collection {Collection} other {Unknown} } ''{entity}'' - { reason } by #{edit_id}",
+        "deleted_default_reason": "deleted or made private",
+        "entity": "{name}",
+        "entity_with_comment": "{name} ({comment})",
+        "open_applied_count": "({open} open, {applied} applied)",
         "open_edits": "All open edits:",
         "open_edits_subscribed_entities": "All open edits for your subscribed entities",
         "open_edits_subscribed_editors": "All open edits by your subscribed editors",
         "thanks": "Thanks for subscribing and voting!",
-        "about": "This is a notification that edits have been added for artists, labels, collections and editors to whom you subscribed on the MusicBrainz web site. "
+        "about": "This is a notification that edits have been added for artists, labels, collections and editors to whom you subscribed on the MusicBrainz web site. ",
+        "edit_subscriptions": "Click here to view or edit your subscriptions."
     }
 }
