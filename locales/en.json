@@ -60,5 +60,15 @@
         "message_copy": "This is a copy of your report of MusicBrainz editor {reported_name}",
         "reporter_account": "Reporter’s account: ",
         "reported_account": "Reported user’s account: "
+    },
+    "subscription": {
+        "title": "Edits for your subscriptions",
+        "info": "New edits have been added for artists that you've subscribed to.",
+        "subscribed_artists_changes": "Changes for your subscribed artists:",
+        "open_edits": "All open edits:",
+        "open_edits_subscribed_entities": "All open edits for your subscribed entities",
+        "open_edits_subscribed_editors": "All open edits by your subscribed editors",
+        "thanks": "Thanks for subscribing and voting!",
+        "about": "This is a notification that edits have been added for artists, labels, collections and editors to whom you subscribed on the MusicBrainz web site. "
     }
 }
