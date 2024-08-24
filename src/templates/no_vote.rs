@@ -16,7 +16,7 @@ use super::TemplateError;
 struct NoVote {
     to_name: String,
     response_url: String,
-    prefs_url: String,
+    subscription_settings_url: String,
     edit_id: u32,
     voter_name: String,
     close_time: String,
@@ -27,7 +27,7 @@ pub(crate) fn no_vote(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
     let NoVote {
         to_name,
         ref response_url,
-        prefs_url,
+        subscription_settings_url,
         edit_id,
         ref voter_name,
         ref close_time,
@@ -69,7 +69,7 @@ pub(crate) fn no_vote(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
                 <mj-divider padding="10px 15px" border-color="#F5F5F5" border-width="3px" />
                 <mj-text font-size="12px" color="#8D8D8D">
                     <p>
-                        <a href={prefs_url}>{ Text::from(tl!(l, change_subscription_settings)).into() }</a>
+                        <a href={subscription_settings_url}>{ Text::from(tl!(l, change_subscription_settings)).into() }</a>
                     </p>
                     <p>{ Text::from(tl!(l, do_not_reply)).into() }</p>
                     // <p>"Do not reply to this message. If you need help, please "<a href="https://metabrainz.org/contact">contact us</a>.</p>
