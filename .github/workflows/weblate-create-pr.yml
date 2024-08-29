@@ -47,7 +47,9 @@ jobs:
                             head,
                             base,
                             body: [
-                                '**This PR is auto-generated**'
+                                '**This PR is auto-generated**',
+                                '',
+                                'When adding a new language, please make sure to add the language to Cargo.toml',
                             ].join('\n')
                         });
                         github.rest.issues.addLabels({
