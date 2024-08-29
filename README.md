@@ -36,3 +36,6 @@ instance. Join in and help translate for your language!
 </a>
 
 [![Translation status](https://translations.metabrainz.org/widget/email/email-templates/multi-auto.svg)](https://translations.metabrainz.org/engage/email/)
+
+When adding a new language, please make sure to add the language
+to the [list of supported languages](https://github.com/metabrainz/mb-mail-service/blob/main/Cargo.toml#L10).
