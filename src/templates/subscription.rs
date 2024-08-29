@@ -216,7 +216,7 @@ pub(crate) fn subscription(params: Value, l: Locale) -> Result<Mjml, TemplateErr
                 </mj-text>
                 { sections.into() }
                 <mj-text>
-                    <h2>{ Text::from(tl!(l, subscription.open_edits )).into() }</h2>
+                    <p>{ Text::from(tl!(l, subscription.open_edits )).into() }</p>
                     <ul>
                         <li><a href="https://musicbrainz.org/edit/subscribed?open=1">{ Text::from(tl!(l, subscription.open_edits_subscribed_entities )).into() }</a></li>
                         <li><a href="https://musicbrainz.org/edit/subscribed_editors?open=1">{ Text::from(tl!(l, subscription.open_edits_subscribed_editors )).into() }</a></li>

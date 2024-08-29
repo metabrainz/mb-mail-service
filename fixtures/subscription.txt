@@ -7,7 +7,7 @@ subscribed to.
 * [Nathan (English EDM artist)][1] (0 open, 1     
   applied)                                        
 * [Example Artist][2] (0 open, 1 applied)         
-## All open edits:                                
+All open edits:                                   
                                                   
 * [All open edits for your subscribed entities][3]
 * [All open edits by your subscribed editors][4]  
