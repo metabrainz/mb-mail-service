@@ -1,1 +1,21 @@
-{}
+{
+    "edit_note": {
+        "reply": "Pour répondre, veuillez ajouter votre note ici.",
+        "title": "Note ajoutée à votre modification no { edit_id }",
+        "top": "La note suivante a été ajoutée à la modification no { edit_id } :"
+    },
+    "editor_message": {
+        "title": "Vous avez reçu un nouveau message de {from_name}",
+        "reply_email": "Sinon, vous pouvez aussi répondre à ce message.",
+        "reply_link": "Pour répondre, cliquez ici pour envoyer à {from_name} un courriel.",
+        "message_copy": "Vous avez envoyé ce message à {to_name}",
+        "top": "L’utilisateur de MusicBrainz « {from_name} » vous a envoyé le message suivant :"
+    },
+    "do_not_reply": "Ne répondez pas à ce message. Pour obtenir de l'aide, veuillez contacter l’équipe ou la communauté.",
+    "editor_report": {
+        "copy_title": "Copie de votre signalement de {reported_name}",
+        "message_copy": "Ceci est une copie de votre signalement de l’éditeur de MusicBrainz {reported_name}",
+        "reply_email": "Vous pouvez répondre à ce message directement."
+    },
+    "change_subscription_settings": "Cliquez ici pour changer vos préférences de courriel pour vos abonnements."
+}
