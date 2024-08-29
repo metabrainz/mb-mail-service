@@ -1,1 +1,83 @@
-{}
+{
+    "greeting_line": "Sveiki, { name },",
+    "do_not_reply": "Neatsakyk į šį laišką. Dėl pagalbos susisiek su komanda arba bendruomene.",
+    "link_copy_info": "Jei paspaudus aukščiau pateiktą nuorodą nepavyksta, vietoj to nukopijuok ir įklijuok URL adresą į naują naršyklės langą.",
+    "edit_note": {
+        "title": "Pastaba pridėta prie tavo redagavimo #{ edit_id }",
+        "top": "Prie redagavimo #{ edit_id } pridėta toliau pateikta pastaba:",
+        "reply": "Kad atsakytum, pridėk savo pastabą čia."
+    },
+    "editor_message": {
+        "title": "Gavai naują pranešimą iš {from_name}",
+        "reply_email": "Arba atsakyk į šį laišką.",
+        "message_copy": "Tu išsiuntei šį laišką į {to_name}",
+        "top": "„MusicBrainz“ naudotojas ''{from_name}'' atsiuntė tau šį pranešimą:",
+        "reply_link": "Kad atsakytum, spustelėk čia ir nusiųsk {from_name} el. laišką."
+    },
+    "metabrainz_signoff": "—  „MetaBrainz“ bendruomenė",
+    "verify_email": {
+        "title": "Patvirtink savo el. paštą",
+        "welcome": "Sveiki atvykę!",
+        "top": "Kad patvirtintum savo el. pašto adresą, spustelėk toliau esančią nuorodą:"
+    },
+    "reset_password": {
+        "info": "Kažkas, tikriausiai tu, paprašė iš naujo nustatyti „MusicBrainz“ slaptažodį.",
+        "action": "Kad iš naujo nustatytum slaptažodį, spustelėk toliau esančią nuorodą:",
+        "contact": "Jei vis dar kyla problemų prisijungiant, parašyk mums.",
+        "in_error": "Jei šio prašymo nepradėjai ir manai, kad šį el. laišką gavai per klaidą, nesijaudink, tau nereikia imtis jokių tolesnių veiksmų ir gali drąsiai nekreipti dėmesio šį el. laišką.",
+        "title": "Slaptažodžio atkūrimo prašymas"
+    },
+    "email_in_use": {
+        "title": "Jau naudojamas el. pašto adresas",
+        "action_username": "Jei pamiršai savo senąjį naudotojo vardą, gali jį atgauti pagal šią nuorodą:",
+        "action_password": "Tada, jei reikia, gali paprašyti iš naujo nustatyti slaptažodį pagal toliau pateiktą nuorodą:",
+        "info": "Paprašei patvirtinti šį el. pašto adresą „MusicBrainz“ paskyrai {user_name}, bet mūsų duomenų bazėje jau yra bent viena paskyra, naudojanti šį adresą.",
+        "in_error": "Jei šio prašymo nepradėjai ir manai, kad šį el. laišką gavai per klaidą, nesijaudink, tau nereikia imtis jokių tolesnių veiksmų ir gali drąsiai nekreipti dėmesio į šį el. laišką.",
+        "second_account": "Jei turi konkrečią priežastį, kodėl tau reikia antros paskyros (pavyzdžiui, nori paleisti robotą ir kad pastabos taip pat pasiektų tave šiuo adresu), parašyk mums. Mes išnagrinėsime tavo konkretų atvejį."
+    },
+    "lost_username": {
+        "title": "Prarastas naudotojo vardas",
+        "info": "Kažkas, tikriausiai tu, paprašė surasti su šiuo el. pašto adresu susietos „MusicBrainz“ paskyros naudotojo vardą.",
+        "username_is": "Tavo „MusicBrainz“ naudotojo vardas yra: { user_name }",
+        "reset_password": "Jei taip pat pamiršai slaptažodį, naudok šį naudotojo vardą ir el. pašto adresą, kad iš naujo nustatytum slaptažodį čia:",
+        "in_error": "Jei šio prašymo nepradėjai ir manai, kad šį el. laišką gavai per klaidą, nesijaudink, tau nereikia imtis jokių tolesnių veiksmų ir gali drąsiai nekreipti dėmesio į šį el. laišką."
+    },
+    "no_vote": {
+        "reply": "Kad atsakytum, pridėk savo pastabą adresu:",
+        "title": "Kažkas balsavo prieš tavo redagavimą #{ edit_id }",
+        "top": "„MusicBrainz“ naudotojas ''{voter_name}'' balsavo prieš tavo redagavimą #{ edit_id }.",
+        "single_email": "Atkreipk dėmesį, kad šis el. laiškas nebus siunčiamas už kiekvieną balsavimą prieš redagavimą.",
+        "close_time": "Kad tu ir kiti redaktoriai turėtų laiko atsakyti, šis redagavimas, jei taikytina, bus atmestas ne anksčiau kaip {close_time}, tai yra po 72 valandų nuo šio el. laiško."
+    },
+    "editor_report": {
+        "top": "Redaktorius {reported_name} buvo praneštas nuo {from_name} dėl šios priežasties:",
+        "reply_email": "Į šį laišką gali atsakyti tiesiogiai.",
+        "reporter_account": "Pranešėjo paskyra: ",
+        "reported_account": "Pranešto naudotojo paskyra: ",
+        "title": "Redaktorius {reported_name} buvo praneštas nuo {from_name}",
+        "reply_no_email": "Pranešėjas nusprendė neatskleisti savo el. pašto adreso. Jei reikia, turėsi susisiekti su jais per jų naudotojo puslapį.",
+        "copy_title": "Tavo ataskaitos apie {reported_name} kopija",
+        "message_copy": "Tai – tavo ataskaitos „MusicBrainz“ redaktoriaus {reported_name} kopija"
+    },
+    "subscription": {
+        "title": "Redagavimai tavo prenumeratoms",
+        "changes_sections": {
+            "subscribed_collections": "Pakeitimai tavo prenumeruojamoms kolekcijoms:",
+            "subscribed_labels": "Pakeitimai tavo prenumeruojamoms leidykloms:",
+            "subscribed_editors": "Pakeitimai tavo prenumeruojamiems redaktoriams:",
+            "subscribed_artists": "Pakeitimai tavo prenumeruojamiems atlikėjams:",
+            "subscribed_series": "Pakeitimai tavo prenumeruojamos serijos:"
+        },
+        "deleted_merged": "Ištrinti ir sujungti atlikėjai ar leidyklos:",
+        "deleted_item": "{ item_type, select, artist {Atlikėjas} label {Leidykla} series {Serija} collection {Kolekcija} other {Nežinomas} } ''{entity}'' – { reason }",
+        "deleted_default_reason": "ištrintas arba padarytas privačiu",
+        "entity": "{name}",
+        "open_applied_count": "({open} atviri, {applied} pritaikyti)",
+        "deleted_merged_info": "Kai kurie tavo prenumeruojami atlikėjai, leidyklos ar kolekcijos buvo sujungti, ištrinti arba padaryti privatūs:",
+        "deleted_item_with_edit": "{ item_type, select, artist {Atlikėjas} label {Leidykla} series {Serija} collection {Kolekcija} other {Nežinomas} } ''{entity}'' – { reason } pagal #{edit_id}",
+        "entity_with_comment": "{name} ({comment})",
+        "info": "Pridėti nauji redagavimai esybėms, kuriuos esi užsiprenumeravęs (-usi)."
+    },
+    "lang": "anglų",
+    "change_subscription_settings": "Spustelėk čia, kad pakeistum prenumeruojamo el. laiško nustatymus."
+}
