@@ -76,7 +76,13 @@
         "deleted_merged_info": "Kai kurie tavo prenumeruojami atlikėjai, leidyklos ar kolekcijos buvo sujungti, ištrinti arba padaryti privatūs:",
         "deleted_item_with_edit": "{ item_type, select, artist {Atlikėjas} label {Leidykla} series {Serija} collection {Kolekcija} other {Nežinomas} } ''{entity}'' – { reason } pagal #{edit_id}",
         "entity_with_comment": "{name} ({comment})",
-        "info": "Pridėti nauji redagavimai esybėms, kuriuos esi užsiprenumeravęs (-usi)."
+        "info": "Pridėti nauji redagavimai esybėms, kuriuos esi užsiprenumeravęs (-usi).",
+        "open_edits_subscribed_entities": "Visi atviri redagavimai tavo prenumeruojamiems esybėms",
+        "thanks": "Ačiū už prenumeratą ir balsavimą!",
+        "about": "Tai – pranešimas apie tai, kad „MusicBrainz“ svetainėje buvo pridėta redagavimų atlikėjams, leidykloms, kolekcijoms ir redaktoriams, kuriuos užsiprenumeravai. ",
+        "edit_subscriptions": "Spustelėk čia, kad peržiūrėtum arba redaguotum savo prenumeratas.",
+        "open_edits": "Visi atviri redagavimai:",
+        "open_edits_subscribed_editors": "Visi atviri redagavimai tavo prenumeruotiems redaktoriams"
     },
     "lang": "anglų",
     "change_subscription_settings": "Spustelėk čia, kad pakeistum prenumeruojamo el. laiško nustatymus."
