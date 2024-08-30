@@ -17,5 +17,8 @@
         "message_copy": "Ceci est une copie de votre signalement de l’éditeur de MusicBrainz {reported_name}",
         "reply_email": "Vous pouvez répondre à ce message directement."
     },
-    "change_subscription_settings": "Cliquez ici pour changer vos préférences de courriel pour vos abonnements."
+    "change_subscription_settings": "Cliquez ici pour changer vos préférences de courriel pour vos abonnements.",
+    "lang": "anglais",
+    "greeting_line": "Bonjour { name },",
+    "metabrainz_signoff": "—  La communauté MetaBrainz"
 }
