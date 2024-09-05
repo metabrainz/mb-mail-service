@@ -19,5 +19,27 @@
     },
     "change_subscription_settings": "Cliquez ici pour changer vos préférences de courriel pour vos abonnements.",
     "greeting_line": "Bonjour { name },",
-    "metabrainz_signoff": "—  La communauté MetaBrainz"
+    "metabrainz_signoff": "—  La communauté MetaBrainz",
+    "verify_email": {
+        "top": "Cliquez sur le lien suivant pour vérifier votre adresse e-mail :",
+        "welcome": "Bienvenue !"
+    },
+    "email_in_use": {
+        "action_password": "Vous pouvez ensuite demander une réinitialisation de mot de passe, si nécessaire, avec le lien ci-dessous :",
+        "title": "Adresse e-mail déjà utilisée",
+        "action_username": "Si vous avez oublié votre ancien nom d'utilisateur, vous pouvez le récupérer avec le lien suivant :"
+    },
+    "subscription": {
+        "changes_sections": {
+            "subscribed_labels": "Changements sur les labels auxquels vous êtes abonné(e) :",
+            "subscribed_collections": "Changements sur les collections auxquelles vous êtes abonné(e) :"
+        },
+        "entity_with_comment": "{name} ({comment})",
+        "entity": "{name}",
+        "open_edits": "Toutes les modifications ouvertes :",
+        "edit_subscriptions": "Cliquez ici pour consulter ou modifier vos abonnements."
+    },
+    "reset_password": {
+        "action": "Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :"
+    }
 }
