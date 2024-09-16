@@ -1444,18 +1444,18 @@ dependencies = [
 
 [[package]]
 name = "mf1"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cab2387542eb20eb337a6f46271531d5b923e769ea5c40fb9d0a92b919a4938c"
+checksum = "bfb897b0b009b31d969f1d7d2f86e75e3af36236747d1f4dab9db641a7f1243d"
 dependencies = [
  "mf1-macros",
 ]
 
 [[package]]
 name = "mf1-macros"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8001532d0699fc003e3a9413341e6af7bcb69972c44297d76f9483cb23ed5cb0"
+checksum = "caa660154127910c1fa81826099bd14d32b10edb577d55f262c64033d93b30ee"
 dependencies = [
  "convert_case",
  "mf1-parser",
@@ -1470,9 +1470,9 @@ dependencies = [
 
 [[package]]
 name = "mf1-parser"
-version = "0.1.4"
+version = "0.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "65dabbd818f7a8969107938234d7fd3f2bc6c444b06edd7c6e1dfe4a7ae21d74"
+checksum = "2a59e0b2cb81646abf74da329e1d912c5087571145730de7759ceea5a9e8fcb2"
 dependencies = [
  "icu_plurals",
  "logos",
