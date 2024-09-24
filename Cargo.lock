@@ -60,6 +60,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "assert-json-diff"
+version = "2.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "47e4f2b81832e72834d7518d8487a0396a28cc408186a2e8854c0f98011faf12"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "async-trait"
 version = "0.1.82"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -178,11 +188,12 @@ dependencies = [
 
 [[package]]
 name = "axum-test"
-version = "15.7.4"
+version = "16.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ac63648e380fd001402a02ec804e7686f9c4751f8cad85b7de0b53dae483a128"
+checksum = "7dcd0a5e654fa2bae63e6101a776d8984bf641e2841e8ad307007b6e9b99c61f"
 dependencies = [
  "anyhow",
+ "assert-json-diff",
  "auto-future",
  "axum",
  "bytes",

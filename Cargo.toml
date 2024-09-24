@@ -46,7 +46,7 @@ git-testament = "0.2.5"
 
 [dev-dependencies]
 expect-test = "1.5.0"
-axum-test = "15.7.1"
+axum-test = "16.0.0"
 
 [profile.release]
 lto = true
