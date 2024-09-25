@@ -15,19 +15,27 @@
     "editor_report": {
         "copy_title": "Copie de votre signalement de {reported_name}",
         "message_copy": "Ceci est une copie de votre signalement de l’éditeur de MusicBrainz {reported_name}",
-        "reply_email": "Vous pouvez répondre à ce message directement."
+        "reply_email": "Vous pouvez répondre à ce message directement.",
+        "reporter_account": "Compte du rapporteur : ",
+        "top": "L’éditeur {reported_name} a été signalé par {from_name} pour la raison suivante :",
+        "reported_account": "Compte utilisateur signalé : ",
+        "reply_no_email": "Le rapporteur a choisi de ne pas révéler son adresse courriel. Vous devrez le contacter via sa page d’utilisateur si nécessaire."
     },
     "change_subscription_settings": "Cliquez ici pour changer vos préférences de courriel pour vos abonnements.",
     "greeting_line": "Bonjour { name },",
     "metabrainz_signoff": "—  La communauté MetaBrainz",
     "verify_email": {
         "top": "Cliquez sur le lien suivant pour vérifier votre adresse e-mail :",
-        "welcome": "Bienvenue !"
+        "welcome": "Bienvenue !",
+        "title": "Vérification de l’adresse courriel"
     },
     "email_in_use": {
         "action_password": "Vous pouvez ensuite demander une réinitialisation de mot de passe, si nécessaire, avec le lien ci-dessous :",
         "title": "Adresse e-mail déjà utilisée",
-        "action_username": "Si vous avez oublié votre ancien nom d'utilisateur, vous pouvez le récupérer avec le lien suivant :"
+        "action_username": "Si vous avez oublié votre ancien nom d'utilisateur, vous pouvez le récupérer avec le lien suivant :",
+        "info": "Vous avez demandé de vérifier cette adresse de courriel pour le compte MusicBrainz {user_name}, mais nous avons déjà au moins un compte utilisant cette adresse dans notre base de données.",
+        "second_account": "Si vous avez besoin d'un deuxième compte pour une raison particulière (par exemple, vous souhaitez exécuter un bot et recevoir des messages à cette adresse), veuillez nous écrire. Nous examinerons votre cas particulier.",
+        "in_error": "Si vous n’avez pas initié cette demande et que vous pensez avoir reçu ce courriel par erreur, ne vous inquiétez pas, vous n’avez aucune autre action à effectuer et pouvez ignorer ce courriel en toute sécurité."
     },
     "subscription": {
         "changes_sections": {
@@ -40,6 +48,25 @@
         "edit_subscriptions": "Cliquez ici pour consulter ou modifier vos abonnements."
     },
     "reset_password": {
-        "action": "Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :"
-    }
+        "action": "Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :",
+        "contact": "Si vous rencontrez toujours des problèmes de connexion, n’hésitez pas à nous contacter.",
+        "title": "Demande de réinitialisation du mot de passe",
+        "info": "Quelqu’un, probablement vous, a demandé que votre mot de passe MusicBrainz soit réinitialisé.",
+        "in_error": "Si vous n’avez pas fait cette demande et que vous pensez avoir reçu ce courriel par erreur, pas de souci, vous n’avez aucune autre action à effectuer et pouvez ignorer ce courriel en toute sécurité."
+    },
+    "lost_username": {
+        "username_is": "Votre nom d’utilisateur MusicBrainz est : { user_name }",
+        "title": "Nom d’utilisateur perdu",
+        "info": "Quelqu’un, probablement vous, a demandé à rechercher le nom d’utilisateur du compte MusicBrainz associé à cette adresse de courriel.",
+        "in_error": "Si vous n’avez pas fait cette demande et que vous pensez avoir reçu ce courriel par erreur, pas de souci, vous n’avez aucune autre action à effectuer et pouvez ignorer ce message en toute sécurité.",
+        "reset_password": "Si vous avez également oublié votre mot de passe, utilisez ce nom d’utilisateur et votre adresse courriel pour réinitialiser votre mot de passe ici :"
+    },
+    "no_vote": {
+        "close_time": "Afin que vous et les autres éditeurs aient l’opportunité d’y répondre, si cette modification est rejetée, elle le sera le {close_time} au plus tôt, c’est-à-dire pas avant 72 heures à compter de l'envoi de ce courriel.",
+        "title": "Quelqu’un a voté contre votre modification no { edit_id }",
+        "reply": "Pour répondre, veuillez ajouter une note à :",
+        "single_email": "Veuillez noter que ce courriel ne sera pas envoyé pour chaque vote contre une modification.",
+        "top": "L’utilisateur « {voter_name} » de MusicBrainz a voté contre votre modification no #{ edit_id }."
+    },
+    "link_copy_info": "Si cliquer sur le lien ci-dessus ne fonctionne pas, veuillez copier/coller l’adresse URL dans une nouvelle fenêtre de navigateur web à la place."
 }
