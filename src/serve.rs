@@ -327,11 +327,10 @@ mod tests {
     async fn test_server() -> Result<TestServer, Box<dyn Error>> {
         let mailer = mailer(Default::default());
 
-        let config = axum_test::TestServerConfig::builder()
+        let server = axum_test::TestServer::builder()
             .mock_transport()
-            .build();
+            .build(service(mailer).await)?;
 
-        let server = TestServer::new_with_config(service(mailer).await, config)?;
         Ok(server)
     }
 

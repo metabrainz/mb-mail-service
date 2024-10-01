@@ -60,6 +60,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "assert-json-diff"
+version = "2.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "47e4f2b81832e72834d7518d8487a0396a28cc408186a2e8854c0f98011faf12"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "async-trait"
 version = "0.1.83"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -173,16 +183,17 @@ dependencies = [
  "pin-project",
  "tokio",
  "tower 0.4.13",
- "tower-http",
+ "tower-http 0.5.2",
 ]
 
 [[package]]
 name = "axum-test"
-version = "15.7.4"
+version = "16.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ac63648e380fd001402a02ec804e7686f9c4751f8cad85b7de0b53dae483a128"
+checksum = "020db7902508b764267eb61f5972129b3d5b6037632523af76ca8eb40504f89a"
 dependencies = [
  "anyhow",
+ "assert-json-diff",
  "auto-future",
  "axum",
  "bytes",
@@ -1382,7 +1393,7 @@ dependencies = [
  "thiserror",
  "tokio",
  "tower 0.5.1",
- "tower-http",
+ "tower-http 0.6.1",
  "tracing",
  "tracing-subscriber",
  "utoipa",
@@ -2139,9 +2150,9 @@ checksum = "2b15c43186be67a4fd63bee50d0303afffcef381492ebe2c5d87f324e1b8815c"
 
 [[package]]
 name = "reqwest"
-version = "0.12.7"
+version = "0.12.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f8f4955649ef5c38cc7f9e8aa41761d48fb9677197daea9984dc54f56aad5e63"
+checksum = "f713147fbe92361e52392c73b8c9e48c04c6625bce969ef54dc901e58e042a7b"
 dependencies = [
  "base64",
  "bytes",
@@ -3039,6 +3050,21 @@ dependencies = [
  "http 1.1.0",
  "http-body",
  "http-body-util",
+ "pin-project-lite",
+ "tower-layer",
+ "tower-service",
+]
+
+[[package]]
+name = "tower-http"
+version = "0.6.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8437150ab6bbc8c5f0f519e3d5ed4aa883a83dd4cdd3d1b21f9482936046cb97"
+dependencies = [
+ "bitflags",
+ "bytes",
+ "http 1.1.0",
+ "http-body",
  "pin-project-lite",
  "tokio",
  "tower-layer",
