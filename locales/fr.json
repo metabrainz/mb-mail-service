@@ -19,7 +19,8 @@
         "reporter_account": "Compte du rapporteur : ",
         "top": "L’éditeur {reported_name} a été signalé par {from_name} pour la raison suivante :",
         "reported_account": "Compte utilisateur signalé : ",
-        "reply_no_email": "Le rapporteur a choisi de ne pas révéler son adresse courriel. Vous devrez le contacter via sa page d’utilisateur si nécessaire."
+        "reply_no_email": "Le rapporteur a choisi de ne pas révéler son adresse courriel. Vous devrez le contacter via sa page d’utilisateur si nécessaire.",
+        "title": "L’éditeur {reported_name} a été signalé par {from_name}"
     },
     "change_subscription_settings": "Cliquez ici pour changer vos préférences de courriel pour vos abonnements.",
     "greeting_line": "Bonjour { name },",
@@ -40,12 +41,23 @@
     "subscription": {
         "changes_sections": {
             "subscribed_labels": "Changements sur les labels auxquels vous êtes abonné(e) :",
-            "subscribed_collections": "Changements sur les collections auxquelles vous êtes abonné(e) :"
+            "subscribed_collections": "Changements sur les collections auxquelles vous êtes abonné(e) :",
+            "subscribed_artists": "Changements pour les artistes auxquels vous êtes abonné :",
+            "subscribed_series": "Changements pour les séries auxquelles vous êtes abonné :",
+            "subscribed_editors": "Changements par les éditeurs auxquels vous êtes abonné :"
         },
         "entity_with_comment": "{name} ({comment})",
         "entity": "{name}",
         "open_edits": "Toutes les modifications ouvertes :",
-        "edit_subscriptions": "Cliquez ici pour consulter ou modifier vos abonnements."
+        "edit_subscriptions": "Cliquez ici pour consulter ou modifier vos abonnements.",
+        "title": "Modifications pour vos abonnements",
+        "info": "De nouvelles modifications ont été ajoutées pour les entités auxquelles vous êtes abonné.",
+        "deleted_merged": "Artistes ou labels supprimés et fusionnés :",
+        "deleted_merged_info": "Certains des artistes, labels ou collections auxquels vous êtes abonné ont été fusionnés, supprimés ou rendus privés :",
+        "deleted_default_reason": "supprimé ou rendu privé",
+        "open_edits_subscribed_entities": "Toutes les modifications ouvertes pour les entités auxquelles vous êtes abonné",
+        "open_edits_subscribed_editors": "Toutes les modifications ouvertes par les éditeurs auxquels vous êtes abonné",
+        "thanks": "Merci de vous être abonné et d’avoir voté !"
     },
     "reset_password": {
         "action": "Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :",
