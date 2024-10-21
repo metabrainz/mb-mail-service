@@ -39,7 +39,7 @@ config = { version = "0.14.0", default-features = false, features = ["convert-ca
 convert_case = "0.6.0"
 monostate = "0.1.13"
 reqwest = { version = "0.12.7", default-features = false }
-metrics = "0.23.0"
+metrics = "0.24.0"
 axum-prometheus = "0.7.0"
 # metrics-exporter-prometheus = { version = "0.15.3", default-features = false, features = ["http-listener"] }
 git-testament = "0.2.5"
