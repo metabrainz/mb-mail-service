@@ -37,7 +37,7 @@ pub(crate) fn editor_message(params: Value, l: Locale) -> Result<Mjml, TemplateE
     let EditorMessage {
         ref to_name,
         ref from_name,
-        subject: _,
+        subject,
         message,
         contact_url,
         revealed_address,
@@ -90,7 +90,8 @@ pub(crate) fn editor_message(params: Value, l: Locale) -> Result<Mjml, TemplateE
 
                 <mj-wrapper mj-class="wrapper" css-class="speech" >
                     <mj-text>
-                        <strong >{ Text::from(from_name.to_owned() + ": ").into()}</strong>
+                        <p><strong>{ Text::from(from_name.to_owned() + ": ").into()}</strong></p>
+                        <p><strong>{ Text::from(subject).into()}</strong></p>
                         <p>
                             { Text::from(message).into()}
                         </p>
