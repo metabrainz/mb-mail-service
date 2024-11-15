@@ -90,8 +90,7 @@ pub(crate) fn editor_message(params: Value, l: Locale) -> Result<Mjml, TemplateE
 
                 <mj-wrapper mj-class="wrapper" css-class="speech" >
                     <mj-text>
-                        <p><strong>{ Text::from(from_name.to_owned() + ": ").into()}</strong></p>
-                        <p><strong>{ Text::from(subject).into()}</strong></p>
+                        <p><strong>{ Text::from(tl!(l, editor_message.bubble_subject, from_name, subject )).into() }</strong></p>
                         <p>
                             { Text::from(message).into()}
                         </p>
