@@ -10,7 +10,7 @@
         "reply": "To reply, please add your note here."
     },
     "editor_message": {
-        "title": "You've received a new message from {from_name}",
+        "title": "MusicBrainz message from {from_name}: {subject}",
         "top": "MusicBrainz user ''{from_name}'' has sent you the following message:",
         "reply_link": "To reply, click here to send {from_name} an email.",
         "reply_email": "Alternatively, please reply to this message.",

@@ -37,7 +37,7 @@ pub(crate) fn editor_message(params: Value, l: Locale) -> Result<Mjml, TemplateE
     let EditorMessage {
         ref to_name,
         ref from_name,
-        subject,
+        ref subject,
         message,
         contact_url,
         revealed_address,
@@ -48,7 +48,7 @@ pub(crate) fn editor_message(params: Value, l: Locale) -> Result<Mjml, TemplateE
         <mjml>
         <mj-head>
             { head().into() }
-            <mj-title>{ tl!(l, editor_message.title, from_name ).borrow() }</mj-title>
+            <mj-title>{ tl!(l, editor_message.title, from_name, subject ).borrow() }</mj-title>
             <mj-style>"
                 div.speech {
                     position: relative;
