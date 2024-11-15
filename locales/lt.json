@@ -1,29 +1,29 @@
 {
     "greeting_line": "Sveiki, { name },",
-    "do_not_reply": "Neatsakyk į šį laišką. Dėl pagalbos susisiek su komanda arba bendruomene.",
-    "link_copy_info": "Jei paspaudus aukščiau pateiktą nuorodą nepavyksta, vietoj to nukopijuok ir įklijuok URL adresą į naują naršyklės langą.",
+    "do_not_reply": "Neatsakykite į šį laišką. Dėl pagalbos susisiekite su komanda arba bendruomene.",
+    "link_copy_info": "Jei paspaudus aukščiau nuorodą nepavyksta, vietoj to nukopijuokite ir įklijuokite URL adresą į naują naršyklės langą.",
     "edit_note": {
-        "title": "Pastaba pridėta prie tavo redagavimo #{ edit_id }",
-        "top": "Prie redagavimo #{ edit_id } pridėta toliau pateikta pastaba:",
-        "reply": "Kad atsakytum, pridėk savo pastabą čia."
+        "title": "Pastaba pridėta prie jūsų redagavimo #{ edit_id }",
+        "top": "Prie redagavimo #{ edit_id } pridėta toliau esančia pastaba:",
+        "reply": "Kad atsakytumėte, pridėkite savo pastabą čia."
     },
     "editor_message": {
-        "title": "Gavai naują pranešimą iš {from_name}",
-        "reply_email": "Arba atsakyk į šį laišką.",
-        "message_copy": "Tu išsiuntei šį laišką į {to_name}",
-        "top": "„MusicBrainz“ naudotojas ''{from_name}'' atsiuntė tau šį pranešimą:",
-        "reply_link": "Kad atsakytum, spustelėk čia ir nusiųsk {from_name} el. laišką.",
+        "title": "„MusicBrainz“ pranešimas iš {from_name}: {subject}",
+        "reply_email": "Arba atsakykite į šį laišką.",
+        "message_copy": "Tu išsiuntėte šį laišką į {to_name}",
+        "top": "„MusicBrainz“ naudotojas ''{from_name}'' atsiuntė jums šį pranešimą:",
+        "reply_link": "Kad atsakytumėte, spustelėkite čia ir nusiųskite {from_name} el. laišką.",
         "bubble_subject": "{ from_name }: { subject }"
     },
     "metabrainz_signoff": "—  „MetaBrainz“ bendruomenė",
     "verify_email": {
-        "title": "Patvirtink savo el. paštą",
+        "title": "Patvirtinkite savo el. paštą",
         "welcome": "Sveiki atvykę!",
-        "top": "Kad patvirtintum savo el. pašto adresą, spustelėk toliau esančią nuorodą:"
+        "top": "Kad patvirtintumėte savo el. pašto adresą, spustelėkite toliau esančią nuorodą:"
     },
     "reset_password": {
-        "info": "Kažkas, tikriausiai tu, paprašė iš naujo nustatyti „MusicBrainz“ slaptažodį.",
-        "action": "Kad iš naujo nustatytum slaptažodį, spustelėk toliau esančią nuorodą:",
+        "info": "Kažkas, tikriausiai jūs, paprašė iš naujo nustatyti „MusicBrainz“ slaptažodį.",
+        "action": "Kad iš naujo nustatytumėte slaptažodį, spustelėkite toliau esančią nuorodą:",
         "contact": "Jei vis dar kyla problemų prisijungiant, parašyk mums.",
         "in_error": "Jei šio prašymo nepradėjai ir manai, kad šį el. laišką gavai per klaidą, nesijaudink, tau nereikia imtis jokių tolesnių veiksmų ir gali drąsiai nekreipti dėmesio šį el. laišką.",
         "title": "Slaptažodžio atkūrimo prašymas"
@@ -85,5 +85,5 @@
         "open_edits": "Visi atviri redagavimai:",
         "open_edits_subscribed_editors": "Visi atviri redagavimai tavo prenumeruotiems redaktoriams"
     },
-    "change_subscription_settings": "Spustelėk čia, kad pakeistum prenumeruojamo el. laiško nustatymus."
+    "change_subscription_settings": "Spustelėkite čia, kad pakeistumėte prenumeruojamo el. laiško nustatymus."
 }
