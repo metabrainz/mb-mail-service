@@ -12,7 +12,8 @@
         "reply_email": "Arba atsakyk į šį laišką.",
         "message_copy": "Tu išsiuntei šį laišką į {to_name}",
         "top": "„MusicBrainz“ naudotojas ''{from_name}'' atsiuntė tau šį pranešimą:",
-        "reply_link": "Kad atsakytum, spustelėk čia ir nusiųsk {from_name} el. laišką."
+        "reply_link": "Kad atsakytum, spustelėk čia ir nusiųsk {from_name} el. laišką.",
+        "bubble_subject": "{ from_name }: { subject }"
     },
     "metabrainz_signoff": "—  „MetaBrainz“ bendruomenė",
     "verify_email": {
