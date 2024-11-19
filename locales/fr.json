@@ -5,11 +5,12 @@
         "top": "La note suivante a été ajoutée à la modification no { edit_id } :"
     },
     "editor_message": {
-        "title": "Vous avez reçu un nouveau message de {from_name}",
+        "title": "Message MusicBrainz de {from_name} : {subject}",
         "reply_email": "Sinon, vous pouvez aussi répondre à ce message.",
         "reply_link": "Pour répondre, cliquez ici pour envoyer à {from_name} un courriel.",
         "message_copy": "Vous avez envoyé ce message à {to_name}",
-        "top": "L’utilisateur de MusicBrainz « {from_name} » vous a envoyé le message suivant :"
+        "top": "L’utilisateur de MusicBrainz « {from_name} » vous a envoyé le message suivant :",
+        "bubble_subject": "{ from_name } : { subject }"
     },
     "do_not_reply": "Ne répondez pas à ce message. Pour obtenir de l'aide, veuillez contacter l’équipe ou la communauté.",
     "editor_report": {
@@ -57,7 +58,9 @@
         "deleted_default_reason": "supprimé ou rendu privé",
         "open_edits_subscribed_entities": "Toutes les modifications ouvertes pour les entités auxquelles vous êtes abonné",
         "open_edits_subscribed_editors": "Toutes les modifications ouvertes par les éditeurs auxquels vous êtes abonné",
-        "thanks": "Merci de vous être abonné et d’avoir voté !"
+        "thanks": "Merci de vous être abonné et d’avoir voté !",
+        "open_applied_count": "({open} ouverte(s), {applied} appliquée(s))",
+        "about": "Ceci est une notification pour des modifications sur les artistes, labels, collections et éditeurs auxquels vous êtes abonné(e) sur le site web de MusicBrainz. "
     },
     "reset_password": {
         "action": "Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :",
