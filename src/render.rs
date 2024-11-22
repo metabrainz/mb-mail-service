@@ -112,7 +112,14 @@ pub async fn render_text(html: &str) -> Result<String, EngineError> {
         .no_table_borders()
         .allow_width_overflow()
         .no_link_wrapping()
-        .raw_mode(true);
+        .raw_mode(true)
+        .add_agent_css(
+            "
+.text-no-wrap {
+white-space: pre !important;
+}",
+        )
+        .unwrap();
     let dom = config.parse_html(html.as_bytes())?;
     let tree = config.dom_to_render_tree(&dom)?;
     let text = config.render_to_string(tree, 50)?;

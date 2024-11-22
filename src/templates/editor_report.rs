@@ -97,7 +97,7 @@ pub(crate) fn editor_report(params: Value, l: Locale) -> Result<Mjml, TemplateEr
                 <mj-wrapper mj-class="wrapper" css-class="speech" >
                     <mj-text>
                         <strong >{ Text::from(from_name.to_owned() + ": ").into()}</strong>
-                        <p>
+                        <p class="text-no-wrap" style="white-space: pre-wrap;">
                             { Text::from(message).into()}
                         </p>
                     </mj-text>
