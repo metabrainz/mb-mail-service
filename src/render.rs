@@ -111,7 +111,8 @@ pub async fn render_text(html: &str) -> Result<String, EngineError> {
     let config = html2text::config::with_decorator(PlainDecorator::new())
         .no_table_borders()
         .allow_width_overflow()
-        .no_link_wrapping();
+        .no_link_wrapping()
+        .raw_mode(true);
     let dom = config.parse_html(html.as_bytes())?;
     let tree = config.dom_to_render_tree(&dom)?;
     let text = config.render_to_string(tree, 50)?;
