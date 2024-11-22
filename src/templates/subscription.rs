@@ -1,5 +1,6 @@
 use std::borrow::Borrow;
 
+use html_escape::encode_text;
 use mf1::t_l_string as tl;
 use mrml::{mjml::Mjml, text::Text};
 use mrmx::WithAttribute;
@@ -91,13 +92,15 @@ pub(crate) fn subscription(params: Value, l: Locale) -> Result<Mjml, TemplateErr
     let ctx: Option<Subscription> = serde_json::from_value(params)?;
 
     let Subscription {
-        to_name,
+        ref to_name,
         subscription_settings_url,
         edit_subscriptions_url,
         edits,
         deletes,
     } = ctx.unwrap_or_default();
-    dbg!(&edits);
+
+    let to_name = &encode_text(to_name);
+
     let mut sections = view! {<></>};
     if !edits.artist.is_empty() {
         sections.children.push(edits_for_type_template(
@@ -149,29 +152,29 @@ pub(crate) fn subscription(params: Value, l: Locale) -> Result<Mjml, TemplateErr
                 tl!(
                     l,
                     subscription.entity_with_comment,
-                    name = entity_name,
-                    comment
+                    name = encode_text(&entity_name),
+                    comment = encode_text(&comment)
                 )
             } else {
-                tl!(l, subscription.entity, name = entity_name)
+                tl!(l, subscription.entity, name = encode_text(&entity_name))
             };
             let reason = reason.unwrap_or(tl!(l, subscription.deleted_default_reason));
             let text = if let Some(edit_id) = edit_id {
                 Text::from(tl!(
                     l,
                     subscription.deleted_item_with_edit,
-                    item_type,
+                    item_type = encode_text(&item_type),
                     entity = formatted_name,
-                    reason,
+                    reason = encode_text(&reason),
                     edit_id = edit_id.to_string()
                 ))
             } else {
                 Text::from(tl!(
                     l,
                     subscription.deleted_item,
-                    item_type,
+                    item_type = encode_text(&item_type),
                     entity = formatted_name,
-                    reason
+                    reason = encode_text(&reason)
                 ))
             };
             let item: mrml::node::Node<mrml::mj_body::MjBodyChild> =
@@ -284,9 +287,9 @@ fn item_template(item: SubItem, l: Locale) -> mrml::node::Node<mrml::mj_body::Mj
     view! {
         <li><a href={entity_url}>{
             if let Some(comment) = entity_comment {
-                Text::from(tl!(l, subscription.entity_with_comment , name = entity_name, comment)).into()
+                Text::from(tl!(l, subscription.entity_with_comment , name = encode_text(entity_name), comment = encode_text(comment))).into()
             } else {
-                Text::from(tl!(l, subscription.entity , name = entity_name)).into()
+                Text::from(tl!(l, subscription.entity , name = encode_text(entity_name))).into()
             }}</a>" "
             { Text::from(tl!(l, subscription.open_applied_count , open = open_size.to_string(), applied = applied_size.to_string())).into() }</li>
     }

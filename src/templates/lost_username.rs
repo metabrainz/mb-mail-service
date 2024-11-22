@@ -1,5 +1,6 @@
 use std::borrow::Borrow;
 
+use html_escape::encode_text;
 use mf1::t_l_string as tl;
 use mrml::{mjml::Mjml, text::Text};
 use mrmx::WithAttribute;
@@ -25,6 +26,9 @@ pub(crate) fn lost_username(params: Value, l: Locale) -> Result<Mjml, TemplateEr
         ref to_name,
         ref lost_password_url,
     } = ctx.unwrap_or_default();
+
+    let to_name = &encode_text(to_name);
+
     Ok(view! {
         <mjml>
         <mj-head>
@@ -46,7 +50,7 @@ pub(crate) fn lost_username(params: Value, l: Locale) -> Result<Mjml, TemplateEr
                 <mj-wrapper mj-class="wrapper">
                     <mj-text>
                         <p>
-                            <a href={lost_password_url}>{ Text::from(lost_password_url).into()}</a>
+                            <a href={lost_password_url}>{ Text::from(encode_text(lost_password_url)).into()}</a>
                         </p>
                     </mj-text>
                 </mj-wrapper>

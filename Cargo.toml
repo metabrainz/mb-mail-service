@@ -43,6 +43,7 @@ metrics = "0.24.0"
 axum-prometheus = "0.7.0"
 # metrics-exporter-prometheus = { version = "0.15.3", default-features = false, features = ["http-listener"] }
 git-testament = "0.2.5"
+html-escape = "0.2.13"
 
 [dev-dependencies]
 expect-test = "1.5.0"

@@ -1,5 +1,6 @@
 use std::borrow::Borrow;
 
+use html_escape::encode_text;
 use mf1::t_l_string as tl;
 use mrml::{mjml::Mjml, text::Text};
 use mrmx::WithAttribute;
@@ -31,6 +32,11 @@ pub(crate) fn edit_note(params: Value, l: Locale) -> Result<Mjml, TemplateError>
         from_name,
         message,
     } = ctx.unwrap_or_default();
+
+    let to_name = encode_text(&to_name);
+    let from_name = encode_text(&from_name);
+    let message = encode_text(&message);
+
     Ok(view! {
         <mjml>
         <mj-head>

@@ -1,5 +1,6 @@
 use std::borrow::Borrow;
 
+use html_escape::encode_text;
 use mf1::t_l_string as tl;
 use mrml::{mjml::Mjml, text::Text};
 use mrmx::WithAttribute;
@@ -35,20 +36,26 @@ struct EditorMessage {
 pub(crate) fn editor_message(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
     let ctx: Option<EditorMessage> = serde_json::from_value(params)?;
     let EditorMessage {
-        ref to_name,
-        ref from_name,
-        ref subject,
+        to_name: ref to_name_raw,
+        from_name: ref from_name_raw,
+        subject: ref subject_raw,
         message,
         contact_url,
         revealed_address,
         is_self_copy,
     } = ctx.unwrap_or_default();
+
+    let to_name = &encode_text(to_name_raw);
+    let from_name = &encode_text(from_name_raw);
+    let message = encode_text(&message);
+    let subject = &encode_text(subject_raw);
+
     // Reply via email is optional
     Ok(view! {
         <mjml>
         <mj-head>
             { head().into() }
-            <mj-title>{ tl!(l, editor_message.title, from_name, subject ).borrow() }</mj-title>
+            <mj-title>{ tl!(l, editor_message.title, from_name = from_name_raw, subject = subject_raw ).borrow() }</mj-title>
             <mj-style>"
                 div.speech {
                     position: relative;

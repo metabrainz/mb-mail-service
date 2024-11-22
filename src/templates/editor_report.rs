@@ -1,5 +1,6 @@
 use std::borrow::Borrow;
 
+use html_escape::encode_text;
 use mf1::t_l_string as tl;
 use mrml::{mjml::Mjml, text::Text};
 use mrmx::WithAttribute;
@@ -35,14 +36,19 @@ struct EditorReport {
 pub(crate) fn editor_report(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
     let ctx: Option<EditorReport> = serde_json::from_value(params)?;
     let EditorReport {
-        ref reported_name,
-        ref from_name,
+        reported_name: ref reported_name_raw,
+        from_name: ref from_name_raw,
         ref reported_url,
         ref from_url,
         message,
         revealed_address,
         is_self_copy,
     } = ctx.unwrap_or_default();
+
+    let reported_name = &encode_text(reported_name_raw);
+    let from_name = &encode_text(from_name_raw);
+    let message = encode_text(&message);
+
     // Reply via email is optional
     Ok(view! {
         <mjml>
@@ -51,7 +57,7 @@ pub(crate) fn editor_report(params: Value, l: Locale) -> Result<Mjml, TemplateEr
 
             { if !is_self_copy {
                 view!{
-                    <mj-title>{ tl!(l, editor_report.title, from_name, reported_name ).borrow() }</mj-title>
+                    <mj-title>{ tl!(l, editor_report.title, from_name = from_name_raw, reported_name = reported_name_raw ).borrow() }</mj-title>
                 }.into()
             } else { view!{
                 <mj-title>{ tl!(l, editor_report.copy_title, reported_name ).borrow() }</mj-title>
@@ -96,7 +102,7 @@ pub(crate) fn editor_report(params: Value, l: Locale) -> Result<Mjml, TemplateEr
 
                 <mj-wrapper mj-class="wrapper" css-class="speech" >
                     <mj-text>
-                        <strong >{ Text::from(from_name.to_owned() + ": ").into()}</strong>
+                        <strong >{ Text::from(from_name.clone()+ ": ").into()}</strong>
                         <p class="text-no-wrap" style="white-space: pre-wrap;">
                             { Text::from(message).into()}
                         </p>
@@ -108,7 +114,7 @@ pub(crate) fn editor_report(params: Value, l: Locale) -> Result<Mjml, TemplateEr
                 <mj-wrapper mj-class="wrapper">
                     <mj-text>
                         <p>
-                            <a href={from_url}>{ Text::from(from_url).into()}</a>
+                            <a href={from_url}>{ Text::from(encode_text(from_url)).into()}</a>
                         </p>
                     </mj-text>
                 </mj-wrapper>
@@ -118,7 +124,7 @@ pub(crate) fn editor_report(params: Value, l: Locale) -> Result<Mjml, TemplateEr
                 <mj-wrapper mj-class="wrapper">
                     <mj-text>
                         <p>
-                            <a href={reported_url}>{ Text::from(reported_url).into()}</a>
+                            <a href={reported_url}>{ Text::from(encode_text(reported_url)).into()}</a>
                         </p>
                     </mj-text>
                 </mj-wrapper>

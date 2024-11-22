@@ -1,5 +1,6 @@
 use std::borrow::Borrow;
 
+use html_escape::encode_text;
 use mf1::t_l_string as tl;
 use mrml::{mjml::Mjml, text::Text};
 use mrmx::WithAttribute;
@@ -20,7 +21,13 @@ struct ResetPassword {
 
 pub(crate) fn reset_password(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
     let ctx: Option<ResetPassword> = serde_json::from_value(params)?;
-    let ResetPassword { to_name, reset_url } = ctx.unwrap_or_default();
+    let ResetPassword {
+        ref to_name,
+        ref reset_url,
+    } = ctx.unwrap_or_default();
+
+    let to_name = &encode_text(to_name);
+
     Ok(view! {
         <mjml>
         <mj-head>
@@ -41,7 +48,7 @@ pub(crate) fn reset_password(params: Value, l: Locale) -> Result<Mjml, TemplateE
                 <mj-wrapper mj-class="wrapper">
                     <mj-text>
                         <p>
-                            <a href={&reset_url}>{ Text::from(reset_url).into()}</a>
+                            <a href={reset_url}>{ Text::from(encode_text(reset_url)).into()}</a>
                         </p>
                     </mj-text>
                 </mj-wrapper>

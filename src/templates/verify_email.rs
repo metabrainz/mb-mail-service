@@ -1,5 +1,6 @@
 use std::borrow::Borrow;
 
+use html_escape::encode_text;
 use mf1::t_l_string as tl;
 use mrml::{mjml::Mjml, text::Text};
 use mrmx::WithAttribute;
@@ -21,9 +22,12 @@ struct VerifyEmail {
 pub(crate) fn verify_email(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
     let ctx: Option<VerifyEmail> = serde_json::from_value(params)?;
     let VerifyEmail {
-        to_name,
-        verification_url,
+        ref to_name,
+        ref verification_url,
     } = ctx.unwrap_or_default();
+
+    let to_name = &encode_text(to_name);
+
     Ok(view! {
         <mjml>
         <mj-head>
@@ -43,7 +47,7 @@ pub(crate) fn verify_email(params: Value, l: Locale) -> Result<Mjml, TemplateErr
                 <mj-wrapper mj-class="wrapper">
                     <mj-text>
                         <p>
-                            <a href={&verification_url}>{ Text::from(verification_url).into()}</a>
+                            <a href={verification_url}>{ Text::from(encode_text(verification_url)).into()}</a>
                         </p>
                     </mj-text>
                 </mj-wrapper>
