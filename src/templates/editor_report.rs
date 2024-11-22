@@ -130,9 +130,9 @@ pub(crate) fn editor_report(params: Value, l: Locale) -> Result<Mjml, TemplateEr
                 </mj-text>
                 <mj-divider padding="10px 15px" border-color="#F5F5F5" border-width="3px" />
                 <mj-text font-size="12px" color="#8D8D8D">
-                { if !revealed_address {
-                    view!(<p>{ Text::from(tl!(l, do_not_reply)).into() }</p>).into()
-                } else { view!(<></>).into()  }}
+                    { if !revealed_address {
+                        view!(<p>{ Text::from(tl!(l, do_not_reply)).into() }</p>).into()
+                    } else { view!(<></>).into()  }}
                 </mj-text>
             </mj-column>
         </mj-section>

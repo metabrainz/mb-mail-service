@@ -105,7 +105,9 @@ pub(crate) fn editor_message(params: Value, l: Locale) -> Result<Mjml, TemplateE
                 </mj-text>
                 <mj-divider padding="10px 15px" border-color="#F5F5F5" border-width="3px" />
                 <mj-text font-size="12px" color="#8D8D8D">
-                    <p>{ Text::from(tl!(l, do_not_reply)).into() }</p>
+                    { if !revealed_address {
+                        view!(<p>{ Text::from(tl!(l, do_not_reply)).into() }</p>).into()
+                    } else { view!(<></>).into()  }}
                     // <p>"Do not reply to this message. If you need help, please "<a href="https://metabrainz.org/contact">contact us</a>.</p>
                 </mj-text>
             </mj-column>
