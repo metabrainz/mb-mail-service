@@ -1,31 +1,31 @@
-Hello Jade,                                       
-                                                  
+Hello Jade,
+
 New edits have been added for entities that you've
-subscribed to.                                    
-## Changes for your subscribed artists:           
-                                                  
-* [Nathan (English EDM artist)][1] (0 open, 1     
-  applied)                                        
-* [Example Artist][2] (0 open, 1 applied)         
-All open edits:                                   
-                                                  
+subscribed to.
+## Changes for your subscribed artists:
+
+* [Nathan (English EDM artist)][1] (0 open, 1
+  applied)
+* [Example Artist][2] (0 open, 1 applied)
+All open edits:
+
 * [All open edits for your subscribed entities][3]
-* [All open edits by your subscribed editors][4]  
-Thanks for subscribing and voting!                
-                                                  
-*— The MetaBrainz community*                      
-This is a notification that edits have been added 
-for artists, labels, collections and editors to   
-whom you subscribed on the MusicBrainz web site.  
-                                                  
-[Click here to change your subscription email     
-settings.][5]                                     
-                                                  
-[Click here to view or edit your                  
-subscriptions.][6]                                
-                                                  
-Do not reply to this message. For assistance      
-please contact the team or the community.         
+* [All open edits by your subscribed editors][4]
+Thanks for subscribing and voting!
+
+*— The MetaBrainz community*
+This is a notification that edits have been added
+for artists, labels, collections and editors to
+whom you subscribed on the MusicBrainz web site.
+
+[Click here to change your subscription email
+settings.][5]
+
+[Click here to view or edit your
+subscriptions.][6]
+
+Do not reply to this message. For assistance
+please contact the team or the community.
 
 [1]: https://musicbrainz.org/artist/8d8d8a80-f74f-4f21-a44c-518cd6944ed2/edits
 [2]: https://musicbrainz.org/artist/8d8d8a80-f74f-4f21-a44c-518cd6944ed2/edits
