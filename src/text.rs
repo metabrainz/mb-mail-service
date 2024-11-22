@@ -121,4 +121,12 @@ impl TextDecorator for PlainDecorator {
     fn make_subblock_decorator(&self) -> Self {
         self.clone()
     }
+
+    fn decorate_superscript_start(&self) -> (String, Self::Annotation) {
+        ("^{".into(), Default::default())
+    }
+
+    fn decorate_superscript_end(&self) -> String {
+        "}".into()
+    }
 }
