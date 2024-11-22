@@ -57,8 +57,11 @@ impl OptionalSubject for MessageBuilder {
 pub struct SendItem {
     /// Template to send
     template_id: String,
-    /// Address to send mail from.
+    /// The address the email is from
     from: String,
+    /// The address ultimately sending the email
+    /// Should not be set if same as from address, as per RFC
+    sender: Option<String>,
     /// Address to send mail to.
     to: String,
     /// Reply-To email header
@@ -170,6 +173,7 @@ pub async fn send_mail(
     SendItem {
         template_id,
         from,
+        sender,
         to,
         lang,
         params,
@@ -187,6 +191,9 @@ pub async fn send_mail(
         .to(to.parse()?)
         .subject_opt(title.as_deref())
         .message_id(message_id);
+    if let Some(sender) = sender {
+        email = email.sender(sender.parse()?);
+    }
     if let Some(reply_to) = reply_to {
         email = email.reply_to(reply_to.parse()?);
     }
