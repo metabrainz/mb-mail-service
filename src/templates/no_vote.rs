@@ -44,7 +44,7 @@ pub(crate) fn no_vote(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
             { head().into() }
             <mj-title>{ tl!(l, no_vote.title, edit_id = edit_id.to_string() ).borrow() }</mj-title>
         </mj-head>
-        <mj-body width="500px" padding="0">
+        <mj-body width="560px" padding="0">
             <mj-section padding="20px 0">
             <mj-column padding="0">
                 { header().into() }

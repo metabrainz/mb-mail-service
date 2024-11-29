@@ -59,7 +59,7 @@ pub(crate) fn edit_note(params: Value, l: Locale) -> Result<Mjml, TemplateError>
                 }
             "</mj-style>
         </mj-head>
-        <mj-body width="500px" padding="0">
+        <mj-body width="560px" padding="0">
             <mj-section padding="20px 0">
             <mj-column padding="0">
                 { header().into() }

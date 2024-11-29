@@ -11,7 +11,7 @@ pub fn head() -> Fragment<MjHeadChild> {
 
             <mj-attributes>
             <mj-all padding="10px 30px" />
-                <mj-text font-size="12px" line-height="14.52px" font-weight="400" font-size="12px" font-family="Inter" />
+                <mj-text font-size="14px" line-height="16.94px" font-weight="400" font-family="Inter" />
                 <mj-class name="wrapper" border-radius="8px" background-color="#F5F5F5" padding="10px 15px" />
             </mj-attributes>
             <mj-style inline="inline">"

@@ -37,7 +37,7 @@ pub(crate) fn email_in_use(params: Value, l: Locale) -> Result<Mjml, TemplateErr
             { head().into() }
             <mj-title>{ tl!(l, email_in_use.title ).borrow() }</mj-title>
         </mj-head>
-        <mj-body width="500px" padding="0">
+        <mj-body width="560px" padding="0">
             <mj-section padding="20px 0">
             <mj-column padding="0">
                 { header().into() }
