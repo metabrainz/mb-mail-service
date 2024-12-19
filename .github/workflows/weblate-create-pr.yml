@@ -3,13 +3,13 @@ on:
       branches:
         - 'translations'
     workflow_dispatch: 
-permissions:
-    pull-requests: write
-    checks: write
-    issues: write
 
 jobs:
     create-pull-request:
+        permissions:
+            pull-requests: write
+            checks: write
+            issues: write
         runs-on: ubuntu-latest
         outputs:
             create-pr: ${{ steps.create-pr.outputs.result }}
