@@ -65,7 +65,7 @@ repos:
         language: system
         types: [file]
         pass_filenames: false
-        stages: ["push"]
+        stages: ["pre-push"]
   - repo: https://github.com/crate-ci/typos
     rev: v1.22.0
     hooks:
