@@ -33,10 +33,6 @@ repos:
   - repo: https://github.com/FeryET/pre-commit-rust
     rev: v1.1.1
     hooks:
-      - id: fmt
-        stages:
-        - pre-commit
-        - pre-push
       - id: cargo-check
         stages:
         - pre-commit
@@ -48,6 +44,16 @@ repos:
         args: [--all-targets, "--", "-D", "warnings"]
   - repo: local
     hooks:
+      - id: cargo-fmt
+        name: cargo fmt
+        description: Format files with cargo fmt.
+        entry: cargo fmt
+        language: system
+        types: ["rust"]
+        args: ["--"]
+        stages:
+        - pre-commit
+        - pre-push
       - id: cargo-deny
         name: check Cargo dependencies
         description: check Cargo dependencies
