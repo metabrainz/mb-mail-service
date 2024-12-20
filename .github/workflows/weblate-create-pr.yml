@@ -64,5 +64,8 @@ jobs:
                     }
     test:
         uses: ./.github/workflows/ci.yml
+        permissions:
+            checks: write
+            issues: write
         needs: create-pull-request
         if: needs.create-pull-request.outputs.create-pr == 'created-pr'
