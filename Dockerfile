@@ -3,7 +3,7 @@ FROM rust:latest AS builder
 # install lld
 RUN apt-get update && apt-get install -y lld
 # install cargo-auditable
-RUN curl --proto '=https' --tlsv1.2 -LsSf https://github.com/rust-secure-code/cargo-auditable/releases/download/v0.6.4/cargo-auditable-installer.sh | sh
+RUN curl --proto '=https' --tlsv1.2 -LsSf https://github.com/rust-secure-code/cargo-auditable/releases/download/v0.6.6/cargo-auditable-installer.sh | sh
 
 WORKDIR /app
 COPY ./rust-toolchain.toml .
