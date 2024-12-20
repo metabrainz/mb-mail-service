@@ -51,8 +51,4 @@ EXPOSE 3000
 
 HEALTHCHECK --interval=15s --timeout=30s --start-period=5s --retries=4 CMD ["/app", "healthcheck"]
 
-LABEL org.opencontainers.image.source=https://github.com/metabrainz/mb-mail-service
-# LABEL org.opencontainers.image.description=
-LABEL org.opencontainers.image.licenses=GPL-2.0-or-later
-
 CMD ["/app"]
