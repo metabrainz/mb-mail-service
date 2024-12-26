@@ -1,4 +1,78 @@
 {
     "greeting_line": "Hallo { name },",
-    "metabrainz_signoff": "—  Die MetaBrainz-Community"
+    "metabrainz_signoff": "—  Die MetaBrainz-Community",
+    "do_not_reply": "Bitte antworte nicht auf diese Nachricht. Für Hilfestellungen frage das Team oder die Community.",
+    "no_vote": {
+        "title": "Jemand hat gegen deine Bearbeitung Nr. { edit_id } gestimmt",
+        "top": "MusicBrainz Benutzer „{voter_name}“ hat gegen deine Bearbeitung Nr. { edit_id } gestimmt."
+    },
+    "subscription": {
+        "deleted_merged_info": "Einige deiner abonnierten Künstler, Label oder Sammlungen wurden vereint, gelöscht oder auf privat gestellt:",
+        "entity": "{name}",
+        "open_edits_subscribed_entities": "Alle offenen Bearbeitungen für deine abonnierten Objekte",
+        "edit_subscriptions": "Klicke hier, um deine Abonnements anzusehen oder zu bearbeiten.",
+        "title": "Bearbeitungen für deine Abonnements",
+        "deleted_default_reason": "gelöscht oder auf privat gestellt",
+        "changes_sections": {
+            "subscribed_editors": "Änderungen von deinen abonnierten Bearbeitern:",
+            "subscribed_artists": "Änderungen für deine abonnierten Künstler:",
+            "subscribed_collections": "Änderungen für deine abonnierten Sammlungen:",
+            "subscribed_labels": "Änderungen für deine abonnierten Label:",
+            "subscribed_series": "Änderungen für deine abonnierten Serien:"
+        },
+        "deleted_merged": "Gelöschte und vereinte Künstler oder Label:",
+        "info": "Es gibt neue Bearbeitungen für deine abonnierten Objekte.",
+        "entity_with_comment": "{name} ({comment})",
+        "open_applied_count": "({open} offen, {applied} angewandt)",
+        "open_edits": "Alle offenen Bearbeitungen:",
+        "open_edits_subscribed_editors": "Alle offenen Bearbeitungen von deinen abonnierten Bearbeitern",
+        "thanks": "Danke fürs Bearbeiten und Abstimmen!"
+    },
+    "link_copy_info": "Falls der obige Link nicht funktioniert, kopiere bitte die URL füge sie in ein neues Browserfenster ein.",
+    "edit_note": {
+        "top": "Die folgende Bemerkung wurde deiner Bearbeitung Nr. { edit_id } hinzugefügt:",
+        "title": "Bemerkung deiner Bearbeitung Nr. { edit_id } hinzugefügt",
+        "reply": "Zum Antworten, bitte füge hier deine Bemerkung ein."
+    },
+    "editor_message": {
+        "title": "MusicBrainz Nachricht von {from_name}: {subject}",
+        "reply_link": "Zum Antworten, klicke hier um {from_name} eine E-Mail zu senden.",
+        "reply_email": "Alternativ, antworte bitte auf diese Nachricht.",
+        "message_copy": "Du hast diese Nachricht an {to_name} gesendet",
+        "top": "MusicBrainz Benutzer „{from_name}“ hat dir folgende Nachricht gesendet:",
+        "bubble_subject": "{ from_name }: { subject }"
+    },
+    "verify_email": {
+        "title": "Bestätige deine E-Mail",
+        "welcome": "Willkommen!",
+        "top": "Klicke auf den untenstehenden Link, um deine E-Mail-Adresse zu bestätigen:"
+    },
+    "editor_report": {
+        "top": "Bearbeiter {reported_name} wurde von {from_name} aus folgendem Grund gemeldet:",
+        "title": "Bearbeiter {reported_name} wurde von {from_name} gemeldet",
+        "copy_title": "Kopie deiner Meldung von {reported_name}",
+        "reply_email": "Du kannst auf diese Nachricht direkt antworten.",
+        "message_copy": "Dies ist eine Kopie deiner Meldung des MusicBrainz Bearbeiter {reported_name}",
+        "reporter_account": "Meldender Account: ",
+        "reported_account": "Gemeldeter Account: "
+    },
+    "email_in_use": {
+        "in_error": "Wenn du dies nicht angefragt hast und denkst diese E-Mail irrtümlich erhalten zu haben, kannst du sie sorglos ignorieren.",
+        "title": "E-Mail-Adresse wird bereits benutzt",
+        "action_username": "Falls du deinen alten Benutzernamen vergessen hast, kannst du ihn mit dem nachfolgenden Link wiederherstellen:",
+        "action_password": "Anschließend kannst du, falls nötig, mit dem folgenden Link dein Passwort zurücksetzten:",
+        "second_account": "Wenn du aus einem bestimmten Grund einen zweiten Account benötigst (z.B. für einen Bot und um Bemerkungen an der gleichen Adresse zu erhalten), gib uns bitte Bescheid. Dann kümmern wir uns um dein Anliegen."
+    },
+    "reset_password": {
+        "action": "Klicke auf den untenstehenden Link, um dein Passwort zurückzusetzen:",
+        "title": "Passwortrücksetzungsanfrage",
+        "info": "Jemand, vermutlich du, möchte dein MusicBrainz Passwort zurücksetzen.",
+        "in_error": "Wenn du dies nicht angefragt hast und denkst diese E-Mail irrtümlich erhalten zu haben, kannst du sie sorglos ignorieren.",
+        "contact": "Falls du immer noch Probleme hast dich anzumelden, gib uns bitte Bescheid."
+    },
+    "lost_username": {
+        "title": "Benutzername vergessen",
+        "username_is": "Dein MusicBrainz Benutzername lautet: { user_name }",
+        "in_error": "Wenn du dies nicht angefragt hast und denkst diese E-Mail irrtümlich erhalten zu haben, kannst du sie sorglos ignorieren."
+    }
 }
