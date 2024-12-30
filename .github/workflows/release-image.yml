@@ -56,6 +56,8 @@ jobs:
             docker.io/${{ env.IMAGE_NAME }}
             ghcr.io/${{ env.IMAGE_NAME }}
           # default labels & annotations: https://github.com/docker/metadata-action/blob/master/src/meta.ts#L509
+        env:
+          DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
 
       # These steps work around docker mount caches not being cached between runs in CI providers.
       # It manually injects the mounts into Docker.
