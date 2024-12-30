@@ -29,11 +29,11 @@ RUN TARGETTUPLE=$(case $TARGETPLATFORM in \
 # Developer tool versions
 # renovate: datasource=github-releases depName=cargo-binstall packageName=cargo-bins/cargo-binstall
 ENV BINSTALL_VERSION=1.10.17
-# renovate: datasource=crate packageName=cargo-auditable
-ENV CARGO_AUDITABLE_VERSION=0.6.6
+# renovate: github-releases depName=cargo-sbom packageName=psastras/sbom-rs
+ENV CARGO_SBOM_VERSION=0.9.1
 
 RUN curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-RUN cargo binstall --no-confirm cargo-auditable --version $CARGO_AUDITABLE_VERSION
+RUN cargo binstall --no-confirm cargo-sbom --version $CARGO_SBOM_VERSION
 
 # Get source
 COPY . .
@@ -44,10 +44,13 @@ ENV CARGO_INCREMENTAL=0
 
 RUN mkdir /out
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
+    --mount=type=cache,target=/usr/local/cargo/git/db \
     --mount=type=cache,target=/app/target \
     . /etc/environment && \
-    cargo auditable build --locked --release --target $TARGETTUPLE && \
+    cargo build --locked --release --target $TARGETTUPLE && \
     cp ./target/$TARGETTUPLE/release/mb-mail-service /out/app
+
+RUN cargo sbom > /out/sbom.spdx.json
 
 # find dynamically linked dependencies
 RUN mkdir /out/libs \
@@ -67,6 +70,8 @@ WORKDIR /
 
 # Copy our build
 COPY --from=builder /out/app ./app 
+# Copy SBOM
+COPY --from=builder /out/sbom.spdx.json ./sbom.spdx.json
 
 # Copy hardcoded dynamic libraries
 COPY --from=builder /out/libs-root /
