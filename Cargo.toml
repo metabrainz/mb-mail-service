@@ -12,42 +12,42 @@ locales = ["en", "es", "de", "fr", "lt"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-axum = { version = "0.7.5", features = ["tracing", "macros"] }
-html2text = { version = "0.13.3", features = ["css"] }
-lettre = { version = "0.11.8", features = ["tokio1", "builder", "smtp-transport", "pool", "tokio1-rustls-tls", "tracing"], default-features = false }
+axum = { version = "0.7.9", features = ["tracing", "macros"] }
+html2text = { version = "0.13.6", features = ["css"] }
+lettre = { version = "0.11.11", features = ["tokio1", "builder", "smtp-transport", "pool", "tokio1-rustls-tls", "tracing"], default-features = false }
 listenfd = "1.0.1"
 mrmx-macros = { version = "0.1.0", git = "https://github.com/JadedBlueEyes/mrmx.git" }
 mrmx = { version = "0.1.0", git = "https://github.com/JadedBlueEyes/mrmx.git" }
 mrml = { version = "4.0.0", git = "https://github.com/JadedBlueEyes/mrml.git", branch = "jade/fragment", features = ["render"], default-features = false}
-serde_json = "1.0.128"
+serde_json = "1.0.134"
 strum = "0.26.3"
-thiserror = "2.0.3"
-tokio = { version = "1.40.0", features = ["full"] }
-tower = { version = "0.5.1", features = ["util"] }
-tower-http = { version = "0.6.1", features = ["timeout", "trace"] }
-tracing = "0.1.40"
-tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
-utoipa = { version = "5.1.1", features = ["axum_extras"] }
-utoipa-swagger-ui = { version = "8.0.1", features = ["axum"] }
-serde = { version = "1.0.210", features = ["derive"] }
-mf1 = "0.1.5"
+thiserror = "2.0.9"
+tokio = { version = "1.42.0", features = ["full"] }
+tower = { version = "0.5.2", features = ["util"] }
+tower-http = { version = "0.6.2", features = ["timeout", "trace"] }
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
+utoipa = { version = "5.3.0", features = ["axum_extras"] }
+utoipa-swagger-ui = { version = "8.1.0", features = ["axum"] }
+serde = { version = "1.0.217", features = ["derive"] }
+mf1 = "0.1.6"
 sentry = { version = "0.35.0", features = ["tracing", "tower", "tower-http"] }
-futures-util = "0.3.30"
-futures = "0.3.30"
+futures-util = "0.3.31"
+futures = "0.3.31"
 dashmap = { version = "6.1.0", features = ["serde"] }
-config = { version = "0.14.0", default-features = false, features = ["convert-case"] }
+config = { version = "0.15.4", default-features = false, features = ["convert-case"] }
 convert_case = "0.6.0"
 monostate = "0.1.13"
-reqwest = { version = "0.12.7", default-features = false }
-metrics = "0.24.0"
+reqwest = { version = "0.12.12", default-features = false }
+metrics = "0.24.1"
 axum-prometheus = "0.7.0"
 # metrics-exporter-prometheus = { version = "0.15.3", default-features = false, features = ["http-listener"] }
-git-testament = "0.2.5"
+git-testament = "0.2.6"
 html-escape = "0.2.13"
 
 [dev-dependencies]
-expect-test = "1.5.0"
-axum-test = "16.1.0"
+expect-test = "1.5.1"
+axum-test = "16.4.1"
 
 [profile.release]
 lto = true
