@@ -12,7 +12,7 @@ locales = ["en", "es", "de", "fr", "lt"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-axum = { version = "0.7.9", features = ["tracing", "macros"] }
+axum = { version = "0.8.0", features = ["tracing", "macros"] }
 html2text = { version = "0.13.6", features = ["css"] }
 lettre = { version = "0.11.11", features = ["tokio1", "builder", "smtp-transport", "pool", "tokio1-rustls-tls", "tracing"], default-features = false }
 listenfd = "1.0.1"
