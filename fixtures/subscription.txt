@@ -12,16 +12,15 @@ All open edits:
 Thanks for subscribing and voting!
 
 *— The MetaBrainz community*
-This is a notification that edits have been added for artists,
-labels, collections and editors to whom you subscribed on the
-MusicBrainz web site.
+This is a notification that edits have been added for artists, labels,
+collections and editors to whom you subscribed on the MusicBrainz web site.
 
 [Click here to change your subscription email settings.][5]
 
 [Click here to view or edit your subscriptions.][6]
 
-Do not reply to this message. For assistance please contact the
-team or the community.
+Do not reply to this message. For assistance please contact the team or the
+community.
 
 [1]: https://musicbrainz.org/artist/8d8d8a80-f74f-4f21-a44c-518cd6944ed2/edits
 [2]: https://musicbrainz.org/artist/8d8d8a80-f74f-4f21-a44c-518cd6944ed2/edits

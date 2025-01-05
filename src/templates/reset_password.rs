@@ -34,7 +34,7 @@ pub(crate) fn reset_password(params: Value, l: Locale) -> Result<Mjml, TemplateE
             { head().into() }
             <mj-title>{ tl!(l, reset_password.title ).borrow() }</mj-title>
         </mj-head>
-        <mj-body width="560px" padding="0">
+        <mj-body width="660px" padding="0">
             <mj-section padding="20px 0">
             <mj-column padding="0">
                 { header().into() }

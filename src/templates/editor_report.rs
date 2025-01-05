@@ -79,7 +79,7 @@ pub(crate) fn editor_report(params: Value, l: Locale) -> Result<Mjml, TemplateEr
                 }
             "</mj-style>
         </mj-head>
-        <mj-body width="560px" padding="0">
+        <mj-body width="660px" padding="0">
             <mj-section padding="20px 0">
             <mj-column padding="0">
                 { header().into() }

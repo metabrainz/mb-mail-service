@@ -35,7 +35,7 @@ pub(crate) fn lost_username(params: Value, l: Locale) -> Result<Mjml, TemplateEr
             { head().into() }
             <mj-title>{ tl!(l, lost_username.title ).borrow() }</mj-title>
         </mj-head>
-        <mj-body width="560px" padding="0">
+        <mj-body width="660px" padding="0">
             <mj-section padding="20px 0">
             <mj-column padding="0">
                 { header().into() }
