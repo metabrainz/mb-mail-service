@@ -122,7 +122,7 @@ white-space: pre !important;
         .unwrap();
     let dom = config.parse_html(html.as_bytes())?;
     let tree = config.dom_to_render_tree(&dom)?;
-    let text = config.render_to_string(tree, 65)?;
+    let text = config.render_to_string(tree, 76)?;
 
     Ok(text)
 }
