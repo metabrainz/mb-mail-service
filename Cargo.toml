@@ -47,7 +47,7 @@ html-escape = "0.2.13"
 
 [dev-dependencies]
 expect-test = "1.5.1"
-axum-test = "16.4.1"
+axum-test = "17.0.0"
 
 [profile.release]
 lto = true
