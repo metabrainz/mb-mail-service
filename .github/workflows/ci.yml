@@ -59,17 +59,17 @@ jobs:
         run: gitlint --commits ${{ env.FROM_REF }}..${{ env.TO_REF }}
         if: always()
       - name: Formatting
-        uses: clechasseur/rs-cargo@v2
+        uses: clechasseur/rs-cargo@v3
         with:
           command: fmt
           args: --check
       - name: Check
-        uses: clechasseur/rs-cargo@v2
+        uses: clechasseur/rs-cargo@v3
         with:
           command: check
           args: --all-targets --all-features --locked
       - name: Linting
-        uses: clechasseur/rs-cargo@v2
+        uses: clechasseur/rs-cargo@v3
         with:
           command: clippy
           args: --all-targets --all-features --locked -- -D warnings
