@@ -114,12 +114,14 @@ jobs:
 
       # This step generates an artifact attestation for the image, which is an unforgeable statement about where and how it was built. It increases supply chain security for people who consume the image. For more information, see "[Using artifact attestations to establish provenance for builds](https://docs.github.com/en/actions/security-for-github-actions/using-artifact-attestations/using-artifact-attestations-to-establish-provenance-for-builds)." 
       - name: Generate artifact attestation (${{ steps.var.outputs.docker_image }})
+        if: env.DOCKER_HUB_ENABLED == 'true'
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: index.${{ steps.var.outputs.docker_image }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
       - name: Generate artifact attestation (${{ steps.var.outputs.ghcr_image }})
+        if: env.GHCR_ENABLED == 'true'
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: ${{ steps.var.outputs.ghcr_image }}
