@@ -19,7 +19,29 @@ jobs:
       packages: write
       attestations: write
       id-token: write
+    env:
+      DOCKER_HUB_ENABLED: ${{ (secrets.DOCKER_HUB_USERNAME != '') && (secrets.DOCKER_HUB_PASSWORD != '') && 'true' || 'false'  }}
+      GHCR_ENABLED: "${{ (github.event_name != 'pull_request' || github.event.pull_request.head.repo.fork == false) && 'true' || 'false' }}"
     steps:
+      - name: Setting variables
+        uses: actions/github-script@v7
+        id: var
+        with:
+          script: |
+            const githubRepo = '${{ github.repository }}'.toLowerCase()
+            const repoId = githubRepo.split('/')[1]
+            const ghcrImage = 'ghcr.io/' + githubRepo
+            const dockerImage = 'docker.io/' + '${{ secrets.DOCKER_HUB_USERNAME }}'.toLowerCase() + '/' + repoId
+            core.setOutput('ghcr_image', ghcrImage)
+            core.setOutput('docker_image', dockerImage)
+            let images = []
+            if (process.env.GHCR_ENABLED === "true") {
+              images.push(ghcrImage)
+            }
+            if (process.env.DOCKER_HUB_ENABLED === "true") {
+              images.push(dockerImage)
+            }
+            core.setOutput('images', images.join("\n"))
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -29,12 +51,14 @@ jobs:
         uses: docker/setup-buildx-action@v3
       # Uses the `docker/login-action` action to log in to the Container registry registry using the account and password that will publish the packages. Once published, the packages are scoped to the account defined here.
       - name: Log in to the Docker Hub registry
+        if: env.DOCKER_HUB_ENABLED == 'true'
         uses: docker/login-action@v3
         with:
           registry: docker.io
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       - name: Log in to the GitHub Container Registry
+        if: env.GHCR_ENABLED == 'true'
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -52,9 +76,7 @@ jobs:
             type=semver,pattern=v{{major}},enable=${{ !startsWith(github.ref, 'refs/tags/v0.') }}
             type=ref,event=branch
             type=ref,event=pr
-          images: |
-            docker.io/${{ env.IMAGE_NAME }}
-            ghcr.io/${{ env.IMAGE_NAME }}
+          images: ${{ steps.var.outputs.images }}
           # default labels & annotations: https://github.com/docker/metadata-action/blob/master/src/meta.ts#L509
         env:
           DOCKER_METADATA_ANNOTATIONS_LEVELS: manifest,index
@@ -83,7 +105,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           annotations: ${{ steps.meta.outputs.annotations }}
@@ -92,15 +113,15 @@ jobs:
           sbom: true
 
       # This step generates an artifact attestation for the image, which is an unforgeable statement about where and how it was built. It increases supply chain security for people who consume the image. For more information, see "[Using artifact attestations to establish provenance for builds](https://docs.github.com/en/actions/security-for-github-actions/using-artifact-attestations/using-artifact-attestations-to-establish-provenance-for-builds)." 
-      - name: Generate artifact attestation (docker.io)
+      - name: Generate artifact attestation (${{ steps.var.outputs.docker_image }})
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: index.docker.io/${{ env.IMAGE_NAME}}
+          subject-name: index.${{ steps.var.outputs.docker_image }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
-      - name: Generate artifact attestation (ghcr.io)
+      - name: Generate artifact attestation (${{ steps.var.outputs.ghcr_image }})
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: ghcr.io/${{ env.IMAGE_NAME}}
+          subject-name: ${{ steps.var.outputs.ghcr_image }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
