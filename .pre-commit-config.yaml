@@ -62,7 +62,7 @@ repos:
         types: [file, toml]
         files: Cargo\.(toml|lock)
         pass_filenames: false
-        args: ["--all-features", "check"]
+        args: ["--frozen", "--all-features", "check"]
         
       - id: test
         name: test
