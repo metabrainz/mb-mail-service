@@ -1,30 +1,14 @@
-FROM rust:latest AS builder
+FROM --platform=$BUILDPLATFORM tonistiigi/xx AS xx
+FROM --platform=$BUILDPLATFORM rust:1-slim-bookworm AS builder
 
-# install lld
-RUN apt-get update && apt-get install -y lld
-
-# Set up Rust toolchain
-WORKDIR /app
-COPY ./rust-toolchain.toml .
-RUN rustc --version
-
-# convert docker target to rust target
-ARG TARGETPLATFORM
-
-# for available rust targets, see `rustup target list` or https://doc.rust-lang.org/nightly/rustc/platform-support.html
-# for available docker platforms, see https://github.com/docker/cli/blob/fb2ba5d63ba4166ceeefa21c2fd866b06966874e/cli/command/manifest/util.go#L23
-RUN TARGETTUPLE=$(case $TARGETPLATFORM in \
-    "linux/386") echo i686-unknown-linux-gnu ;; \
-    "linux/amd64") echo x86_64-unknown-linux-gnu ;; \
-    "linux/arm64") echo aarch64-unknown-linux-gnu ;; \
-    "linux/arm") echo arm-unknown-linux-gnueabihf ;; \
-    "linux/arm/v7") echo armv7-unknown-linux-gnueabihf ;; \
-    "linux/riscv64") echo riscv64gc-unknown-linux-gnu ;; \
-    "linux/ppc64le") echo powerpc64le-unknown-linux-gnu ;; \
-    "linux/s390x") echo s390x-unknown-linux-gnu ;; \
-    *) exit 1 ;; \
-    esac) && \
-    echo "TARGETTUPLE=$TARGETTUPLE" >> /etc/environment
+# Install repo tools
+# Line one: compiler tools
+# Line two: curl, for downloading binaries
+# Line three: for xx-verify
+RUN apt-get update && apt-get install -y \
+    clang lld pkg-config \
+    curl \
+    libmagic-mgc libmagic1 file
 
 # Developer tool versions
 # renovate: datasource=github-releases depName=cargo-binstall packageName=cargo-bins/cargo-binstall
@@ -35,6 +19,23 @@ ENV CARGO_SBOM_VERSION=0.9.1
 RUN curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 RUN cargo binstall --no-confirm cargo-sbom --version $CARGO_SBOM_VERSION
 
+# Set up xx (cross-compilation scripts)
+COPY --from=xx / /
+ARG TARGETPLATFORM
+
+# install libraries linked by the binary
+# xx-* are xx-specific meta-packages
+# c is needed for ring
+# cxx is needed for openssl
+RUN xx-apt-get install -y xx-c-essentials xx-cxx-essentials \
+    libssl-dev
+
+# Set up Rust toolchain
+WORKDIR /app
+COPY ./rust-toolchain.toml .
+RUN rustc --version
+RUN rustup target add $(xx-cargo --print-target-triple)
+
 # Get source
 COPY . .
 
@@ -42,13 +43,21 @@ COPY . .
 # We disable incremental compilation to save disk space, as it only produces a minimal speedup for this case.
 ENV CARGO_INCREMENTAL=0
 
+RUN echo "PKG_CONFIG_LIBDIR=/usr/lib/$(xx-info)/pkgconfig" >> /etc/environment
+RUN echo "PKG_CONFIG=/usr/bin/$(xx-info)-pkg-config"
+RUN echo "PKG_CONFIG_ALLOW_CROSS=true" >> /etc/environment
+
+RUN cat /etc/environment
+
 RUN mkdir /out
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/usr/local/cargo/git/db \
     --mount=type=cache,target=/app/target \
+    set -o allexport && \
     . /etc/environment && \
-    cargo build --locked --release --target $TARGETTUPLE && \
-    cp ./target/$TARGETTUPLE/release/mb-mail-service /out/app
+    xx-cargo build --locked --release && \
+    xx-verify ./target/$(xx-cargo --print-target-triple)/release/mb-mail-service && \
+    cp ./target/$(xx-cargo --print-target-triple)/release/mb-mail-service /out/app
 
 RUN cargo sbom > /out/sbom.spdx.json
 
