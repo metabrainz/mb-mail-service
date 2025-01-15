@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 
 # Developer tool versions
 # renovate: datasource=github-releases depName=cargo-bins/cargo-binstall
-ENV BINSTALL_VERSION=1.10.17
+ENV BINSTALL_VERSION=1.10.21
 # renovate: datasource=github-releases depName=psastras/sbom-rs
 ENV CARGO_SBOM_VERSION=0.9.1
 
