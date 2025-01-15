@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y \
     libmagic-mgc libmagic1 file
 
 # Developer tool versions
-# renovate: datasource=github-releases depName=cargo-binstall packageName=cargo-bins/cargo-binstall
+# renovate: datasource=github-releases packageName=cargo-binstall depName=cargo-bins/cargo-binstall
 ENV BINSTALL_VERSION=1.10.17
-# renovate: datasource=github-releases depName=cargo-sbom packageName=psastras/sbom-rs
+# renovate: datasource=github-releases packageName=cargo-sbom depName=psastras/sbom-rs
 ENV CARGO_SBOM_VERSION=0.9.1
 
 RUN curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
