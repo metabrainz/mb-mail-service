@@ -36,7 +36,7 @@ futures-util = "0.3.31"
 futures = "0.3.31"
 dashmap = { version = "6.1.0", features = ["serde"] }
 config = { version = "0.15.4", default-features = false, features = ["convert-case"] }
-convert_case = "0.6.0"
+convert_case = "0.7.0"
 monostate = "0.1.13"
 reqwest = { version = "0.12.12", default-features = false }
 metrics = "0.24.1"
