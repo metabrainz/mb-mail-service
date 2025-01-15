@@ -129,10 +129,16 @@ async fn service(mailer: MailTransport) -> axum::Router {
         .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", ApiDoc::openapi()))
         // Our routes
         .route("/available_locales", get(available_locales))
-        .route("/templates/:template_id/html", post(render_html_route_post))
-        .route("/templates/:template_id/html", get(render_html_route_get))
-        .route("/templates/:template_id/text", get(render_text_route_get))
-        .route("/templates/:template_id/text", post(render_text_route_post))
+        .route(
+            "/templates/{template_id}/html",
+            post(render_html_route_post),
+        )
+        .route("/templates/{template_id}/html", get(render_html_route_get))
+        .route("/templates/{template_id}/text", get(render_text_route_get))
+        .route(
+            "/templates/{template_id}/text",
+            post(render_text_route_post),
+        )
         .route("/send_single", post(send_mail_route))
         .route("/send_bulk", post(send_mail_bulk_route))
         .with_state(mailer);

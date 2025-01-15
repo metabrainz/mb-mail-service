@@ -12,7 +12,7 @@ locales = ["en", "es", "de", "fr", "lt"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-axum = { version = "0.7.9", features = ["tracing", "macros"] }
+axum = { version = "0.8.1", features = ["tracing", "macros"] }
 html2text = { version = "0.13.6", features = ["css"] }
 lettre = { version = "0.11.11", features = ["tokio1", "builder", "smtp-transport", "pool", "tokio1-rustls-tls", "tracing"], default-features = false }
 listenfd = "1.0.1"
@@ -31,7 +31,7 @@ utoipa = { version = "5.3.0", features = ["axum_extras"] }
 utoipa-swagger-ui = { version = "8.1.0", features = ["axum"] }
 serde = { version = "1.0.217", features = ["derive"] }
 mf1 = "0.1.6"
-sentry = { version = "0.35.0", features = ["tracing", "tower", "tower-http"] }
+sentry = { version = "0.36.0", features = ["tracing", "tower", "tower-http"] }
 futures-util = "0.3.31"
 futures = "0.3.31"
 dashmap = { version = "6.1.0", features = ["serde"] }
@@ -40,14 +40,14 @@ convert_case = "0.6.0"
 monostate = "0.1.13"
 reqwest = { version = "0.12.12", default-features = false }
 metrics = "0.24.1"
-axum-prometheus = "0.7.0"
+axum-prometheus = "0.8.0"
 # metrics-exporter-prometheus = { version = "0.15.3", default-features = false, features = ["http-listener"] }
 git-testament = "0.2.6"
 html-escape = "0.2.13"
 
 [dev-dependencies]
 expect-test = "1.5.1"
-axum-test = "16.4.1"
+axum-test = "17.1.0"
 
 [profile.release]
 lto = true
