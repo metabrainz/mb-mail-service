@@ -8,16 +8,19 @@ FROM --platform=$BUILDPLATFORM rust:1-slim-bookworm AS builder
 RUN apt-get update && apt-get install -y \
     clang lld pkg-config \
     curl \
-    libmagic-mgc libmagic1 file
+    file
 
 # Developer tool versions
 # renovate: datasource=github-releases depName=cargo-bins/cargo-binstall
 ENV BINSTALL_VERSION=1.10.21
 # renovate: datasource=github-releases depName=psastras/sbom-rs
 ENV CARGO_SBOM_VERSION=0.9.1
+# renovate: datasource=crate depName=lddtree
+ENV LDDTREE_VERSION=0.3.7
 
 RUN curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
 RUN cargo binstall --no-confirm cargo-sbom --version $CARGO_SBOM_VERSION
+RUN cargo binstall --no-confirm lddtree --version $LDDTREE_VERSION
 
 # Set up xx (cross-compilation scripts)
 COPY --from=xx / /
@@ -64,15 +67,7 @@ RUN cargo sbom > /out/sbom.spdx.json
 
 # find dynamically linked dependencies
 RUN mkdir /out/libs \
-     && ldd /out/app | grep '=>' | awk '{print $(NF-1)}' | xargs -I {} cp {} /out/libs/
-# libraries with a hardcoded path, like ld
-# (see for example https://github.com/vlang/v/issues/8682)
-# Excluding linux-vdso.so, as it is a part of the kernel
-RUN mkdir /out/libs-root \
-    && ldd /out/app | grep -v '=>' | grep -v 'linux-vdso.so' | awk '{print $(NF-1)}' | xargs -I {} install -D {} /out/libs-root{}
-# RUN ldd /out/app
-# ldd /out/app | grep -v 'linux-vdso.so' | awk '{print $(NF-1)}'
-# RUN ls /libs
+    && lddtree /out/app | awk '{print $(NF-0) " " $1}' | sort -u -k 1,1 | awk '{print "install", "-D", $1, "/out/libs" (($2 ~ /^\//) ? $2 : $1)}' | xargs -I {} sh -c {}
 
 FROM scratch
 
@@ -83,12 +78,8 @@ COPY --from=builder /out/app ./app
 # Copy SBOM
 COPY --from=builder /out/sbom.spdx.json ./sbom.spdx.json
 
-# Copy hardcoded dynamic libraries
-COPY --from=builder /out/libs-root /
-# Copy dynamic libraries
-COPY --from=builder /out/libs /libs
-# Tell Linux where to find our libraries
-ENV LD_LIBRARY_PATH=/libs
+# Copy dynamic libraries to root
+COPY --from=builder /out/libs /
 
 ENV APP_LISTEN_MODE=tcp_listener
 ENV APP_LISTEN_PORT=3000
