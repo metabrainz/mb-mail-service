@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM tonistiigi/xx AS xx
+FROM --platform=$BUILDPLATFORM docker.io/tonistiigi/xx AS xx
 FROM --platform=$BUILDPLATFORM rust:1-slim-bookworm AS builder
 
 # Install repo tools
@@ -27,7 +27,8 @@ ARG TARGETPLATFORM
 # xx-* are xx-specific meta-packages
 # c is needed for ring
 # cxx is needed for openssl
-RUN xx-apt-get install -y xx-c-essentials xx-cxx-essentials \
+RUN xx-apt-get install -y \
+    xx-c-essentials xx-cxx-essentials \
     libssl-dev
 
 # Set up Rust toolchain
