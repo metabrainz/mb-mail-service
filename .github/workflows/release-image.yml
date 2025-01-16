@@ -8,7 +8,7 @@ on:
       - "*.*.*"
 
 env:
-  IMAGE_NAME: metabrainz/mb-mail-service
+  DOCKER_HUB_REPO_NAME: metabrainz/mb-mail-service
 
 jobs:
   build-and-push-image:
@@ -31,7 +31,8 @@ jobs:
             const githubRepo = '${{ github.repository }}'.toLowerCase()
             const repoId = githubRepo.split('/')[1]
             const ghcrImage = 'ghcr.io/' + githubRepo
-            const dockerImage = 'docker.io/' + '${{ secrets.DOCKER_HUB_USERNAME }}'.toLowerCase() + '/' + repoId
+            const dockerRepo = process.env.DOCKER_HUB_REPO_NAME || ('${{ secrets.DOCKER_HUB_USERNAME }}'.toLowerCase() + '/' + repoId)
+            const dockerImage = 'docker.io/' + dockerRepo
             core.setOutput('ghcr_image', ghcrImage)
             core.setOutput('docker_image', dockerImage)
             let images = []
