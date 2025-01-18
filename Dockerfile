@@ -1,11 +1,16 @@
 FROM --platform=$BUILDPLATFORM docker.io/tonistiigi/xx AS xx
 FROM --platform=$BUILDPLATFORM rust:1-slim-bookworm AS builder
 
+# Don't delete the apt cache
+RUN rm -f /etc/apt/apt.conf.d/docker-clean
+
 # Install repo tools
 # Line one: compiler tools
 # Line two: curl, for downloading binaries
 # Line three: for xx-verify
-RUN apt-get update && apt-get install -y \
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && apt-get install -y \
     clang lld pkg-config \
     curl \
     file
@@ -30,7 +35,9 @@ ARG TARGETPLATFORM
 # xx-* are xx-specific meta-packages
 # c is needed for ring
 # cxx is needed for openssl
-RUN xx-apt-get install -y \
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    xx-apt-get install -y \
     xx-c-essentials xx-cxx-essentials \
     libssl-dev
 
