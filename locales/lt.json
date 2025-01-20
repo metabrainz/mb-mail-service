@@ -63,27 +63,27 @@
     "subscription": {
         "title": "Redagavimai tavo prenumeratoms",
         "changes_sections": {
-            "subscribed_collections": "Pakeitimai tavo prenumeruojamoms kolekcijoms:",
-            "subscribed_labels": "Pakeitimai tavo prenumeruojamoms leidykloms:",
-            "subscribed_editors": "Pakeitimai tavo prenumeruojamiems redaktoriams:",
-            "subscribed_artists": "Pakeitimai tavo prenumeruojamiems atlikėjams:",
-            "subscribed_series": "Pakeitimai tavo prenumeruojamos serijos:"
+            "subscribed_collections": "Pakeitimai jūsų prenumeruojamoms kolekcijoms:",
+            "subscribed_labels": "Pakeitimai jūsų prenumeruojamoms leidykloms:",
+            "subscribed_editors": "Pakeitimai jūsų prenumeruojamiems redaktoriams:",
+            "subscribed_artists": "Pakeitimai jūsų prenumeruojamiems atlikėjams:",
+            "subscribed_series": "Pakeitimai jūsų prenumeruojamos serijos:"
         },
         "deleted_merged": "Ištrinti ir sujungti atlikėjai ar leidyklos:",
         "deleted_item": "{ item_type, select, artist {Atlikėjas} label {Leidykla} series {Serija} collection {Kolekcija} other {Nežinomas} } ''{entity}'' – { reason }",
         "deleted_default_reason": "ištrintas arba padarytas privačiu",
         "entity": "{name}",
         "open_applied_count": "({open} atviri, {applied} pritaikyti)",
-        "deleted_merged_info": "Kai kurie tavo prenumeruojami atlikėjai, leidyklos ar kolekcijos buvo sujungti, ištrinti arba padaryti privatūs:",
+        "deleted_merged_info": "Kai kurie jūsų prenumeruojami atlikėjai, leidyklos ar kolekcijos buvo sujungti, ištrinti arba padaryti privatūs:",
         "deleted_item_with_edit": "{ item_type, select, artist {Atlikėjas} label {Leidykla} series {Serija} collection {Kolekcija} other {Nežinomas} } ''{entity}'' – { reason } pagal #{edit_id}",
         "entity_with_comment": "{name} ({comment})",
         "info": "Pridėti nauji redagavimai esybėms, kuriuos esi užsiprenumeravęs (-usi).",
-        "open_edits_subscribed_entities": "Visi atviri redagavimai tavo prenumeruojamiems esybėms",
-        "thanks": "Ačiū už prenumeratą ir balsavimą!",
-        "about": "Tai – pranešimas apie tai, kad „MusicBrainz“ svetainėje buvo pridėta redagavimų atlikėjams, leidykloms, kolekcijoms ir redaktoriams, kuriuos užsiprenumeravai. ",
-        "edit_subscriptions": "Spustelėk čia, kad peržiūrėtum arba redaguotum savo prenumeratas.",
+        "open_edits_subscribed_entities": "Visi atviri redagavimai jūsų prenumeruojamiems esybėms",
+        "thanks": "Dėkojame už prenumeratą ir balsavimą!",
+        "about": "Tai – pranešimas apie tai, kad „MusicBrainz“ svetainėje buvo pridėta redagavimų atlikėjams, leidykloms, kolekcijoms ir redaktoriams, kuriuos užsiprenumeravote. ",
+        "edit_subscriptions": "Spustelėkite čia, kad peržiūrėtumėte arba redaguotumėte savo prenumeratas.",
         "open_edits": "Visi atviri redagavimai:",
-        "open_edits_subscribed_editors": "Visi atviri redagavimai tavo prenumeruotiems redaktoriams"
+        "open_edits_subscribed_editors": "Visi atviri redagavimai jūsų prenumeruotiems redaktoriams"
     },
     "change_subscription_settings": "Spustelėkite čia, kad pakeistumėte prenumeruojamo el. laiško nustatymus."
 }
