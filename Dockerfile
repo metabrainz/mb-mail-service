@@ -73,41 +73,41 @@ COPY . .
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/usr/local/cargo/git/db \
     --mount=type=cache,target=/app/target \
-    bash <<EOF
+    bash <<'EOF'
     set -o allexport
     . /etc/environment
-    TARGET_DIR=(\$(cargo metadata --no-deps --format-version 1 | \
+    TARGET_DIR=($(cargo metadata --no-deps --format-version 1 | \
             jq -r ".target_directory"))
     mkdir /out/sbin
     PACKAGE=mb-mail-service
     xx-cargo build --locked --release \
-        -p \$PACKAGE;
-    BINARIES=(\$(cargo metadata --no-deps --format-version 1 | \
-        jq -r ".packages[] | select(.name == \"\$PACKAGE\") | .targets[] | select( .kind | map(. == \"bin\") | any ) | .name"))
-    for BINARY in "\${BINARIES[@]}"; do
-        echo \$BINARY
-        xx-verify \$TARGET_DIR/$(xx-cargo   --print-target-triple)/release/\$BINARY
-        cp \$TARGET_DIR/$(xx-cargo --print-target-triple)/release/\$BINARY /out/sbin/\$BINARY
+        -p $PACKAGE;
+    BINARIES=($(cargo metadata --no-deps --format-version 1 | \
+        jq -r ".packages[] | select(.name == \"$PACKAGE\") | .targets[] | select( .kind | map(. == \"bin\") | any ) | .name"))
+    for BINARY in "${BINARIES[@]}"; do
+        echo $BINARY
+        xx-verify $TARGET_DIR/$(xx-cargo   --print-target-triple)/release/$BINARY
+        cp $TARGET_DIR/$(xx-cargo --print-target-triple)/release/$BINARY /out/sbin/$BINARY
     done
 EOF
 
 # Generate Software Bill of Materials (SBOM)
 RUN --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/usr/local/cargo/git/db \
-    bash <<EOF
+    bash <<'EOF'
     mkdir /out/sbom
     typeset -A PACKAGES
     for BINARY in /out/sbin/*; do
-        BINARY_BASE=\$(basename \${BINARY})
-        package=\$(cargo metadata --no-deps --format-version 1 | jq -r ".packages[] | select(.targets[] | select( .kind | map(. == \"bin\") | any ) | .name == \"\$BINARY_BASE\") | .name")
-        if [ -z "\$package" ]; then
+        BINARY_BASE=$(basename ${BINARY})
+        package=$(cargo metadata --no-deps --format-version 1 | jq -r ".packages[] | select(.targets[] | select( .kind | map(. == \"bin\") | any ) | .name == \"$BINARY_BASE\") | .name")
+        if [ -z "$package" ]; then
             continue
         fi
-        PACKAGES[\$package]=1
+        PACKAGES[$package]=1
     done
-    for PACKAGE in \$(echo \${!PACKAGES[@]}); do
-        echo \$PACKAGE
-        cargo sbom --cargo-package \$PACKAGE > /out/sbom/\$PACKAGE.spdx.json
+    for PACKAGE in $(echo ${!PACKAGES[@]}); do
+        echo $PACKAGE
+        cargo sbom --cargo-package $PACKAGE > /out/sbom/$PACKAGE.spdx.json
     done
 EOF
 
