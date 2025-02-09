@@ -7,7 +7,7 @@ publish = false
 license = "GPL-2.0-or-later"
 
 [package.metadata.mf1]
-locales = ["en", "es", "de", "fr", "lt"]
+locales = ["en", "de", "es", "fr", "lt", "ru"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
