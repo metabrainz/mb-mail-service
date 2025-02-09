@@ -1,4 +1,3 @@
-use super::text::PlainDecorator;
 use axum::{
     extract::{Path, Query},
     http::{header, StatusCode},
@@ -108,10 +107,11 @@ pub async fn render_html_route_post(
 }
 
 pub async fn render_text(html: &str) -> Result<String, EngineError> {
-    let config = html2text::config::with_decorator(PlainDecorator::new())
+    let config = html2text::config::plain()
         .no_table_borders()
         .allow_width_overflow()
         .no_link_wrapping()
+        .link_footnotes(true)
         .raw_mode(true)
         .add_agent_css(
             "

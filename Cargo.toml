@@ -13,30 +13,30 @@ locales = ["en", "de", "es", "fr", "lt", "ru"]
 
 [dependencies]
 axum = { version = "0.8.1", features = ["tracing", "macros"] }
-html2text = { version = "0.13.6", features = ["css"] }
-lettre = { version = "0.11.11", features = ["tokio1", "builder", "smtp-transport", "pool", "tokio1-rustls-tls", "tracing"], default-features = false }
-listenfd = "1.0.1"
+html2text = { version = "0.14.0", features = ["css"] }
+lettre = { version = "0.11.12", features = ["tokio1", "builder", "smtp-transport", "pool", "tokio1-rustls-tls", "tracing"], default-features = false }
+listenfd = "1.0.2"
 mrmx-macros = { version = "0.1.0", git = "https://github.com/JadedBlueEyes/mrmx.git" }
 mrmx = { version = "0.1.0", git = "https://github.com/JadedBlueEyes/mrmx.git" }
 mrml = { version = "4.0.0", git = "https://github.com/JadedBlueEyes/mrml.git", branch = "jade/fragment", features = ["render"], default-features = false}
-serde_json = "1.0.134"
-strum = "0.26.3"
-thiserror = "2.0.9"
-tokio = { version = "1.42.0", features = ["full"] }
+serde_json = "1.0.138"
+strum = "0.27.0"
+thiserror = "2.0.11"
+tokio = { version = "1.43.0", features = ["full"] }
 tower = { version = "0.5.2", features = ["util"] }
 tower-http = { version = "0.6.2", features = ["timeout", "trace"] }
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
-utoipa = { version = "5.3.0", features = ["axum_extras"] }
-utoipa-swagger-ui = { version = "8.1.0", features = ["axum"] }
+utoipa = { version = "5.3.1", features = ["axum_extras"] }
+utoipa-swagger-ui = { version = "9.0.0", features = ["axum"] }
 serde = { version = "1.0.217", features = ["derive"] }
 mf1 = "0.1.6"
 sentry = { version = "0.36.0", features = ["tracing", "tower", "tower-http"] }
 futures-util = "0.3.31"
 futures = "0.3.31"
 dashmap = { version = "6.1.0", features = ["serde"] }
-config = { version = "0.15.4", default-features = false, features = ["convert-case"] }
-convert_case = "0.6.0"
+config = { version = "0.15.7", default-features = false, features = ["convert-case"] }
+convert_case = "0.7.1"
 monostate = "0.1.13"
 reqwest = { version = "0.12.12", default-features = false }
 metrics = "0.24.1"
@@ -47,7 +47,7 @@ html-escape = "0.2.13"
 
 [dev-dependencies]
 expect-test = "1.5.1"
-axum-test = "17.1.0"
+axum-test = "17.2.0"
 
 [profile.release]
 lto = true

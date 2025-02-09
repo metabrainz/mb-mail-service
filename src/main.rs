@@ -8,7 +8,6 @@ mod render;
 mod send;
 mod serve;
 mod templates;
-mod text;
 
 mf1::load_locales!();
 
@@ -45,7 +44,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             config::Environment::with_prefix("APP")
                 .try_parsing(true)
                 .separator("_")
-                .convert_case(convert_case::Case::Snake),
+                .convert_case(config::Case::Snake),
         )
         .build()
         .unwrap();
