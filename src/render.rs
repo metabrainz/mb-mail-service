@@ -4,6 +4,7 @@ use axum::{
     response::{IntoResponse, Response},
     Json,
 };
+use mrml::prelude::parser::noop_loader::NoopIncludeLoader;
 use serde::Deserialize;
 use serde_json::Value;
 use std::borrow::Cow;
@@ -22,7 +23,9 @@ pub(crate) enum EngineError {
     Template(#[from] TemplateError),
     #[error("Failed to render MJML: {0}")]
     Render(#[from] mrml::prelude::render::Error),
-    #[error("Template not found: {0}")]
+    #[error("Error rendering template: {0}")]
+    Parse(#[from] mrml::prelude::parser::Error),
+    #[error("Failed to parse MJML: {0}")]
     TemplateNotFound(String),
     #[error("Failed to convert HTML to text: {0}")]
     FailedTextConversion(#[from] html2text::Error),
@@ -46,7 +49,7 @@ pub(crate) struct RenderQuery {
     lang: Option<String>,
 }
 
-pub async fn render_html(
+pub async fn render_template(
     template_id: String,
     params: Value,
     lang: crate::Locale,
@@ -55,6 +58,18 @@ pub async fn render_html(
         templates::get(&template_id).ok_or(EngineError::TemplateNotFound(template_id))?;
     let root = template(params, lang)?;
     let opts = mrml::prelude::render::RenderOptions::default();
+    let content = root.render(&opts)?;
+    Ok((content, root.get_title()))
+}
+
+pub async fn render_mjml(mjml_text: String) -> Result<(String, Option<String>), EngineError> {
+    let opts = mrml::prelude::render::RenderOptions::default();
+
+    let resolver = Box::<NoopIncludeLoader>::default();
+    let parser_options = mrml::prelude::parser::ParserOptions {
+        include_loader: resolver,
+    };
+    let root = mrml::parse_with_options(mjml_text, &parser_options)?;
     let content = root.render(&opts)?;
     Ok((content, root.get_title()))
 }
@@ -77,7 +92,7 @@ pub async fn render_html_route_get(
 ) -> Result<Response, EngineError> {
     let lang = locale_from_optional_code(lang)?;
 
-    let (content, _title) = render_html(template_id, Value::Null, lang).await?;
+    let (content, _title) = render_template(template_id, Value::Null, lang).await?;
 
     Ok(([(header::CONTENT_TYPE, "text/html")], content).into_response())
 }
@@ -101,7 +116,7 @@ pub async fn render_html_route_post(
     Json(body): Json<Value>,
 ) -> Result<Response, EngineError> {
     let lang = locale_from_optional_code(lang)?;
-    let (content, _title) = render_html(template_id, body, lang).await?;
+    let (content, _title) = render_template(template_id, body, lang).await?;
 
     Ok(([(header::CONTENT_TYPE, "text/html")], content).into_response())
 }
@@ -144,7 +159,7 @@ pub async fn render_text_route_get(
     Query(RenderQuery { lang }): Query<RenderQuery>,
 ) -> Result<Response, EngineError> {
     let lang = locale_from_optional_code(lang)?;
-    let (html, _title) = render_html(template_id, Value::Null, lang).await?;
+    let (html, _title) = render_template(template_id, Value::Null, lang).await?;
     let content = render_text(&html).await?;
 
     Ok((
@@ -173,7 +188,7 @@ pub async fn render_text_route_post(
     Json(body): Json<Value>,
 ) -> Result<Response, EngineError> {
     let lang = locale_from_optional_code(lang)?;
-    let (html, _title) = render_html(template_id, body, lang).await?;
+    let (html, _title) = render_template(template_id, body, lang).await?;
     let content = render_text(&html).await?;
 
     Ok((
@@ -192,7 +207,7 @@ mod test {
 
     #[tokio::test]
     async fn basic_template_html() {
-        let (res, _) = super::render_html("basic".to_string(), Value::Null, Locale::default())
+        let (res, _) = super::render_template("basic".to_string(), Value::Null, Locale::default())
             .await
             .unwrap();
         let expected = expect_file!["../fixtures/basic.html"];
@@ -201,7 +216,7 @@ mod test {
 
     #[tokio::test]
     async fn subscription_template_html() {
-        let (res, _) = super::render_html(
+        let (res, _) = super::render_template(
             "subscription".to_string(),
             json!({
                 "to_name": "Jade",
@@ -235,7 +250,7 @@ mod test {
 
     #[tokio::test]
     async fn basic_template_text() {
-        let (html, _) = super::render_html("basic".to_string(), Value::Null, Locale::default())
+        let (html, _) = super::render_template("basic".to_string(), Value::Null, Locale::default())
             .await
             .unwrap();
         let res: String = super::render_text(&html).await.unwrap();
@@ -245,7 +260,7 @@ mod test {
 
     #[tokio::test]
     async fn subscription_template_text() {
-        let (html, _) = super::render_html(
+        let (html, _) = super::render_template(
             "subscription".to_string(),
             json!({
                 "to_name": "Jade",

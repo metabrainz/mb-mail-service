@@ -12,7 +12,7 @@ use utoipa::ToSchema;
 
 use crate::{
     locale_from_optional_code,
-    render::{render_html, render_text, EngineError},
+    render::{render_mjml, render_template, render_text, EngineError},
 };
 
 #[derive(Debug, thiserror::Error)]
@@ -52,9 +52,9 @@ impl OptionalSubject for MessageBuilder {
     }
 }
 
-/// All the data needed to send a single email
+/// All the data needed to send a single email based on a template
 #[derive(Deserialize, ToSchema, Clone)]
-pub struct SendItem {
+pub struct SendTemplateItem {
     /// Template to send
     template_id: String,
     /// The address the email is from
@@ -81,6 +81,32 @@ pub struct SendItem {
     references: Vec<String>,
 }
 
+/// All the data needed to send a single email based on a template
+#[derive(Deserialize, ToSchema, Clone)]
+pub struct SendMjmlItem {
+    /// The MJML body to render and send
+    mjml_text: String,
+
+    /// The address the email is from
+    from: String,
+    /// The address ultimately sending the email
+    /// Should not be set if same as from address, as per RFC
+    sender: Option<String>,
+    /// Address to send mail to.
+    to: String,
+    /// Reply-To email header
+    reply_to: Option<String>,
+    /// A unique identifier for the email
+    /// Please see https://www.ietf.org/rfc/rfc2822.html#section-3.6.4
+    message_id: Option<String>,
+    /// The unique identifiers of the emails to which this is replying
+    #[serde(default)]
+    in_reply_to: Vec<String>,
+    /// The unique identifiers of the emails that this email references
+    #[serde(default)]
+    references: Vec<String>,
+}
+
 #[derive(Serialize, ToSchema, Clone)]
 #[serde(tag = "t", content = "c")]
 pub enum SendResponse {
@@ -95,14 +121,44 @@ pub enum SendResponse {
         (status = 200, description = "Email sent successfully"),
         (status = NOT_FOUND, description = "Template was not found")
     ),
-    request_body = SendItem,
+    request_body = SendTemplateItem,
 )]
 pub async fn send_mail_route(
     State(mailer): State<MailTransport>,
-    Json(item): Json<SendItem>,
+    Json(item): Json<SendTemplateItem>,
 ) -> Result<(StatusCode, Json<SendResponse>), SendError> {
     counter!("mails_requested_total").increment(1);
-    let res = send_mail(&mailer, item).await?;
+    let res = send_mail_template(&mailer, item).await?;
+    trace!("{:?}", res);
+
+    Ok((
+        if res.is_positive() {
+            StatusCode::OK
+        } else {
+            StatusCode::INTERNAL_SERVER_ERROR
+        },
+        Json(SendResponse::Success {
+            code: res.code().into(),
+            message: res.message().fold(String::new(), |s, n| s + n + "\n"),
+        }),
+    ))
+}
+
+#[utoipa::path(
+    post,
+    path = "/send_single_mjml",
+    responses(
+        (status = 200, description = "Email sent successfully"),
+        (status = NOT_FOUND, description = "Template was not found")
+    ),
+    request_body = SendMjmlItem,
+)]
+pub async fn send_mail_mjml_route(
+    State(mailer): State<MailTransport>,
+    Json(item): Json<SendMjmlItem>,
+) -> Result<(StatusCode, Json<SendResponse>), SendError> {
+    counter!("mails_requested_total").increment(1);
+    let res = send_mail_mjml(&mailer, item).await?;
     trace!("{:?}", res);
 
     Ok((
@@ -127,11 +183,11 @@ const PAR_SENDERS: usize = 16;
     responses(
         (status = 200, description = "Bulk job ran successfully", body = [SendResponse])
     ),
-    request_body = Vec<SendItem>,
+    request_body = Vec<SendTemplateItem>,
 )]
 pub async fn send_mail_bulk_route(
     State(mailer): State<MailTransport>,
-    Json(items): Json<Vec<SendItem>>,
+    Json(items): Json<Vec<SendTemplateItem>>,
 ) -> Result<Json<Vec<SendResponse>>, SendError> {
     counter!("mails_requested_total").increment(items.len().try_into().unwrap());
     let all_results = dashmap::DashMap::new();
@@ -143,7 +199,7 @@ pub async fn send_mail_bulk_route(
             let mailer = &mailer;
             let all_results = &all_results;
             async move {
-                let res = send_mail(mailer, item).await;
+                let res = send_mail_template(mailer, item).await;
                 all_results.insert(i, res);
             }
         })
@@ -168,9 +224,9 @@ pub async fn send_mail_bulk_route(
 }
 
 #[tracing::instrument(skip(mailer))]
-pub async fn send_mail(
+pub async fn send_mail_template(
     mailer: &MailTransport,
-    SendItem {
+    SendTemplateItem {
         template_id,
         from,
         sender,
@@ -181,10 +237,65 @@ pub async fn send_mail(
         message_id,
         in_reply_to,
         references,
-    }: SendItem,
+    }: SendTemplateItem,
 ) -> Result<lettre::transport::smtp::response::Response, SendError> {
     let lang = locale_from_optional_code(lang)?;
-    let (html, title) = render_html(template_id, params, lang).await?;
+    let (html, title) = render_template(template_id, params, lang).await?;
+    let text = render_text(&html).await?;
+    let mut email = Message::builder()
+        .from(from.parse()?)
+        .to(to.parse()?)
+        .subject_opt(title.as_deref())
+        .message_id(message_id);
+    if let Some(sender) = sender {
+        email = email.sender(sender.parse()?);
+    }
+    if let Some(reply_to) = reply_to {
+        email = email.reply_to(reply_to.parse()?);
+    }
+    for id in in_reply_to.into_iter() {
+        email = email.in_reply_to(id)
+    }
+    for id in references.into_iter() {
+        email = email.references(id)
+    }
+
+    let email = email
+        .multipart(
+            MultiPart::alternative() // This is composed of two parts.
+                .singlepart(
+                    SinglePart::builder()
+                        .header(lettre::message::header::ContentType::TEXT_PLAIN)
+                        .body(text), // Every message should have a plain text fallback.
+                )
+                .singlepart(
+                    SinglePart::builder()
+                        .header(lettre::message::header::ContentType::TEXT_HTML)
+                        .body(html),
+                ),
+        )
+        .expect("failed to build email");
+    let res = mailer.send(email).await?;
+
+    counter!("mails_sent_total").increment(1);
+    Ok(res)
+}
+
+#[tracing::instrument(skip(mailer))]
+pub async fn send_mail_mjml(
+    mailer: &MailTransport,
+    SendMjmlItem {
+        mjml_text,
+        from,
+        sender,
+        to,
+        reply_to,
+        message_id,
+        in_reply_to,
+        references,
+    }: SendMjmlItem,
+) -> Result<lettre::transport::smtp::response::Response, SendError> {
+    let (html, title) = render_mjml(mjml_text).await?;
     let text = render_text(&html).await?;
     let mut email = Message::builder()
         .from(from.parse()?)

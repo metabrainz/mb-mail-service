@@ -21,7 +21,7 @@ use crate::{
         render_html_route_get, render_html_route_post, render_text_route_get,
         render_text_route_post,
     },
-    send::{send_mail_bulk_route, send_mail_route, MailTransport},
+    send::{send_mail_bulk_route, send_mail_mjml_route, send_mail_route, MailTransport},
 };
 use axum::{
     response::Redirect,
@@ -40,10 +40,11 @@ use metrics::counter;
         crate::render::render_html_route_get,
         crate::render::render_html_route_post,crate::render::render_text_route_get,crate::render::render_text_route_post,
         crate::send::send_mail_route,
+        crate::send::send_mail_mjml_route,
         crate::send::send_mail_bulk_route,
         healthcheck
     ),
-    components(schemas(crate::send::SendItem, crate::send::SendResponse)),
+    components(schemas(crate::send::SendTemplateItem, crate::send::SendResponse)),
     tags(
         (name = "mb-mail-service", description = "MusicBrains Mail Service API")
     )
@@ -140,6 +141,7 @@ async fn service(mailer: MailTransport) -> axum::Router {
             post(render_text_route_post),
         )
         .route("/send_single", post(send_mail_route))
+        .route("/send_single_mjml", post(send_mail_mjml_route))
         .route("/send_bulk", post(send_mail_bulk_route))
         .with_state(mailer);
 

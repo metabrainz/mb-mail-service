@@ -18,7 +18,7 @@ lettre = { version = "0.11.12", features = ["tokio1", "builder", "smtp-transport
 listenfd = "1.0.2"
 mrmx-macros = { version = "0.1.0", git = "https://github.com/JadedBlueEyes/mrmx.git" }
 mrmx = { version = "0.1.0", git = "https://github.com/JadedBlueEyes/mrmx.git" }
-mrml = { version = "4.0.0", git = "https://github.com/JadedBlueEyes/mrml.git", branch = "jade/fragment", features = ["render"], default-features = false}
+mrml = { version = "4.0.0", git = "https://github.com/JadedBlueEyes/mrml.git", branch = "jade/fragment", features = ["render", "parse"], default-features = false}
 serde_json = "1.0.138"
 strum = "0.27.0"
 thiserror = "2.0.11"
