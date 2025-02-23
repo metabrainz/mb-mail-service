@@ -124,6 +124,11 @@ FROM scratch
 
 WORKDIR /
 
+# Copy root certs for tls into image
+# You can also mount the certs from the host
+# --volume /etc/ssl/certs:/etc/ssl/certs:ro
+COPY --from=rust:1-slim-bookworm /etc/ssl/certs /etc/ssl/certs
+
 # Copy our build
 COPY --from=builder /out/sbin/ /sbin/
 # Copy SBOM
