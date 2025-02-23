@@ -88,7 +88,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             let res = reqwest::get(&endpoint).await;
 
             if res.is_err() {
-                panic!("Can't reach route {}", endpoint);
+                panic!("Can't reach route {} {res:?}", endpoint);
             };
         });
         return Ok(());
