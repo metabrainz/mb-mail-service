@@ -100,7 +100,8 @@ allow = [
     "OpenSSL",
     "Unicode-3.0",
     "CC0-1.0",
-    "MPL-2.0", # used by webpki-roots 
+    "MPL-2.0", # used by webpki-roots
+    "CDLA-Permissive-2.0", # used by webpki-roots
     "BSL-1.0", # Boost Software License 1.0 (lockfree-object-pool)
     "Zlib", # used by foldhash
 ]
