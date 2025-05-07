@@ -4,14 +4,16 @@
     "config:recommended"
   ],
   "platformAutomerge": true,
-  "labels": ["dependencies"],
+  "labels": [
+    "dependencies"
+  ],
   "customManagers": [
     {
       "customType": "regex",
       "description": "Update _VERSION variables in Dockerfiles",
-      "fileMatch": [
-        "(^|/)([Dd]ocker|[Cc]ontainer)file[^/]*$",
-        "(^|/|\\.)([Dd]ocker|[Cc]ontainer)file$"
+      "managerFilePatterns": [
+        "/(^|/)([Dd]ocker|[Cc]ontainer)file[^/]*$/",
+        "/(^|/|\\.)([Dd]ocker|[Cc]ontainer)file$/"
       ],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s+(?:ENV|ARG)\\s+[A-Za-z0-9_]+?_VERSION[ =][\"']?(?<currentValue>.+?)[\"']?\\s"
@@ -24,12 +26,16 @@
   },
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor"],
+      "matchUpdateTypes": [
+        "minor"
+      ],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
     },
     {
-      "matchUpdateTypes": ["patch"],
+      "matchUpdateTypes": [
+        "patch"
+      ],
       "matchCurrentVersion": "!/^0.0/",
       "automerge": true
     }
