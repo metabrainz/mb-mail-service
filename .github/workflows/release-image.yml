@@ -89,7 +89,7 @@ jobs:
         id: rust-cache
       
       - name: inject cache into docker
-        uses: reproducible-containers/buildkit-cache-dance@v3.2.0
+        uses: reproducible-containers/buildkit-cache-dance@v3.3.0
         with:
           cache-map: |
             {
