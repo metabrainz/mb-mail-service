@@ -252,9 +252,9 @@ dependencies = [
 
 [[package]]
 name = "bumpalo"
-version = "3.18.1"
+version = "3.19.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "793db76d6187cd04dff33004d8e6c9cc4e05cd330500379d2394209271b4aeee"
+checksum = "46c5e41b57b8bba42a04676d81cb89e9ee8e859a1a66f80a5a72e1cb76b34d43"
 
 [[package]]
 name = "bytes"
@@ -1187,9 +1187,9 @@ dependencies = [
 
 [[package]]
 name = "indexmap"
-version = "2.9.0"
+version = "2.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cea70ddb795996207ad57735b50c5982d8844f38ba9ee5f1aedcfb708a2aa11e"
+checksum = "fe4cd85333e22411419a0bcae1297d25e58c9443848b11dc6a86fefe8c78a661"
 dependencies = [
  "equivalent",
  "hashbrown 0.15.4",
@@ -1611,7 +1611,7 @@ dependencies = [
 [[package]]
 name = "mrmx"
 version = "0.1.0"
-source = "git+https://github.com/JadedBlueEyes/mrmx.git#7872212dc6f7bb72e807bb5ba6ed67a6978b5a20"
+source = "git+https://github.com/JadedBlueEyes/mrmx.git#1db2e1cfd6a6af08033269e5e94e609bd22485a9"
 dependencies = [
  "mrml",
  "mrmx-macros",
@@ -1620,7 +1620,7 @@ dependencies = [
 [[package]]
 name = "mrmx-macros"
 version = "0.1.0"
-source = "git+https://github.com/JadedBlueEyes/mrmx.git#7872212dc6f7bb72e807bb5ba6ed67a6978b5a20"
+source = "git+https://github.com/JadedBlueEyes/mrmx.git#1db2e1cfd6a6af08033269e5e94e609bd22485a9"
 dependencies = [
  "convert_case 0.8.0",
  "proc-macro-error",
