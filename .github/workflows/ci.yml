@@ -111,7 +111,7 @@ jobs:
       with:
         persist-credentials: false
     - name: Download code coverage from GitHub
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v5
       with:
         merge-multiple: true
         pattern: code-coverage-*
