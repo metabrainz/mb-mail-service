@@ -41,7 +41,7 @@ repos:
         stages:
         - pre-commit
         - pre-push
-        args: [--all-targets, "--", "-D", "errors"]
+        args: [--all-targets, "--all-features", "--locked"]
   - repo: local
     hooks:
       - id: cargo-fmt

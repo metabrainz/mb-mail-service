@@ -72,7 +72,7 @@ jobs:
         uses: clechasseur/rs-cargo@v3
         with:
           command: clippy
-          args: --all-targets --all-features --locked -- -D errors
+          args: --all-targets --all-features --locked
       - name: Tests
         run: |
           cargo llvm-cov --no-report nextest --profile ci --locked
