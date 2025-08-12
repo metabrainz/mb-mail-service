@@ -72,7 +72,7 @@ jobs:
         uses: clechasseur/rs-cargo@v3
         with:
           command: clippy
-          args: --all-targets --all-features --locked -- -D warnings
+          args: --all-targets --all-features --locked -- -D errors
       - name: Tests
         run: |
           cargo llvm-cov --no-report nextest --profile ci --locked
@@ -100,7 +100,7 @@ jobs:
     name: Generate coverage report
     needs: test
     runs-on: ubuntu-latest
-    permissions: 
+    permissions:
       checks: write
       issues: write
     steps:

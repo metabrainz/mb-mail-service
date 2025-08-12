@@ -13,7 +13,7 @@ locales = ["en", "de", "es", "fr", "lt", "ru"]
 
 [dependencies]
 axum = { version = "0.8.1", features = ["tracing", "macros"] }
-html2text = { version = "0.14.0", features = ["css"] }
+html2text = { version = "0.15.3", features = ["css"] }
 lettre = { version = "0.11.12", features = ["tokio1", "builder", "smtp-transport", "pool", "tokio1-rustls-tls", "tracing"], default-features = false }
 listenfd = "1.0.2"
 mrmx-macros = { version = "0.1.0", git = "https://github.com/JadedBlueEyes/mrmx.git" }
@@ -31,7 +31,7 @@ utoipa = { version = "5.3.1", features = ["axum_extras"] }
 utoipa-swagger-ui = { version = "9.0.0", features = ["axum"] }
 serde = { version = "1.0.217", features = ["derive"] }
 mf1 = "0.1.6"
-sentry = { version = "0.37.0", features = ["tracing", "tower", "tower-http"] }
+sentry = { version = "0.42.0", features = ["tracing", "tower", "tower-http"] }
 futures-util = "0.3.31"
 futures = "0.3.31"
 dashmap = { version = "6.1.0", features = ["serde"] }

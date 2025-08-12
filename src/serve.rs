@@ -119,7 +119,7 @@ async fn service(mailer: MailTransport) -> axum::Router {
     #[cfg(not(test))]
     let sentry_layer = ServiceBuilder::new()
         .layer(NewSentryLayer::new_from_top())
-        .layer(SentryHttpLayer::with_transaction());
+        .layer(SentryHttpLayer::new().enable_transaction());
 
     #[cfg(not(test))]
     let (prometheus_layer, metric_handle) = PrometheusMetricLayer::pair();

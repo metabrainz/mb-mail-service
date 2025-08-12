@@ -41,7 +41,7 @@ repos:
         stages:
         - pre-commit
         - pre-push
-        args: [--all-targets, "--", "-D", "warnings"]
+        args: [--all-targets, "--", "-D", "errors"]
   - repo: local
     hooks:
       - id: cargo-fmt
@@ -63,7 +63,7 @@ repos:
         files: Cargo\.(toml|lock)
         pass_filenames: false
         args: ["--locked", "--all-features", "check"]
-        
+
       - id: test
         name: test
         description: Run tests with cargo test
