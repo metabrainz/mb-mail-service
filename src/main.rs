@@ -33,9 +33,16 @@ fn locale_from_optional_code(lang: Option<String>) -> Result<Locale, EngineError
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let version = render_testament!(TESTAMENT).leak();
+    let version = format!(
+        "{}@{}",
+        env!("CARGO_PKG_NAME"),
+        render_testament!(TESTAMENT)
+    )
+    .leak();
+
     let _guard = sentry::init(sentry::ClientOptions {
         release: Some(std::borrow::Cow::Borrowed(version)),
+        session_mode: sentry::SessionMode::Request,
         ..sentry::ClientOptions::default()
     });
 
