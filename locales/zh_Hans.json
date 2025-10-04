@@ -1,1 +1,89 @@
-{}
+{
+    "greeting_line": "您好{ name }，",
+    "metabrainz_signoff": "— MetaBrainz 社区",
+    "do_not_reply": "请勿回复此邮件。如需帮助，请联系团队或社区。",
+    "change_subscription_settings": "点击此处更改您的订阅邮件设置。",
+    "link_copy_info": "如果点击上方链接无效，请将网址复制并粘贴到新的浏览器窗口中。",
+    "edit_note": {
+        "title": "编辑 #{ edit_id } 的备注",
+        "top": "以下备注已添加到编辑 #{ edit_id }：",
+        "reply": "如需回复，请在此处添加您的备注。"
+    },
+    "editor_message": {
+        "title": "来自 {from_name} 的 MusicBrainz 消息：{subject}",
+        "top": "MusicBrainz 用户“{from_name}”向您发送了以下消息：",
+        "reply_link": "如需回复，请点击此处向 {from_name} 发送邮件。",
+        "reply_email": "或者，请直接回复此邮件。",
+        "message_copy": "您向 {to_name} 发送了此消息",
+        "bubble_subject": "{ from_name }：{ subject }"
+    },
+    "verify_email": {
+        "title": "验证您的邮箱",
+        "top": "点击下方链接验证您的邮箱地址：",
+        "welcome": "欢迎！"
+    },
+    "reset_password": {
+        "title": "密码重置请求",
+        "info": "有人（可能是您本人）请求重置您的 MusicBrainz 密码。",
+        "action": "点击下方链接重置密码：",
+        "in_error": "如果您未发起此请求且认为误收此邮件，请放心，无需任何操作，可安全忽略此邮件。",
+        "contact": "如果登录仍有问题，请给我们留言。"
+    },
+    "email_in_use": {
+        "title": "邮箱地址已被使用",
+        "info": "您请求为 MusicBrainz 账号 {user_name} 验证此邮箱地址，但我们的数据库中已有至少一个账号使用该地址。",
+        "action_username": "如果您忘记了旧用户名，可通过以下链接找回：",
+        "action_password": "如有需要，您可通过下方链接申请重置密码：",
+        "in_error": "如果您未发起此请求且认为误收此邮件，请放心，无需任何操作，可安全忽略此邮件。",
+        "second_account": "如果您有特殊原因需要第二个账号（例如运行机器人程序并希望备注也发送至此地址），请给我们留言。我们将审核您的具体情况。"
+    },
+    "lost_username": {
+        "title": "找回用户名",
+        "info": "有人（可能是您本人）请求查找与此邮箱地址关联的 MusicBrainz 账号用户名。",
+        "username_is": "您的 MusicBrainz 用户名为：{ user_name }",
+        "reset_password": "如果您也忘记了密码，请使用此用户名和您的电子邮件地址在此重置密码：",
+        "in_error": "如果您未发起此请求并认为误收了此邮件，请放心，您无需采取任何进一步操作，可安全忽略此邮件。"
+    },
+    "no_vote": {
+        "title": "有人对您的编辑 #{ edit_id } 投了反对票",
+        "top": "MusicBrainz 用户“{voter_name}”对您的编辑 #{ edit_id } 投了反对票。",
+        "reply": "如需回复，请在以下位置添加您的备注：",
+        "single_email": "请注意，并非每次编辑被反对都会发送此邮件。",
+        "close_time": "为确保您和其他编辑者有足够时间回应，此编辑最早将在 {close_time}（即本邮件发出后 72 小时）被拒绝（如适用）。"
+    },
+    "editor_report": {
+        "title": "编辑者 {reported_name} 已被 {from_name} 举报",
+        "copy_title": "您对 {reported_name} 举报的副本",
+        "top": "编辑者 {reported_name} 已被 {from_name} 举报，原因如下：",
+        "reply_email": "您可以直接回复此邮件。",
+        "reply_no_email": "举报人选择不公开其邮箱地址。如有需要，您需通过其用户页面联系他们。",
+        "message_copy": "这是您对 MusicBrainz 编辑者 {reported_name} 举报的副本",
+        "reporter_account": "举报人账号： ",
+        "reported_account": "被举报用户账号： "
+    },
+    "subscription": {
+        "title": "您订阅的编辑",
+        "info": "您订阅的实体已新增编辑。",
+        "changes_sections": {
+            "subscribed_artists": "您订阅的艺术家变更：",
+            "subscribed_collections": "您订阅的收藏集变更：",
+            "subscribed_labels": "您订阅的厂牌变更：",
+            "subscribed_series": "您订阅的系列变更：",
+            "subscribed_editors": "您订阅的编辑者所作变更："
+        },
+        "deleted_merged": "已删除和合并的艺术家或厂牌：",
+        "deleted_merged_info": "您订阅的部分艺术家、厂牌或收藏集已被合并、删除或设为私有：",
+        "deleted_item": "{ item_type, select, artist {艺术家} label {厂牌} series {系列} collection {收藏} other {未知} } “{entity}” - { reason }",
+        "deleted_item_with_edit": "{ item_type, select, artist {艺术家} label {厂牌} series {系列} collection {收藏} other {未知} } “{entity}” - { reason } 由 #{edit_id}",
+        "deleted_default_reason": "已删除或设为私有",
+        "entity": "{name}",
+        "entity_with_comment": "{name}（{comment}）",
+        "open_applied_count": "（{open} 个待处理，{applied} 个已应用）",
+        "open_edits": "所有待处理编辑：",
+        "open_edits_subscribed_entities": "您订阅实体的所有待处理编辑",
+        "open_edits_subscribed_editors": "您订阅编辑者的所有待处理编辑",
+        "thanks": "感谢您的订阅与投票！",
+        "about": "这是一条通知，告知您已为在 MusicBrainz 网站上订阅的艺术家、厂牌、合集和编辑者添加了编辑内容。 ",
+        "edit_subscriptions": "点击此处查看或编辑您的订阅。"
+    }
+}
