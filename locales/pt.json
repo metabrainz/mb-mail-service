@@ -8,11 +8,11 @@
         "title": "Nota adicionada à sua edição #{ edit_id }"
     },
     "editor_message": {
-        "title": "Mensagem no MusicBrainz de {from_name}: {subject}",
-        "top": "O utilizador do MusicBrainz «{from_name}» enviou-lhe a seguinte mensagem:",
+        "title": "Mensagem no MusicBrainz de { from_name }: { subject }",
+        "top": "O utilizador do MusicBrainz «{ from_name }» enviou-lhe a seguinte mensagem:",
         "reply_email": "Em alternativa, responda a esta mensagem.",
-        "message_copy": "Você enviou esta mensagem para {to_name}",
-        "reply_link": "Para responder, clique aqui para enviar uma mensagem de correio eletrónico a {from_name}."
+        "message_copy": "Você enviou esta mensagem para { to_name }",
+        "reply_link": "Para responder, clique aqui para enviar uma mensagem de correio eletrónico a { from_name }."
     },
     "greeting_line": "Olá, { name },",
     "do_not_reply": "Não responda a esta mensagem. Para obter ajuda, contacte a equipa ou a comunidade."

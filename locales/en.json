@@ -10,11 +10,11 @@
         "reply": "To reply, please add your note here."
     },
     "editor_message": {
-        "title": "MusicBrainz message from {from_name}: {subject}",
-        "top": "MusicBrainz user “{from_name}” has sent you the following message:",
-        "reply_link": "To reply, click here to send {from_name} an email.",
+        "title": "MusicBrainz message from { from_name }: { subject }",
+        "top": "MusicBrainz user “{ from_name }” has sent you the following message:",
+        "reply_link": "To reply, click here to send { from_name } an email.",
         "reply_email": "Alternatively, please reply to this message.",
-        "message_copy": "You sent this message to {to_name}",
+        "message_copy": "You sent this message to { to_name }",
         "bubble_subject": "{ from_name }: { subject }"
     },
     "verify_email": {
@@ -31,7 +31,7 @@
     },
     "email_in_use": {
         "title": "Email address already in use",
-        "info": "You have requested to verify this email address for the MusicBrainz account {user_name}, but we already have at least one account using this address in our database.",
+        "info": "You have requested to verify this email address for the MusicBrainz account { user_name }, but we already have at least one account using this address in our database.",
         "action_username": "If you have forgotten your old username, you can recover it from the following link:",
         "action_password": "You can then request a password reset, if needed, from the link below:",
         "in_error": "If you didn't initiate this request and feel that you've received this email in error, don't worry, you don't need to take any further action and can safely disregard this email.",
@@ -46,18 +46,18 @@
     },
     "no_vote": {
         "title": "Someone has voted against your edit #{ edit_id }",
-        "top": "MusicBrainz user ''{voter_name}'' has voted against your edit #{ edit_id }.",
+        "top": "MusicBrainz user ''{ voter_name }'' has voted against your edit #{ edit_id }.",
         "reply": "To respond, please add your note at:",
         "single_email": "Please note that this email will not be sent for every vote against an edit.",
-        "close_time": "To ensure time for you and other editors to respond, the soonest this edit will be rejected, if applicable, is {close_time}, 72 hours from the time of this email."
+        "close_time": "To ensure time for you and other editors to respond, the soonest this edit will be rejected, if applicable, is { close_time }, 72 hours from the time of this email."
     },
     "editor_report": {
-        "title": "Editor {reported_name} has been reported by {from_name}",
-        "copy_title": "Copy of your report of {reported_name}",
-        "top": "Editor {reported_name} has been reported by {from_name} for the following reason:",
+        "title": "Editor { reported_name } has been reported by { from_name }",
+        "copy_title": "Copy of your report of { reported_name }",
+        "top": "Editor { reported_name } has been reported by { from_name } for the following reason:",
         "reply_email": "You can reply to this message directly.",
         "reply_no_email": "The reporter chose not to reveal their email address. You’ll have to contact them through their user page if necessary.",
-        "message_copy": "This is a copy of your report of MusicBrainz editor {reported_name}",
+        "message_copy": "This is a copy of your report of MusicBrainz editor { reported_name }",
         "reporter_account": "Reporter’s account: ",
         "reported_account": "Reported user’s account: "
     },
@@ -73,12 +73,12 @@
         },
         "deleted_merged": "Deleted and merged artists or labels:",
         "deleted_merged_info": "Some of your subscribed artists, labels or collections have been merged, deleted or made private:",
-        "deleted_item": "{ item_type, select, artist {Artist} label {Label} series {Series} collection {Collection} other {Unknown} } ''{entity}'' - { reason }",
-        "deleted_item_with_edit": "{ item_type, select, artist {Artist} label {Label} series {Series} collection {Collection} other {Unknown} } ''{entity}'' - { reason } by #{edit_id}",
+        "deleted_item": "{ item_type, select, artist {Artist} label {Label} series {Series} collection {Collection} other {Unknown} } ''{ entity }'' - { reason }",
+        "deleted_item_with_edit": "{ item_type, select, artist {Artist} label {Label} series {Series} collection {Collection} other {Unknown} } ''{ entity }'' - { reason } by #{ edit_id }",
         "deleted_default_reason": "deleted or made private",
-        "entity": "{name}",
-        "entity_with_comment": "{name} ({comment})",
-        "open_applied_count": "({open} open, {applied} applied)",
+        "entity": "{ name }",
+        "entity_with_comment": "{ name } ({ comment })",
+        "open_applied_count": "({ open } open, { applied } applied)",
         "open_edits": "All open edits:",
         "open_edits_subscribed_entities": "All open edits for your subscribed entities",
         "open_edits_subscribed_editors": "All open edits by your subscribed editors",

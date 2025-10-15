@@ -8,11 +8,11 @@
         "reply": "Kad atsakytumėte, pridėkite savo pastabą čia."
     },
     "editor_message": {
-        "title": "„MusicBrainz“ pranešimas iš {from_name}: {subject}",
+        "title": "„MusicBrainz“ pranešimas iš { from_name }: { subject }",
         "reply_email": "Arba atsakykite į šį laišką.",
-        "message_copy": "Tu išsiuntėte šį laišką į {to_name}",
-        "top": "„MusicBrainz“ naudotojas ''{from_name}'' atsiuntė jums šį pranešimą:",
-        "reply_link": "Kad atsakytumėte, spustelėkite čia ir nusiųskite {from_name} el. laišką.",
+        "message_copy": "Tu išsiuntėte šį laišką į { to_name }",
+        "top": "„MusicBrainz“ naudotojas ''{ from_name }'' atsiuntė jums šį pranešimą:",
+        "reply_link": "Kad atsakytumėte, spustelėkite čia ir nusiųskite { from_name } el. laišką.",
         "bubble_subject": "{ from_name }: { subject }"
     },
     "metabrainz_signoff": "—  „MetaBrainz“ bendruomenė",
@@ -32,7 +32,7 @@
         "title": "Jau naudojamas el. pašto adresas",
         "action_username": "Jei pamiršai savo senąjį naudotojo vardą, gali jį atgauti pagal šią nuorodą:",
         "action_password": "Tada, jei reikia, gali paprašyti iš naujo nustatyti slaptažodį pagal toliau pateiktą nuorodą:",
-        "info": "Paprašei patvirtinti šį el. pašto adresą „MusicBrainz“ paskyrai {user_name}, bet mūsų duomenų bazėje jau yra bent viena paskyra, naudojanti šį adresą.",
+        "info": "Paprašei patvirtinti šį el. pašto adresą „MusicBrainz“ paskyrai { user_name }, bet mūsų duomenų bazėje jau yra bent viena paskyra, naudojanti šį adresą.",
         "in_error": "Jei šio prašymo nepradėjai ir manai, kad šį el. laišką gavai per klaidą, nesijaudink, tau nereikia imtis jokių tolesnių veiksmų ir gali drąsiai nekreipti dėmesio į šį el. laišką.",
         "second_account": "Jei turi konkrečią priežastį, kodėl tau reikia antros paskyros (pavyzdžiui, nori paleisti robotą ir kad pastabos taip pat pasiektų tave šiuo adresu), parašyk mums. Mes išnagrinėsime tavo konkretų atvejį."
     },
@@ -46,19 +46,19 @@
     "no_vote": {
         "reply": "Kad atsakytum, pridėk savo pastabą adresu:",
         "title": "Kažkas balsavo prieš tavo redagavimą #{ edit_id }",
-        "top": "„MusicBrainz“ naudotojas ''{voter_name}'' balsavo prieš tavo redagavimą #{ edit_id }.",
+        "top": "„MusicBrainz“ naudotojas ''{ voter_name }'' balsavo prieš tavo redagavimą #{ edit_id }.",
         "single_email": "Atkreipk dėmesį, kad šis el. laiškas nebus siunčiamas už kiekvieną balsavimą prieš redagavimą.",
-        "close_time": "Kad tu ir kiti redaktoriai turėtų laiko atsakyti, šis redagavimas, jei taikytina, bus atmestas ne anksčiau kaip {close_time}, tai yra po 72 valandų nuo šio el. laiško."
+        "close_time": "Kad tu ir kiti redaktoriai turėtų laiko atsakyti, šis redagavimas, jei taikytina, bus atmestas ne anksčiau kaip { close_time }, tai yra po 72 valandų nuo šio el. laiško."
     },
     "editor_report": {
-        "top": "Redaktorius {reported_name} buvo praneštas nuo {from_name} dėl šios priežasties:",
+        "top": "Redaktorius { reported_name } buvo praneštas nuo { from_name } dėl šios priežasties:",
         "reply_email": "Į šį laišką gali atsakyti tiesiogiai.",
         "reporter_account": "Pranešėjo paskyra: ",
         "reported_account": "Pranešto naudotojo paskyra: ",
-        "title": "Redaktorius {reported_name} buvo praneštas nuo {from_name}",
+        "title": "Redaktorius { reported_name } buvo praneštas nuo { from_name }",
         "reply_no_email": "Pranešėjas nusprendė neatskleisti savo el. pašto adreso. Jei reikia, turėsi susisiekti su jais per jų naudotojo puslapį.",
-        "copy_title": "Tavo ataskaitos apie {reported_name} kopija",
-        "message_copy": "Tai – tavo ataskaitos „MusicBrainz“ redaktoriaus {reported_name} kopija"
+        "copy_title": "Tavo ataskaitos apie { reported_name } kopija",
+        "message_copy": "Tai – tavo ataskaitos „MusicBrainz“ redaktoriaus { reported_name } kopija"
     },
     "subscription": {
         "title": "Redagavimai tavo prenumeratoms",
@@ -70,13 +70,13 @@
             "subscribed_series": "Pakeitimai jūsų prenumeruojamos serijos:"
         },
         "deleted_merged": "Ištrinti ir sujungti atlikėjai ar leidyklos:",
-        "deleted_item": "{ item_type, select, artist {Atlikėjas} label {Leidykla} series {Serija} collection {Kolekcija} other {Nežinomas} } ''{entity}'' – { reason }",
+        "deleted_item": "{ item_type, select, artist {Atlikėjas} label {Leidykla} series {Serija} collection {Kolekcija} other {Nežinomas} } ''{ entity }'' – { reason }",
         "deleted_default_reason": "ištrintas arba padarytas privačiu",
-        "entity": "{name}",
-        "open_applied_count": "({open} atviri, {applied} pritaikyti)",
+        "entity": "{ name }",
+        "open_applied_count": "({ open } atviri, { applied } pritaikyti)",
         "deleted_merged_info": "Kai kurie jūsų prenumeruojami atlikėjai, leidyklos ar kolekcijos buvo sujungti, ištrinti arba padaryti privatūs:",
-        "deleted_item_with_edit": "{ item_type, select, artist {Atlikėjas} label {Leidykla} series {Serija} collection {Kolekcija} other {Nežinomas} } ''{entity}'' – { reason } pagal #{edit_id}",
-        "entity_with_comment": "{name} ({comment})",
+        "deleted_item_with_edit": "{ item_type, select, artist {Atlikėjas} label {Leidykla} series {Serija} collection {Kolekcija} other {Nežinomas} } ''{ entity }'' – { reason } pagal #{ edit_id }",
+        "entity_with_comment": "{ name } ({ comment })",
         "info": "Pridėti nauji redagavimai esybėms, kuriuos esi užsiprenumeravęs (-usi).",
         "open_edits_subscribed_entities": "Visi atviri redagavimai jūsų prenumeruojamiems esybėms",
         "thanks": "Dėkojame už prenumeratą ir balsavimą!",

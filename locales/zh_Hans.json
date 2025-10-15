@@ -10,11 +10,11 @@
         "reply": "如需回复，请在此处添加您的备注。"
     },
     "editor_message": {
-        "title": "来自 {from_name} 的 MusicBrainz 消息：{subject}",
-        "top": "MusicBrainz 用户“{from_name}”向您发送了以下消息：",
-        "reply_link": "如需回复，请点击此处向 {from_name} 发送邮件。",
+        "title": "来自 { from_name } 的 MusicBrainz 消息：{ subject }",
+        "top": "MusicBrainz 用户“{ from_name }”向您发送了以下消息：",
+        "reply_link": "如需回复，请点击此处向 { from_name } 发送邮件。",
         "reply_email": "或者，请直接回复此邮件。",
-        "message_copy": "您向 {to_name} 发送了此消息",
+        "message_copy": "您向 { to_name } 发送了此消息",
         "bubble_subject": "{ from_name }：{ subject }"
     },
     "verify_email": {
@@ -31,7 +31,7 @@
     },
     "email_in_use": {
         "title": "邮箱地址已被使用",
-        "info": "您请求为 MusicBrainz 账号 {user_name} 验证此邮箱地址，但我们的数据库中已有至少一个账号使用该地址。",
+        "info": "您请求为 MusicBrainz 账号 { user_name } 验证此邮箱地址，但我们的数据库中已有至少一个账号使用该地址。",
         "action_username": "如果您忘记了旧用户名，可通过以下链接找回：",
         "action_password": "如有需要，您可通过下方链接申请重置密码：",
         "in_error": "如果您未发起此请求且认为误收此邮件，请放心，无需任何操作，可安全忽略此邮件。",
@@ -46,18 +46,18 @@
     },
     "no_vote": {
         "title": "有人对您的编辑 #{ edit_id } 投了反对票",
-        "top": "MusicBrainz 用户“{voter_name}”对您的编辑 #{ edit_id } 投了反对票。",
+        "top": "MusicBrainz 用户“{ voter_name }”对您的编辑 #{ edit_id } 投了反对票。",
         "reply": "如需回复，请在以下位置添加您的备注：",
         "single_email": "请注意，并非每次编辑被反对都会发送此邮件。",
-        "close_time": "为确保您和其他编辑者有足够时间回应，此编辑最早将在 {close_time}（即本邮件发出后 72 小时）被拒绝（如适用）。"
+        "close_time": "为确保您和其他编辑者有足够时间回应，此编辑最早将在 { close_time }（即本邮件发出后 72 小时）被拒绝（如适用）。"
     },
     "editor_report": {
-        "title": "编辑者 {reported_name} 已被 {from_name} 举报",
-        "copy_title": "您对 {reported_name} 举报的副本",
-        "top": "编辑者 {reported_name} 已被 {from_name} 举报，原因如下：",
+        "title": "编辑者 { reported_name } 已被 { from_name } 举报",
+        "copy_title": "您对 { reported_name } 举报的副本",
+        "top": "编辑者 { reported_name } 已被 { from_name } 举报，原因如下：",
         "reply_email": "您可以直接回复此邮件。",
         "reply_no_email": "举报人选择不公开其邮箱地址。如有需要，您需通过其用户页面联系他们。",
-        "message_copy": "这是您对 MusicBrainz 编辑者 {reported_name} 举报的副本",
+        "message_copy": "这是您对 MusicBrainz 编辑者 { reported_name } 举报的副本",
         "reporter_account": "举报人账号： ",
         "reported_account": "被举报用户账号： "
     },
@@ -73,12 +73,12 @@
         },
         "deleted_merged": "已删除和合并的艺术家或厂牌：",
         "deleted_merged_info": "您订阅的部分艺术家、厂牌或收藏集已被合并、删除或设为私有：",
-        "deleted_item": "{ item_type, select, artist {艺术家} label {厂牌} series {系列} collection {收藏} other {未知} } “{entity}” - { reason }",
-        "deleted_item_with_edit": "{ item_type, select, artist {艺术家} label {厂牌} series {系列} collection {收藏} other {未知} } “{entity}” - { reason } 由 #{edit_id}",
+        "deleted_item": "{ item_type, select, artist {艺术家} label {厂牌} series {系列} collection {收藏} other {未知} } “{ entity }” - { reason }",
+        "deleted_item_with_edit": "{ item_type, select, artist {艺术家} label {厂牌} series {系列} collection {收藏} other {未知} } “{ entity }” - { reason } 由 #{ edit_id }",
         "deleted_default_reason": "已删除或设为私有",
-        "entity": "{name}",
-        "entity_with_comment": "{name}（{comment}）",
-        "open_applied_count": "（{open} 个待处理，{applied} 个已应用）",
+        "entity": "{ name }",
+        "entity_with_comment": "{ name }（{ comment }）",
+        "open_applied_count": "（{ open } 个待处理，{ applied } 个已应用）",
         "open_edits": "所有待处理编辑：",
         "open_edits_subscribed_entities": "您订阅实体的所有待处理编辑",
         "open_edits_subscribed_editors": "您订阅编辑者的所有待处理编辑",

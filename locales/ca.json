@@ -10,15 +10,15 @@
     },
     "subscription": {
         "edit_subscriptions": "Feu clic aquí per a veure o editar les vostres subscripcions.",
-        "entity_with_comment": "{name} ({comment})",
+        "entity_with_comment": "{ name } ({ comment })",
         "title": "Edicions de les vostres subscripcions",
-        "entity": "{name}",
+        "entity": "{ name }",
         "open_edits": "Totes les edicions obertes:",
         "thanks": "Gràcies per subscriure-us i votar!",
         "deleted_merged": "Artistes o segells suprimits i fusionats:",
-        "deleted_item_with_edit": "{ item_type, select, artist {Artista} label {Segell} series {Sèrie} collection {Col·lecció} other {Desconegut} } ''{entity}'' - { reason } per #{edit_id}",
+        "deleted_item_with_edit": "{ item_type, select, artist {Artista} label {Segell} series {Sèrie} collection {Col·lecció} other {Desconegut} } ''{ entity }'' - { reason } per #{ edit_id }",
         "deleted_default_reason": "s'ha suprimit o fet privat",
-        "open_applied_count": "(obertes: {open}, aplicades: {applied})",
+        "open_applied_count": "(obertes: { open }, aplicades: { applied })",
         "open_edits_subscribed_entities": "Totes les edicions obertes de les entitats a què us heu subscrit",
         "info": "S'han afegit noves edicions a entitats a què us heu subscrit.",
         "changes_sections": {
@@ -29,7 +29,7 @@
             "subscribed_editors": "Canvis d'editors a què us heu subscrit:"
         },
         "open_edits_subscribed_editors": "Totes les edicions obertes dels editors a què us heu subscrit",
-        "deleted_item": "{ item_type, select, artist {Artista} label {Segell} series {Sèrie} collection {Col·lecció} other {Desconegut} } ''{entity}'' - { reason }",
+        "deleted_item": "{ item_type, select, artist {Artista} label {Segell} series {Sèrie} collection {Col·lecció} other {Desconegut} } ''{ entity }'' - { reason }",
         "about": "Aquesta és una notificació que s'han afegit edicions d'artistes, segells, col·leccions i editors a què us heu subscrit al lloc web de MusicBrainz. ",
         "deleted_merged_info": "Alguns dels artistes, segells o col·leccions a què us heu subscrit s'han fusionat, suprimit o fet privats:"
     },
@@ -38,7 +38,7 @@
         "title": "L'adreça electrònica ja està en ús",
         "action_username": "Si heu oblidat el vostre antic nom d'usuari, el podeu recuperar des de l'enllaç següent:",
         "action_password": "A continuació, podeu demanar reinicialitzar la contrasenya, si cal, des de l'enllaç següent:",
-        "info": "Heu sol·licitat verificar aquesta adreça electrònica per al compte de MusicBrainz {user_name}, però ja tenim com a mínim un compte que fa servir aquesta adreça a la base de dades.",
+        "info": "Heu sol·licitat verificar aquesta adreça electrònica per al compte de MusicBrainz { user_name }, però ja tenim com a mínim un compte que fa servir aquesta adreça a la base de dades.",
         "second_account": "Si hi ha una raó específica per la qual necessiteu un segon compte (per exemple, voleu tenir un bot i que les notes us arribin també a aquesta adreça), aviseu-nos. Estudiarem el vostre cas en concret."
     },
     "metabrainz_signoff": "—  Comunitat de MetaBrainz",
@@ -50,11 +50,11 @@
         "reply": "Per a respondre, afegiu la vostra nota aquí."
     },
     "editor_message": {
-        "top": "L'usuari de MusicBrainz «{from_name}» us ha enviat el missatge següent:",
-        "title": "Missatge a MusicBrainz de {from_name}: {subject}",
+        "top": "L'usuari de MusicBrainz «{ from_name }» us ha enviat el missatge següent:",
+        "title": "Missatge a MusicBrainz de { from_name }: { subject }",
         "reply_email": "També podeu respondre a aquest missatge.",
-        "reply_link": "Feu clic aquí per a enviar una resposta per correu electrònic a {from_name}.",
-        "message_copy": "Heu enviat aquest missatge a {to_name}",
+        "reply_link": "Feu clic aquí per a enviar una resposta per correu electrònic a { from_name }.",
+        "message_copy": "Heu enviat aquest missatge a { to_name }",
         "bubble_subject": "{ from_name }: { subject }"
     },
     "verify_email": {
@@ -65,19 +65,19 @@
     "no_vote": {
         "title": "Algú ha votat en contra de la vostra edició #{ edit_id }",
         "reply": "Per a respondre, afegiu una nota a:",
-        "top": "L'usuari de MusicBrainz «{voter_name}» ha votat en contra de la vostra edició #{ edit_id }.",
+        "top": "L'usuari de MusicBrainz «{ voter_name }» ha votat en contra de la vostra edició #{ edit_id }.",
         "single_email": "Tingueu en compte que aquest correu electrònic no s'enviarà per a cada vot en contra d'una edició.",
-        "close_time": "Per a garantir un temps de resposta per a vós i altres editors, si aquest és el resultat, es rebutjarà aquesta edició no abans del {close_time}, 72 hores després de l'enviament d'aquest correu electrònic."
+        "close_time": "Per a garantir un temps de resposta per a vós i altres editors, si aquest és el resultat, es rebutjarà aquesta edició no abans del { close_time }, 72 hores després de l'enviament d'aquest correu electrònic."
     },
     "editor_report": {
         "reporter_account": "Compte de l'usuari denunciant: ",
-        "copy_title": "Copia de la denúncia de {reported_name}",
+        "copy_title": "Copia de la denúncia de { reported_name }",
         "reply_email": "Podeu respondre a aquest missatge directament.",
-        "title": "{from_name} ha denunciat l'editor {reported_name}",
-        "top": "{from_name} ha denunciat l'editor {reported_name} per la raó següent:",
+        "title": "{ from_name } ha denunciat l'editor { reported_name }",
+        "top": "{ from_name } ha denunciat l'editor { reported_name } per la raó següent:",
         "reply_no_email": "L'usuari denunciant ha optat per no revelar la seva adreça electrònica. Us hi haureu de posar en contacte a través de la seva pàgina d'usuari, si és necessari.",
         "reported_account": "Compte de l'usuari denunciat: ",
-        "message_copy": "Aquesta és una còpia de la denúncia de l'editor de MusicBrainz {reported_name}"
+        "message_copy": "Aquesta és una còpia de la denúncia de l'editor de MusicBrainz { reported_name }"
     },
     "reset_password": {
         "contact": "Si encara teniu problemes per a iniciar la sessió, aviseu-nos.",
