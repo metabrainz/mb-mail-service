@@ -46,7 +46,7 @@
     },
     "no_vote": {
         "title": "Someone has voted against your edit #{ edit_id }",
-        "top": "MusicBrainz user ''{ voter_name }'' has voted against your edit #{ edit_id }.",
+        "top": "MusicBrainz user “{ voter_name }” has voted against your edit #{ edit_id }.",
         "reply": "To respond, please add your note at:",
         "single_email": "Please note that this email will not be sent for every vote against an edit.",
         "close_time": "To ensure time for you and other editors to respond, the soonest this edit will be rejected, if applicable, is { close_time }, 72 hours from the time of this email."
@@ -73,8 +73,8 @@
         },
         "deleted_merged": "Deleted and merged artists or labels:",
         "deleted_merged_info": "Some of your subscribed artists, labels or collections have been merged, deleted or made private:",
-        "deleted_item": "{ item_type, select, artist {Artist} label {Label} series {Series} collection {Collection} other {Unknown} } ''{ entity }'' - { reason }",
-        "deleted_item_with_edit": "{ item_type, select, artist {Artist} label {Label} series {Series} collection {Collection} other {Unknown} } ''{ entity }'' - { reason } by #{ edit_id }",
+        "deleted_item": "{ item_type, select, artist {Artist} label {Label} series {Series} collection {Collection} other {Unknown} } “{ entity }” - { reason }",
+        "deleted_item_with_edit": "{ item_type, select, artist {Artist} label {Label} series {Series} collection {Collection} other {Unknown} } “{ entity }” - { reason } by #{ edit_id }",
         "deleted_default_reason": "deleted or made private",
         "entity": "{ name }",
         "entity_with_comment": "{ name } ({ comment })",
