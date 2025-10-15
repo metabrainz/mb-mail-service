@@ -38,10 +38,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     eprintln!("{}", testament);
 
     let mut build = match TESTAMENT.commit {
-        git_testament::CommitKind::NoRepository(version, date)
-        | git_testament::CommitKind::NoCommit(version, date) => format!("{}", date),
-        git_testament::CommitKind::NoTags(hash, date) => (&hash[..9]).to_string(),
-        git_testament::CommitKind::FromTag(tag, hash, date, distance) => (&hash[..9]).to_string(),
+        git_testament::CommitKind::NoRepository(_version, date)
+        | git_testament::CommitKind::NoCommit(_version, date) => date.to_string(),
+        git_testament::CommitKind::NoTags(hash, _date) => hash[..9].to_string(),
+        git_testament::CommitKind::FromTag(_tag, hash, _date, _distance) => hash[..9].to_string(),
     };
 
     if !TESTAMENT.modifications.is_empty() {
