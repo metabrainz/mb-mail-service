@@ -7,10 +7,10 @@ regex-style-search=True
 
 [ignore-by-body]
 # Match commits by author name (e.g. ignore dependabot commits)
-regex=^Translate-URL: 
-ignore=body-max-line-length
+regex=^Translate-URL:
+ignore=body-max-line-length,title-max-length
 
 [ignore-by-title]
 # Dependency names may be very long
-regex=^[a-z]+\(deps\): 
+regex=^[a-z]+\((deps|translations)\):
 ignore=title-max-length,body-is-missing,body-max-line-length
