@@ -1,6 +1,7 @@
 use config::Config;
 use git_testament::{git_testament, render_testament};
 use render::EngineError;
+use tracing::warn;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 mod components;
@@ -85,6 +86,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .with(tracing_subscriber::fmt::layer().without_time())
         .with(sentry::integrations::tracing::layer())
         .init();
+
+    if !_guard.is_enabled() {
+        warn!("Sentry is not enabled");
+    }
 
     let rt = tokio::runtime::Runtime::new()?;
 
