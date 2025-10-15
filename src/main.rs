@@ -33,15 +33,31 @@ fn locale_from_optional_code(lang: Option<String>) -> Result<Locale, EngineError
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let version = format!(
-        "{}@{}",
+    let testament = render_testament!(TESTAMENT);
+    eprintln!("{}", testament);
+
+    let mut build = match TESTAMENT.commit {
+        git_testament::CommitKind::NoRepository(version, date)
+        | git_testament::CommitKind::NoCommit(version, date) => format!("{}", date),
+        git_testament::CommitKind::NoTags(hash, date) => (&hash[..9]).to_string(),
+        git_testament::CommitKind::FromTag(tag, hash, date, distance) => (&hash[..9]).to_string(),
+    };
+
+    if !TESTAMENT.modifications.is_empty() {
+        build.push_str("-dirty-");
+        build.push_str(&TESTAMENT.modifications.len().to_string());
+    }
+
+    let sentry_release = format!(
+        "{}@{}+{}",
         env!("CARGO_PKG_NAME"),
-        render_testament!(TESTAMENT)
+        env!("CARGO_PKG_VERSION"),
+        build
     )
     .leak();
 
     let _guard = sentry::init(sentry::ClientOptions {
-        release: Some(std::borrow::Cow::Borrowed(version)),
+        release: Some(std::borrow::Cow::Borrowed(sentry_release)),
         session_mode: sentry::SessionMode::Request,
         ..sentry::ClientOptions::default()
     });
