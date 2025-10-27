@@ -38,3 +38,12 @@ pub fn header() -> mrml::fragment::Fragment<MjBodyChild> {
         </>
     )
 }
+pub fn meb_header() -> mrml::fragment::Fragment<MjBodyChild> {
+    view!(
+        <>
+            <mj-image width="120px" align="left" padding="10px 15px 0px" src="https://metabrainz.org/static/img/navbar_logo.svg" alt="MetaBrainz"></mj-image>
+
+            <mj-divider padding="10px 15px" border-color="#3b9766" border-width="3px" />
+        </>
+    )
+}
