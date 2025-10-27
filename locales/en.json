@@ -3,6 +3,8 @@
     "metabrainz_signoff": "—  The MetaBrainz community",
     "do_not_reply": "Do not reply to this message. For assistance please contact the team or the community.",
     "change_subscription_settings": "Click here to change your subscription email settings.",
+    "change_notification_settings": "Click here to change your email notification settings.",
+    "lb_notification_about": "You are receiving this email because email notifications are enabled for your ListenBrainz account.",
     "link_copy_info": "If clicking the link above doesn't work, please copy and paste the URL into a new browser window instead.",
     "edit_note": {
         "title": "Note added to your edit #{ edit_id }",
