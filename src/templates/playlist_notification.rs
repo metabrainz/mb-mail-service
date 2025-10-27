@@ -18,6 +18,7 @@ struct PlaylistNotification {
     to_name: String,
     playlist_name: String,
     playlist_url: String,
+    notification_settings_url: String,
 }
 
 pub(crate) fn playlist_notification(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
@@ -26,6 +27,7 @@ pub(crate) fn playlist_notification(params: Value, l: Locale) -> Result<Mjml, Te
         to_name: ref to_name_raw,
         playlist_name: ref playlist_name_raw,
         playlist_url,
+        notification_settings_url,
     } = ctx.unwrap_or_default();
 
     let to_name = &encode_text(to_name_raw);
@@ -62,6 +64,10 @@ pub(crate) fn playlist_notification(params: Value, l: Locale) -> Result<Mjml, Te
                 </mj-text>
                 <mj-divider padding="10px 15px" border-color="#F5F5F5" border-width="3px" />
                 <mj-text font-size="12px" color="#8D8D8D">
+                    <p>{ Text::from(tl!(l, lb_notification_about)).into() }</p>
+                    <p>
+                        <a href={notification_settings_url}>{ Text::from(tl!(l, change_notification_settings)).into() }</a>
+                    </p>
                     <p>{ Text::from(tl!(l, do_not_reply)).into() }</p>
                 </mj-text>
             </mj-column>

@@ -22,6 +22,7 @@ struct PersonalRecommendation {
     track_artist: String,
     track_url: String,
     album_art_url: String,
+    notification_settings_url: String,
 }
 
 pub(crate) fn personal_recommendation(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
@@ -34,6 +35,7 @@ pub(crate) fn personal_recommendation(params: Value, l: Locale) -> Result<Mjml, 
         track_artist,
         track_url,
         album_art_url,
+        notification_settings_url,
     } = ctx.unwrap_or_default();
 
     let to_name = &encode_text(to_name_raw);
@@ -98,6 +100,10 @@ pub(crate) fn personal_recommendation(params: Value, l: Locale) -> Result<Mjml, 
                 </mj-text>
                 <mj-divider padding="10px 15px" border-color="#F5F5F5" border-width="3px" />
                 <mj-text font-size="12px" color="#8D8D8D">
+                    <p>{ Text::from(tl!(l, lb_notification_about)).into() }</p>
+                    <p>
+                        <a href={notification_settings_url}>{ Text::from(tl!(l, change_notification_settings)).into() }</a>
+                    </p>
                     <p>{ Text::from(tl!(l, do_not_reply)).into() }</p>
                 </mj-text>
             </mj-column>
