@@ -89,13 +89,13 @@
         "edit_subscriptions": "Click here to view or edit your subscriptions."
     },
     "personal_recommendation": {
-        "title": "{from_name} has recommended a track for you",
-        "info": "{from_name} has recommended the following track for you, check it out!",
+        "title": "{ from_name } has recommended a track for you",
+        "info": "{ from_name } has recommended the following track for you, check it out!",
         "button_text": "Listen Now"
     },
-    "playlist_notification":{
-        "title": "Your {playlist_name} playlist is ready",
-        "info": "Your {playlist_name} playlist has been updated. Give it a listen!",
+    "playlist_notification": {
+        "title": "Your { playlist_name } playlist is ready",
+        "info": "Your { playlist_name } playlist has been updated. Give it a listen!",
         "button_text": "Listen Now"
     }
 }
