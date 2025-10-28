@@ -20,7 +20,6 @@ struct PlaylistNotification {
     playlist_url: String,
     notification_settings_url: String,
 }
-
 pub(crate) fn playlist_notification(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
     let ctx: Option<PlaylistNotification> = serde_json::from_value(params)?;
     let PlaylistNotification {
@@ -42,22 +41,28 @@ pub(crate) fn playlist_notification(params: Value, l: Locale) -> Result<Mjml, Te
         <mj-body width="660px" padding="0">
             <mj-section padding="20px 0">
             <mj-column padding="0">
-                { meb_header().into() }
+                { lb_header().into() }
 
-                <mj-text font-size="16px">
+                <mj-text font-size="14px">
                     <p>{ Text::from(tl!(l, greeting_line, name = to_name)).into() }</p>
-                   <p>{ Text::from(tl!(l, playlist_notification.info, playlist_name)).into() }</p>
                 </mj-text>
 
-                <mj-button
-                    href={playlist_url}
-                    background-color="#e94363"
-                    border-radius="10px"
-                    font-size="18px"
-                    width="50%"
-                >
-                   { Text::from(tl!(l, playlist_notification.button_text)).into() }
-                </mj-button>
+                <mj-wrapper mj-class="wrapper">
+                    <mj-section padding="0"><mj-column padding="0">
+                        <mj-text align="center">
+                           <p>{ Text::from(tl!(l, playlist_notification.info, playlist_name)).into() }</p>
+                        </mj-text>
+
+                        <mj-button
+                            href={playlist_url}
+                            background-color="#353070"
+                            border-radius="8px"
+                            font-size="14px"
+                        >
+                           { Text::from(tl!(l, playlist_notification.button_text)).into() }
+                        </mj-button>
+                    </mj-column></mj-section>
+                </mj-wrapper>
 
                 <mj-text>
                     <p><em>{ Text::from(tl!(l, metabrainz_signoff)).into() }</em></p>
