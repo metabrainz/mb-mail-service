@@ -38,3 +38,13 @@ pub fn header() -> mrml::fragment::Fragment<MjBodyChild> {
         </>
     )
 }
+pub fn lb_header() -> mrml::fragment::Fragment<MjBodyChild> {
+    view!(
+        <>
+            <mj-image width="120px" align="left" padding="10px 15px 0px" src="https://listenbrainz.org/static/img/listenbrainz-logo.png" alt="ListenBrainz"></mj-image>
+
+            <mj-divider padding="10px 15px" border-color="#353070" border-width="3px" />
+        <>
+
+    )
+}
