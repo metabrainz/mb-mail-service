@@ -10,6 +10,8 @@ mod editor_report;
 mod email_in_use;
 mod lost_username;
 mod no_vote;
+mod personal_recommendation;
+mod playlist_notification;
 mod reset_password;
 mod subscription;
 mod verify_email;
@@ -33,6 +35,8 @@ pub fn get(template_id: &str) -> Option<Template> {
         "lost-username" => Some(lost_username::lost_username),
         "no-vote" => Some(no_vote::no_vote),
         "editor-report" => Some(editor_report::editor_report),
+        "personal-recommendation" => Some(personal_recommendation::personal_recommendation),
+        "playlist-notification" => Some(playlist_notification::playlist_notification),
         _ => None,
     }
 }
