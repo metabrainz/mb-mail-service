@@ -85,5 +85,17 @@
         "action": "Feu clic en l'enllaç següent per a reinicialitzar la contrasenya:",
         "info": "Algú, probablement vós, ha sol·licitat reinicialitzar la vostra contrasenya de MusicBrainz.",
         "in_error": "Si no heu iniciat aquesta sol·licitud i creieu que heu rebut aquest correu electrònic per error, no patiu; no cal que feu res més i podeu ignorar aquest correu electrònic."
+    },
+    "change_notification_settings": "Feu clic aquí per a canviar els paràmetres de les notificacions per correu electrònic.",
+    "lb_notification_about": "Heu rebut aquest correu perquè heu habilitat les notificacions per correu electrònic al vostre compte de ListenBrainz.",
+    "personal_recommendation": {
+        "title": "{ from_name } us ha recomanat una pista",
+        "info": "{ from_name } us ha recomanat la pista següent, doneu-hi una ullada!",
+        "button_text": "Escolta-ho ara"
+    },
+    "playlist_notification": {
+        "title": "La llista de reproducció { playlist_name } està a punt",
+        "info": "La llista de reproducció { playlist_name } s'ha actualitzat. Escolteu-la ara!",
+        "button_text": "Escolta-ho ara"
     }
 }
