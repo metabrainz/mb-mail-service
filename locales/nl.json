@@ -1,1 +1,38 @@
-{}
+{
+    "greeting_line": "Beste { name },",
+    "metabrainz_signoff": "– De MetaBrainz-gemeenschap",
+    "do_not_reply": "Je kan niet op dit bericht reageren. Als je hulp nodig hebt, kun je rechtstreeks contact met het team of de gemeenschap opnemen.",
+    "change_subscription_settings": "Klik hier om je instellingen voor mails over je abonnementen te wijzigen.",
+    "change_notification_settings": "Klik hier om je instellingen voor e-mailmeldingen te wijzigen.",
+    "lb_notification_about": "Je krijgt deze e-mail omdat e-mailmeldingen voor je ListenBrainz-account zijn ingeschakeld.",
+    "link_copy_info": "Als je niet op de link hierboven kunt klikken, kun je hem kopiëren en in een nieuw browservenster plakken.",
+    "edit_note": {
+        "title": "Er is een notitie aan je bewerking ({ edit_id }) toegevoegd",
+        "top": "De volgende notitie is aan je bewerking ({ edit_id }) toegevoegd:",
+        "reply": "Je kunt hier reageren."
+    },
+    "editor_message": {
+        "title": "MusicBrainz-bericht van { from_name }: { subject }",
+        "top": "MusicBrainz-redacteur { from_name } heeft je het volgende bericht gestuurd:",
+        "reply_link": "Klik hier om { from_name } een e-mail te sturen.",
+        "reply_email": "Je kunt ook op deze e-mail reageren.",
+        "message_copy": "Je hebt dit bericht naar { to_name } gestuurd",
+        "bubble_subject": "{ from_name }: { subject }"
+    },
+    "verify_email": {
+        "title": "Je e-mailadres bevestigen",
+        "top": "Klik op de link hieronder om je e-mailadres te bevestigen:",
+        "welcome": "Welkom!"
+    },
+    "reset_password": {
+        "title": "Verzoek om het wachtwoord te resetten",
+        "info": "Iemand (waarschijnlijk jij) heeft een verzoek voor een nieuw MusicBrainz-wachtwoord ingediend.",
+        "action": "Klik op de link hieronder om je wachtwoord te resetten:",
+        "in_error": "Als je dit niet hebt aangevraagd en je denkt dat deze e-mail een vergissing is, hoef je je geen zorgen te maken. Je hoeft verder niets te doen en kan deze e-mail veilig negeren.",
+        "contact": "Lukt het inloggen nog steeds niet? Neem dan contact met ons op."
+    },
+    "email_in_use": {
+        "title": "E-mailadres al in gebruik",
+        "info": "Je hebt ons gevraagd om dit e-mailadres te bevestigen voor het MusicBrainz-account { user_name }, maar we hebben al ten minste één account met dit adres in onze databank."
+    }
+}
