@@ -31,7 +31,7 @@ utoipa = { version = "5.3.1", features = ["axum_extras"] }
 utoipa-swagger-ui = { version = "9.0.0", features = ["axum"] }
 serde = { version = "1.0.217", features = ["derive"] }
 mf1 = "0.1.6"
-sentry = { version = "0.45.0", features = ["tracing", "tower", "tower-http"] }
+sentry = { version = "0.46.0", features = ["tracing", "tower", "tower-http"] }
 futures-util = "0.3.31"
 futures = "0.3.31"
 dashmap = { version = "6.1.0", features = ["serde"] }
