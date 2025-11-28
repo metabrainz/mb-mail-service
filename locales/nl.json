@@ -33,6 +33,67 @@
     },
     "email_in_use": {
         "title": "E-mailadres al in gebruik",
-        "info": "Je hebt ons gevraagd om dit e-mailadres te bevestigen voor het MusicBrainz-account { user_name }, maar we hebben al ten minste één account met dit adres in onze databank."
+        "info": "Je hebt ons gevraagd om dit e-mailadres te bevestigen voor het MusicBrainz-account { user_name }, maar we hebben al ten minste één account met dit adres in onze databank.",
+        "action_username": "Als je je oude gebruikersnaam bent vergeten, kun je die met de volgende link opvragen:",
+        "action_password": "Je kunt daarna met de onderstaande link eventueel een nieuw wachtwoord aanvragen:",
+        "in_error": "Als je dit niet hebt aangevraagd en je denkt dat je deze e-mail niet had moeten krijgen, hoef je je geen zorgen te maken. Je hoeft verder niets te doen en je kan deze e-mail veilig negeren.",
+        "second_account": "Als je een specifieke reden voor een tweede account hebt (bijvoorbeeld als je een bot wil uitvoeren en je wil dat opmerkingen ook naar dit adres worden gestuurd), kan je ons een bericht sturen. Dan kunnen we het beoordelen."
+    },
+    "lost_username": {
+        "title": "Gebruikersnaam vergeten",
+        "info": "Iemand (waarschijnlijk jij) heeft de gebruikersnaam van het aan dit e-mailadres gekoppelde MusicBrainz-account opgevraagd.",
+        "username_is": "Je MusicBrainz-gebruikersnaam is: { user_name }",
+        "reset_password": "Als je ook je wachtwoord bent vergeten, kun je deze gebruikersnaam en je e-mailadres gebruiken om hier een nieuw wachtwoord aan te vragen:",
+        "in_error": "Als je dit niet hebt aangevraagd en je denkt dat deze e-mail een vergissing is, hoef je je geen zorgen te maken. Je hoeft verder niets te doen en kan deze e-mail veilig negeren."
+    },
+    "no_vote": {
+        "title": "Iemand heeft tegen je bewerking { edit_id } gestemd",
+        "top": "MusicBrainz-redacteur { voter_name } heeft tegen je bewerking { edit_id } gestemd.",
+        "reply": "Je kunt reageren op:",
+        "single_email": "Houd er rekening mee dat deze e-mail niet voor elke stem tegen een bewerking wordt verstuurd.",
+        "close_time": "Deze bewerking wordt pas afgewezen op { close_time }, 72 uur na het verzenden van deze e-mail, zodat jij en andere redacteuren de tijd hebben om te reageren."
+    },
+    "editor_report": {
+        "title": "{ from_name } heeft redacteur { reported_name } gerapporteerd",
+        "copy_title": "Kopie van je melding over { reported_name }",
+        "top": "{ from_name } heeft redacteur { reported_name } om de volgende reden gerapporteerd:",
+        "reply_email": "Je kan rechtstreeks op dit bericht reageren.",
+        "reply_no_email": "De melder heeft ervoor gekozen om het e-mailadres niet te tonen. Je kan via het profiel van de redacteur contact opnemen.",
+        "message_copy": "Dit is een kopie van je melding over MusicBrainz-redacteur { reported_name }",
+        "reporter_account": "Account van melder: ",
+        "reported_account": "Account van gemelde redacteur: "
+    },
+    "subscription": {
+        "open_applied_count": "({ open } open, { applied } doorgevoerd)",
+        "open_edits": "Alle open bewerkingen:",
+        "open_edits_subscribed_entities": "Alle open bewerkingen voor geabonneerde objecten",
+        "open_edits_subscribed_editors": "Alle open bewerkingen door je geabonneerde redacteuren",
+        "thanks": "Bedankt voor het abonneren en stemmen!",
+        "about": "Dit is een melding dat er bewerkingen zijn toegevoegd voor artiesten, platenmaatschappijen, collecties en redacteuren waarop je op MusicBrainz bent geabonneerd. ",
+        "edit_subscriptions": "Klik hier om je abonnementen te bekijken of aan te passen.",
+        "title": "Bewerkingen voor je abonnementen",
+        "info": "Er zijn nieuwe bewerkingen voor objecten waarop je bent geabonneerd.",
+        "changes_sections": {
+            "subscribed_artists": "Bewerkingen voor je geabonneerde artiesten:",
+            "subscribed_collections": "Bewerkingen voor je geabonneerde collecties:",
+            "subscribed_labels": "Bewerkingen voor je geabonneerde platenmaatschappijen:",
+            "subscribed_series": "Bewerkingen voor je geabonneerde series:",
+            "subscribed_editors": "Bewerkingen door je geabonneerde redacteuren:"
+        },
+        "deleted_merged": "Verwijderde en samengevoegde artiesten of platenmaatschappijen:",
+        "deleted_merged_info": "Sommige van de artiesten, platenmaatschappijen of collecties waarop je bent geabonneerd, zijn samengevoegd, verwijderd of privé gemaakt:",
+        "deleted_default_reason": "verwijderd of privé gemaakt",
+        "entity": "{ name }",
+        "entity_with_comment": "{ name } ({ comment })"
+    },
+    "personal_recommendation": {
+        "title": "{ from_name } heeft je een nummer aanbevolen",
+        "info": "{ from_name } heeft je het volgende nummer aanbevolen. Luister het nu!",
+        "button_text": "Nu luisteren"
+    },
+    "playlist_notification": {
+        "title": "Je afspeellijst { playlist_name } is klaar",
+        "info": "Je afspeellijst { playlist_name } is bijgewerkt. Luister maar!",
+        "button_text": "Nu luisteren"
     }
 }
