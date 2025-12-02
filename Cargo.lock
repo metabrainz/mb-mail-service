@@ -334,9 +334,9 @@ dependencies = [
 
 [[package]]
 name = "axum-test"
-version = "18.3.0"
+version = "18.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c0388808c0617a886601385c0024b9d0162480a763ba371f803d87b775115400"
+checksum = "3290e73c56c5cc4701cdd7d46b9ced1b4bd61c7e9f9c769a9e9e87ff617d75d2"
 dependencies = [
  "anyhow",
  "axum",
@@ -833,19 +833,20 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "39cab71617ae0d63f51a36d69f866391735b51691dbda63cf6f96d042b63efeb"
 dependencies = [
  "libc",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
 name = "expect-json"
-version = "1.5.0"
+version = "1.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7519e78573c950576b89eb4f4fe82aedf3a80639245afa07e3ee3d199dcdb29e"
+checksum = "422e7906e79941e5ac58c64dfd2da03e6ae3de62227f87606fbbe125d91080f9"
 dependencies = [
  "chrono",
  "email_address",
  "expect-json-macros",
  "num",
+ "regex",
  "serde",
  "serde_json",
  "thiserror 2.0.17",
@@ -1309,7 +1310,7 @@ dependencies = [
  "libc",
  "percent-encoding",
  "pin-project-lite",
- "socket2 0.5.10",
+ "socket2 0.6.1",
  "tokio",
  "tower-service",
  "tracing",
@@ -2886,7 +2887,7 @@ dependencies = [
  "errno",
  "libc",
  "linux-raw-sys",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -3404,7 +3405,7 @@ dependencies = [
  "getrandom 0.3.4",
  "once_cell",
  "rustix",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -4101,7 +4102,7 @@ version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
 dependencies = [
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
