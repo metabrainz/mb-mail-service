@@ -40,7 +40,7 @@ convert_case = "0.8.0"
 monostate = "1.0.0"
 reqwest = { version = "0.12.12", default-features = false }
 metrics = "0.24.1"
-axum-prometheus = "0.9.0"
+axum-prometheus = "0.10.0"
 # metrics-exporter-prometheus = { version = "0.15.3", default-features = false, features = ["http-listener"] }
 git-testament = "0.2.6"
 html-escape = "0.2.13"
