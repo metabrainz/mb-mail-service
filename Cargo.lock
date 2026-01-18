@@ -513,18 +513,18 @@ dependencies = [
 
 [[package]]
 name = "convert_case"
-version = "0.8.0"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "baaaa0ecca5b51987b9423ccdc971514dd8b0bb7b4060b983d3664dad3f1f89f"
+checksum = "db05ffb6856bf0ecdf6367558a76a0e8a77b1713044eb92845c692100ed50190"
 dependencies = [
  "unicode-segmentation",
 ]
 
 [[package]]
 name = "convert_case"
-version = "0.9.0"
+version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "db05ffb6856bf0ecdf6367558a76a0e8a77b1713044eb92845c692100ed50190"
+checksum = "633458d4ef8c78b72454de2d54fd6ab2e60f9e02be22f3c6104cdc8a4e0fceb9"
 dependencies = [
  "unicode-segmentation",
 ]
@@ -833,7 +833,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "39cab71617ae0d63f51a36d69f866391735b51691dbda63cf6f96d042b63efeb"
 dependencies = [
  "libc",
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -1299,7 +1299,7 @@ dependencies = [
  "libc",
  "percent-encoding",
  "pin-project-lite",
- "socket2 0.5.10",
+ "socket2 0.6.1",
  "tokio",
  "tower-service",
  "tracing",
@@ -1757,7 +1757,7 @@ dependencies = [
  "axum-prometheus",
  "axum-test",
  "config",
- "convert_case 0.8.0",
+ "convert_case 0.10.0",
  "dashmap",
  "expect-test",
  "futures",
@@ -1836,27 +1836,27 @@ dependencies = [
 
 [[package]]
 name = "mf1"
-version = "0.1.8"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2b7c601b4de37680ef625ba3fd02917613f734b2fcafcc0566576e64bb5e0470"
+checksum = "bfb897b0b009b31d969f1d7d2f86e75e3af36236747d1f4dab9db641a7f1243d"
 dependencies = [
  "mf1-macros",
 ]
 
 [[package]]
 name = "mf1-macros"
-version = "0.1.8"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3892c9549e82e6727f768ff6fcc9e87f50009fd930d7ed6dbfac896cda96f11c"
+checksum = "caa660154127910c1fa81826099bd14d32b10edb577d55f262c64033d93b30ee"
 dependencies = [
- "convert_case 0.8.0",
+ "convert_case 0.6.0",
  "mf1-parser",
  "proc-macro2",
  "quote",
  "serde",
  "serde_json",
  "syn 2.0.114",
- "thiserror 2.0.18",
+ "thiserror 1.0.69",
  "toml",
 ]
 
@@ -2018,7 +2018,7 @@ version = "0.50.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7957b9740744892f114936ab4a57b3f487491bbeafaf8083688b16841a4240e5"
 dependencies = [
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -2870,7 +2870,7 @@ dependencies = [
  "errno",
  "libc",
  "linux-raw-sys",
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -3387,7 +3387,7 @@ dependencies = [
  "getrandom 0.3.4",
  "once_cell",
  "rustix",
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -4083,7 +4083,7 @@ version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
 dependencies = [
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
