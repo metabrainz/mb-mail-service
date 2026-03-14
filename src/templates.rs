@@ -21,6 +21,7 @@ pub(crate) enum TemplateError {
     #[error("Failed to parse parameters: {0}")]
     SerdeJson(#[from] serde_json::Error),
 }
+
 type Template = fn(Value, Locale) -> Result<Mjml, TemplateError>;
 
 pub fn get(template_id: &str) -> Option<Template> {
@@ -37,6 +38,9 @@ pub fn get(template_id: &str) -> Option<Template> {
         "editor-report" => Some(editor_report::editor_report),
         "personal-recommendation" => Some(personal_recommendation::personal_recommendation),
         "playlist-notification" => Some(playlist_notification::playlist_notification),
-        _ => None,
+        _ => {
+            tracing::warn!("Unknown email template requested: {}", template_id);
+            None
+        },
     }
 }
