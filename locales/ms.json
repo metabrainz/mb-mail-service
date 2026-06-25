@@ -1,1 +1,11 @@
-{}
+{
+    "greeting_line": "Salam { name },",
+    "metabrainz_signoff": "—  Para warga MetaBrainz",
+    "editor_message": {
+        "message_copy": "Pesanan telah dihantar kepada { to_name }",
+        "bubble_subject": "{ from_name }: { subject }"
+    },
+    "verify_email": {
+        "welcome": "Selamat datang!"
+    }
+}
