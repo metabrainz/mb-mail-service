@@ -85,5 +85,6 @@
         "thanks": "感谢您的订阅与投票！",
         "about": "这是一条通知，告知您已为在 MusicBrainz 网站上订阅的艺术家、厂牌、合集和编辑者添加了编辑内容。 ",
         "edit_subscriptions": "点击此处查看或编辑您的订阅。"
-    }
+    },
+    "change_notification_settings": "点击此处更改邮件通知设置。"
 }
