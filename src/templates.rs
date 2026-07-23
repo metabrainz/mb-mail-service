@@ -51,6 +51,6 @@ pub fn get(template_id: &str) -> Option<Template> {
         _ => {
             tracing::warn!("Unknown email template requested: {}", template_id);
             None
-        },
+        }
     }
 }
