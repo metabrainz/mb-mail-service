@@ -508,6 +508,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "convert_case"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "affbf0190ed2caf063e3def54ff444b449371d55c58e513a95ab98eca50adb49"
+dependencies = [
+ "unicode-segmentation",
+]
+
+[[package]]
 name = "cookie"
 version = "0.18.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1715,7 +1724,7 @@ dependencies = [
  "axum-prometheus",
  "axum-test",
  "config",
- "convert_case 0.8.0",
+ "convert_case 0.11.0",
  "dashmap",
  "expect-test",
  "futures",
