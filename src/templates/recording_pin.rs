@@ -1,0 +1,104 @@
+use std::borrow::Borrow;
+
+use html_escape::encode_text;
+use mf1::t_l_string as tl;
+use mrml::{mjml::Mjml, text::Text};
+use mrmx::WithAttribute;
+use mrmx_macros::view;
+use serde::Deserialize;
+use serde_json::Value;
+
+use crate::{components::*, Locale};
+
+use super::TemplateError;
+
+#[derive(Deserialize, Debug, Default)]
+#[serde(default)]
+struct RecordingPin {
+    to_name: String,
+    from_name: String,
+    track_name: String,
+    track_artist: String,
+    track_url: String,
+    message: String,
+    notification_settings_url: String,
+}
+
+pub(crate) fn recording_pin(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
+    let ctx: Option<RecordingPin> = serde_json::from_value(params)?;
+    let RecordingPin {
+        to_name: ref to_name_raw,
+        from_name: ref from_name_raw,
+        message: _,
+        track_name,
+        track_artist,
+        track_url,
+        notification_settings_url,
+    } = ctx.unwrap_or_default();
+
+    let to_name = &encode_text(to_name_raw);
+    let from_name = &encode_text(from_name_raw);
+
+    Ok(view! {
+        <mjml>
+        <mj-head>
+            { head().into() }
+            <mj-title>{ tl!(l, recording_pin.title, from_name = from_name_raw).borrow() }</mj-title>
+        </mj-head>
+        <mj-body width="660px" padding="0">
+            <mj-section padding="20px 0">
+            <mj-column padding="0">
+                { lb_header().into() }
+                <mj-text>
+                    <p>{ Text::from(tl!(l, greeting_line, name = to_name)).into() }</p>
+                    <p>{ Text::from(tl!(l, recording_pin.info, from_name = from_name)).into() }</p>
+                </mj-text>
+
+                <mj-wrapper mj-class="wrapper">
+                    <mj-section>
+                        <mj-column>
+                            <mj-text
+                                align="center"
+                                font-size="20px"
+                                font-weight="bold"
+                                padding="15px 5px 5px 5px"
+                            >
+                                { Text::from(track_name).into() }
+                            </mj-text>
+                            <mj-text
+                                align="center"
+                                font-size="16px"
+                                color="#555"
+                                padding="0px 5px 15px 5px"
+                            >
+                                { Text::from(track_artist).into() }
+                            </mj-text>
+                            <mj-button
+                                href={track_url}
+                                background-color="#353070"
+                                border-radius="8px"
+                                padding="10px 0"
+                            >
+                            { Text::from(tl!(l, recording_pin.button_text)).into() }
+                            </mj-button>
+                        </mj-column>
+                    </mj-section>
+                </mj-wrapper>
+
+                <mj-text>
+                    <p><em>{ Text::from(tl!(l, metabrainz_signoff)).into() }</em></p>
+                </mj-text>
+                <mj-divider padding="10px 15px" border-color="#F5F5F5" border-width="3px" />
+                <mj-text font-size="12px" color="#8D8D8D">
+                    <p>{ Text::from(tl!(l, lb_notification_about)).into() }</p>
+                    <p>
+                        <a href={notification_settings_url}>{ Text::from(tl!(l, change_notification_settings)).into() }</a>
+                    </p>
+                    <p>{ Text::from(tl!(l, do_not_reply)).into() }</p>
+                </mj-text>
+            </mj-column>
+          </mj-section>
+        </mj-body>
+      </mjml>
+    })
+}

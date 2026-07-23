@@ -88,9 +88,33 @@
         "about": "This is a notification that edits have been added for artists, labels, collections and editors to whom you subscribed on the MusicBrainz web site. ",
         "edit_subscriptions": "Click here to view or edit your subscriptions."
     },
+    "cb_review": {
+        "title": "{ from_name } wrote a review",
+        "info": "{ from_name } wrote a review of { entity_name } on CritiqueBrainz.",
+        "button_text": "Read Review"
+    },
+    "follow": {
+        "title": "{ from_name } is now following you",
+        "info": "{ from_name } is now following you on ListenBrainz!",
+        "button_text": "View Profile"
+    },
+    "notification": {
+        "title": "Message from { from_name }",
+        "info": "{ from_name } sent you the following message:"
+    },
     "personal_recommendation": {
         "title": "{ from_name } has recommended a track for you",
         "info": "{ from_name } has recommended the following track for you, check it out!",
+        "button_text": "Listen Now"
+    },
+    "recording_pin": {
+        "title": "{ from_name } pinned a track",
+        "info": "{ from_name } has pinned the following track, check it out!",
+        "button_text": "Listen Now"
+    },
+    "thanks": {
+        "title": "{ from_name } thanked you for a recommendation",
+        "info": "{ from_name } thanked you for recommending the following track!",
         "button_text": "Listen Now"
     },
     "playlist_notification": {
