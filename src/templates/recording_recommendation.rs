@@ -14,10 +14,9 @@ use super::TemplateError;
 
 #[derive(Deserialize, Debug, Default)]
 #[serde(default)]
-struct PersonalRecommendation {
+struct RecordingRecommendation {
     to_name: String,
     from_name: String,
-    message: String,
     track_name: String,
     track_artist: String,
     track_url: String,
@@ -25,12 +24,11 @@ struct PersonalRecommendation {
     notification_settings_url: String,
 }
 
-pub(crate) fn personal_recommendation(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
-    let ctx: Option<PersonalRecommendation> = serde_json::from_value(params)?;
-    let PersonalRecommendation {
+pub(crate) fn recording_recommendation(params: Value, l: Locale) -> Result<Mjml, TemplateError> {
+    let ctx: Option<RecordingRecommendation> = serde_json::from_value(params)?;
+    let RecordingRecommendation {
         to_name: ref to_name_raw,
         from_name: ref from_name_raw,
-        message,
         track_name,
         track_artist,
         track_url,
@@ -40,30 +38,12 @@ pub(crate) fn personal_recommendation(params: Value, l: Locale) -> Result<Mjml, 
 
     let to_name = &encode_text(to_name_raw);
     let from_name = &encode_text(from_name_raw);
-    let message = encode_text(&message);
 
     Ok(view! {
         <mjml>
         <mj-head>
             { head().into() }
-            <mj-title>{ tl!(l, personal_recommendation.title, from_name = from_name_raw).borrow() }</mj-title>
-            <mj-style>"
-                div.speech {
-                    position: relative;
-                }
-                div .speech::after {
-                    display: block;
-                    width: 0;
-                    content: \"\";
-                    border: 15px solid transparent;
-                    border-left-color: #F5F5F5;
-                    position: absolute;
-                    bottom: -15px;
-                    left: 15px;
-                    z-index: -1;
-                }
-            "</mj-style>
-
+            <mj-title>{ tl!(l, recording_recommendation.title, from_name = from_name_raw).borrow() }</mj-title>
         </mj-head>
         <mj-body width="660px" padding="0">
             <mj-section padding="20px 0">
@@ -71,20 +51,8 @@ pub(crate) fn personal_recommendation(params: Value, l: Locale) -> Result<Mjml, 
                 { lb_header().into() }
                 <mj-text>
                     <p>{ Text::from(tl!(l, greeting_line, name = to_name)).into() }</p>
-                    <p>{ Text::from(tl!(l, personal_recommendation.info, from_name = from_name)).into() }</p>
+                    <p>{ Text::from(tl!(l, recording_recommendation.info, from_name = from_name)).into() }</p>
                 </mj-text>
-
-                { if !message.is_empty() {
-                    view! {
-                        <mj-wrapper mj-class="wrapper" css-class="speech" >
-                            <mj-text>
-                                <p class="text-no-wrap" style="white-space: pre-wrap;">
-                                    { Text::from(message).into()}
-                                </p>
-                            </mj-text>
-                        </mj-wrapper>
-                    }.into()
-                } else { view!(<></>).into() }}
 
                 <mj-wrapper mj-class="wrapper">
                     <mj-section>
@@ -117,7 +85,7 @@ pub(crate) fn personal_recommendation(params: Value, l: Locale) -> Result<Mjml, 
                                 border-radius="8px"
                                 padding="10px 0"
                             >
-                            { Text::from(tl!(l, personal_recommendation.button_text)).into() }
+                            { Text::from(tl!(l, recording_recommendation.button_text)).into() }
                             </mj-button>
                         </mj-column>
                     </mj-section>

@@ -107,6 +107,11 @@
         "info": "{ from_name } has recommended the following track for you, check it out!",
         "button_text": "Listen Now"
     },
+    "recording_recommendation": {
+        "title": "{ from_name } recommended a track",
+        "info": "{ from_name } recommended the following track, check it out!",
+        "button_text": "Listen Now"
+    },
     "recording_pin": {
         "title": "{ from_name } pinned a track",
         "info": "{ from_name } has pinned the following track, check it out!",

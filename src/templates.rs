@@ -16,6 +16,7 @@ mod notification;
 mod personal_recommendation;
 mod playlist_notification;
 mod recording_pin;
+mod recording_recommendation;
 mod reset_password;
 mod subscription;
 mod thanks;
@@ -47,6 +48,7 @@ pub fn get(template_id: &str) -> Option<Template> {
         "personal-recommendation" => Some(personal_recommendation::personal_recommendation),
         "playlist-notification" => Some(playlist_notification::playlist_notification),
         "recording-pin" => Some(recording_pin::recording_pin),
+        "recording-recommendation" => Some(recording_recommendation::recording_recommendation),
         "thanks" => Some(thanks::thanks),
         _ => {
             tracing::warn!("Unknown email template requested: {}", template_id);
