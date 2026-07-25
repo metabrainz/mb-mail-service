@@ -20,6 +20,7 @@ struct RecordingPin {
     track_name: String,
     track_artist: String,
     track_url: String,
+    album_art_url: String,
     message: String,
     notification_settings_url: String,
 }
@@ -29,21 +30,39 @@ pub(crate) fn recording_pin(params: Value, l: Locale) -> Result<Mjml, TemplateEr
     let RecordingPin {
         to_name: ref to_name_raw,
         from_name: ref from_name_raw,
-        message: _,
+        message,
         track_name,
         track_artist,
         track_url,
+        album_art_url,
         notification_settings_url,
     } = ctx.unwrap_or_default();
 
     let to_name = &encode_text(to_name_raw);
     let from_name = &encode_text(from_name_raw);
+    let message = encode_text(&message);
 
     Ok(view! {
         <mjml>
         <mj-head>
             { head().into() }
             <mj-title>{ tl!(l, recording_pin.title, from_name = from_name_raw).borrow() }</mj-title>
+            <mj-style>"
+                div.speech {
+                    position: relative;
+                }
+                div .speech::after {
+                    display: block;
+                    width: 0;
+                    content: \"\";
+                    border: 15px solid transparent;
+                    border-left-color: #F5F5F5;
+                    position: absolute;
+                    bottom: -15px;
+                    left: 15px;
+                    z-index: -1;
+                }
+            "</mj-style>
         </mj-head>
         <mj-body width="660px" padding="0">
             <mj-section padding="20px 0">
@@ -54,9 +73,27 @@ pub(crate) fn recording_pin(params: Value, l: Locale) -> Result<Mjml, TemplateEr
                     <p>{ Text::from(tl!(l, recording_pin.info, from_name = from_name)).into() }</p>
                 </mj-text>
 
+                { if !message.is_empty() {
+                    view! {
+                        <mj-wrapper mj-class="wrapper" css-class="speech" >
+                            <mj-text>
+                                <p class="text-no-wrap" style="white-space: pre-wrap;">
+                                    { Text::from(message).into()}
+                                </p>
+                            </mj-text>
+                        </mj-wrapper>
+                    }.into()
+                } else { view!(<></>).into() }}
+
                 <mj-wrapper mj-class="wrapper">
                     <mj-section>
                         <mj-column>
+                            <mj-image
+                                src={album_art_url}
+                                alt={format!("Cover art for {} by {}", track_name, track_artist)}
+                                padding="0"
+                                border-radius="8px"
+                            />
                             <mj-text
                                 align="center"
                                 font-size="20px"
