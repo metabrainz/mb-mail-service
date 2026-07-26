@@ -24,6 +24,7 @@ use crate::{
     send::{send_mail_bulk_route, send_mail_mjml_route, send_mail_route, MailTransport},
 };
 use axum::{
+    http::StatusCode,
     response::Redirect,
     routing::{get, post},
     Json,
@@ -153,7 +154,7 @@ async fn service(mailer: MailTransport) -> axum::Router {
             TraceLayer::new_for_http(),
             // Give a universal timeout to prevent
             // DOS and for graceful shutdown
-            TimeoutLayer::new(Duration::from_secs(60)),
+            TimeoutLayer::with_status_code(StatusCode::REQUEST_TIMEOUT, Duration::from_secs(60)),
         ))
         // Place the healthcheck last to bypass previously set layers
         .route("/healthcheck", get(healthcheck));
