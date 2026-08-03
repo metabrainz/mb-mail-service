@@ -52,3 +52,8 @@ axum-test = "18.0.0"
 [profile.release]
 lto = true
 codegen-units = 1
+
+# Place debuginfo next to the binary
+debug = true
+split-debuginfo = "packed"
+strip = true
