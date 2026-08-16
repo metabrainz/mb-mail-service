@@ -37,10 +37,10 @@ cargo run
 To send mail to your local SMTP relay, first start it, and then tell the service which port it is running on with an environment variable:
 
 ```shell
-SMTP_PORT="1025" cargo run
+APP_SMTP_PORT="1025" cargo run
 ```
 Where:
-- `SMTP_PORT` is the port on which your local SMTP testing tool is running (for example, Mailpit defaults to port 1025).
+- `APP_SMTP_PORT` is the port on which your local SMTP testing tool is running (for example, Mailpit defaults to port 1025).
 
 #### Automatic restarts (live reload)
 
