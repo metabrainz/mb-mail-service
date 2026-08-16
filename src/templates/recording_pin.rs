@@ -88,12 +88,16 @@ pub(crate) fn recording_pin(params: Value, l: Locale) -> Result<Mjml, TemplateEr
                 <mj-wrapper mj-class="wrapper">
                     <mj-section>
                         <mj-column>
-                            <mj-image
-                                src={album_art_url}
-                                alt={format!("Cover art for {} by {}", track_name, track_artist)}
-                                padding="0"
-                                border-radius="8px"
-                            />
+                            { if !album_art_url.is_empty() {
+                                view! {
+                                    <mj-image
+                                        src={album_art_url}
+                                        alt={format!("Cover art for {} by {}", track_name, track_artist)}
+                                        padding="0"
+                                        border-radius="8px"
+                                    />
+                                }.into()
+                            } else { view!(<></>).into() }}
                             <mj-text
                                 align="center"
                                 font-size="20px"
@@ -110,14 +114,18 @@ pub(crate) fn recording_pin(params: Value, l: Locale) -> Result<Mjml, TemplateEr
                             >
                                 { Text::from(track_artist).into() }
                             </mj-text>
-                            <mj-button
-                                href={track_url}
-                                background-color="#353070"
-                                border-radius="8px"
-                                padding="10px 0"
-                            >
-                            { Text::from(tl!(l, recording_pin.button_text)).into() }
-                            </mj-button>
+                            { if !track_url.is_empty() {
+                                view! {
+                                    <mj-button
+                                        href={track_url}
+                                        background-color="#353070"
+                                        border-radius="8px"
+                                        padding="10px 0"
+                                    >
+                                    { Text::from(tl!(l, recording_pin.button_text)).into() }
+                                    </mj-button>
+                                }.into()
+                            } else { view!(<></>).into() }}
                         </mj-column>
                     </mj-section>
                 </mj-wrapper>
