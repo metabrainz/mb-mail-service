@@ -95,5 +95,34 @@
         "title": "Je afspeellijst { playlist_name } is klaar",
         "info": "Je afspeellijst { playlist_name } is bijgewerkt. Luister maar!",
         "button_text": "Nu luisteren"
+    },
+    "cb_review": {
+        "title": "{ from_name } schreef een recensie",
+        "info": "{ from_name } schreef op CritiqueBrainz een recensie over { entity_name }.",
+        "button_text": "Recensie lezen"
+    },
+    "follow": {
+        "title": "{ from_name } volgt je nu",
+        "info": "{ from_name } volgt je nu op ListenBrainz!",
+        "button_text": "Profiel bekijken"
+    },
+    "notification": {
+        "title": "Bericht van { from_name }",
+        "info": "{ from_name } stuurde je het volgende bericht:"
+    },
+    "recording_recommendation": {
+        "title": "{ from_name } raadde een nummer aan",
+        "info": "{ from_name } raadde het volgende nummer aan. Luister het nu!",
+        "button_text": "Nu luisteren"
+    },
+    "recording_pin": {
+        "title": "{ from_name } heeft een nummer vastgezet",
+        "info": "{ from_name } heeft het volgende nummer vastgezet. Luister het nu!",
+        "button_text": "Nu luisteren"
+    },
+    "thanks": {
+        "title": "{ from_name } bedankte je voor een aanbeveling",
+        "info": "{ from_name } bedankte je voor het aanraden van het volgende nummer!",
+        "button_text": "Nu luisteren"
     }
 }
