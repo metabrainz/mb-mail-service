@@ -139,5 +139,19 @@
         "election_rules_link_text": "Read more about the election process.",
         "autoeditor_link_text": "Read more about what we expect from our auto-editors.",
         "participate": "To vote or discuss, please visit our forum:"
+    },
+    "election_open": {
+        "title": "Auto-editor election: { candidate_name }",
+        "salute": "Hey auto-editors!",
+        "opening_message": "Voting in this election is now open!",
+        "candidate": "<strong>Candidate</strong>: <a href={candidate_url}>{ candidate_name }</a>",
+        "proposer": "<strong>Proposer</strong>: <a href={proposer_url}>{ proposer_name }</a>",
+        "seconder_1": "<strong>First seconder</strong>: <a href={seconder_1_url}>{ seconder_1_name }</a>",
+        "seconder_2": "<strong>Second seconder</strong>: <a href={seconder_2_url}>{ seconder_2_name }</a>",
+        "election_rules_1": "Voting will remain open for 1 week",
+        "election_rules_2": "The proposer may withdraw the proposal at any time",
+        "election_rules_link_text": "Read more about the election process.",
+        "autoeditor_link_text": "Read more about what we expect from our auto-editors.",
+        "participate": "To vote or discuss, please visit our forum:"
     }
 }
