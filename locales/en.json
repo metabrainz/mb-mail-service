@@ -126,5 +126,18 @@
         "title": "Your { playlist_name } playlist is ready",
         "info": "Your { playlist_name } playlist has been updated. Give it a listen!",
         "button_text": "Listen Now"
+    },
+    "election_start": {
+        "title": "Auto-editor election: { candidate_name }",
+        "salute": "Hey auto-editors!",
+        "opening_message": "There is a new election going on!",
+        "candidate": "<strong>Candidate</strong>: <a href={candidate_url}>{ candidate_name }</a>",
+        "proposer": "<strong>Proposer</strong>: <a href={proposer_url}>{ proposer_name }</a>",
+        "election_rules_1": "There is a 1 week window for 2 seconders to step forward",
+        "election_rules_2": "Once the seconders have been found, a 1 week voting period begins",
+        "election_rules_3": "The proposer may withdraw the proposal at any time",
+        "election_rules_link_text": "Read more about the election process.",
+        "autoeditor_link_text": "Read more about what we expect from our auto-editors.",
+        "participate": "To vote or discuss, please visit our forum:"
     }
 }
