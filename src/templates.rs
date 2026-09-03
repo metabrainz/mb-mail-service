@@ -10,6 +10,7 @@ mod editor_message;
 mod editor_report;
 mod election_accepted;
 mod election_open;
+mod election_rejected;
 mod election_start;
 mod email_in_use;
 mod follow;
@@ -56,6 +57,7 @@ pub fn get(template_id: &str) -> Option<Template> {
         "election-start" => Some(election_start::election_start),
         "election-open" => Some(election_open::election_open),
         "election-accepted" => Some(election_accepted::election_accepted),
+        "election-rejected" => Some(election_rejected::election_rejected),
         _ => {
             tracing::warn!("Unknown email template requested: {}", template_id);
             None

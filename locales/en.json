@@ -166,5 +166,15 @@
         "new_autoeditor_welcome_2": "In summary, you have more voting rights, and we expect familiarity with the <a href=\"https://musicbrainz.org/doc/Code_of_Conduct\">Code of Conduct</a>, adherence to the <a href=\"https://musicbrainz.org/doc/Style\">Style Guidelines</a>, and a high standard of objectivity on edits and votes.",
         "new_autoeditor_welcome_3": "You have also been given access to the <a href=\"https://community.metabrainz.org/t/about-the-autoeditor-category/43\">Autoeditor category of the forums</a>, and, once you’re confident enough, you can <a href=\"https://musicbrainz.org/doc/Auto-Editor_Election\">start auto-editor elections</a> yourself.",
         "election_outro": "Happy editing!"
+    },
+    "election_rejected": {
+        "title": "Auto-editor election: { candidate_name }",
+        "salute": "Hey auto-editors!",
+        "opening_message": "Voting in the latest election has closed!",
+        "rejected_message": "Candidate <a href={candidate_url}>{ candidate_name }</a> <strong>has not been accepted</strong> as an auto-editor.",
+        "see_results_message": "See the full results.",
+        "election_thanks": "Thank you to everyone who took part.",
+        "not_forever_reminder": "Remember that editors can be proposed multiple times - many auto-editors are elected in repeat elections, after being asked to improve some aspects of their editing.",
+        "election_outro": "Happy editing!"
     }
 }
