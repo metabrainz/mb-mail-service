@@ -153,5 +153,18 @@
         "election_rules_link_text": "Read more about the election process.",
         "autoeditor_link_text": "Read more about what we expect from our auto-editors.",
         "participate": "To vote or discuss, please visit our forum:"
+    },
+    "election_accepted": {
+        "title": "Auto-editor election: { candidate_name }",
+        "salute": "Hey auto-editors!",
+        "opening_message": "Voting in the latest election has closed!",
+        "accepted_message": "Candidate <a href={candidate_url}>{ candidate_name }</a> <strong>has been accepted</strong> as an auto-editor.",
+        "see_results_message": "See the full results.",
+        "election_thanks": "Thank you to everyone who took part.",
+        "new_autoeditor_welcome_intro": "And { candidate_name }, congratulations on becoming an auto-editor! With great power comes great responsibility - please familiarise yourself with the below.",
+        "new_autoeditor_welcome_1": "Your new privileges, as well as your obligations as an auto-editor, can be found <a href=\"https://musicbrainz.org/doc/Editor#Auto-editor\">here</a>.",
+        "new_autoeditor_welcome_2": "In summary, you have more voting rights, and we expect familiarity with the <a href=\"https://musicbrainz.org/doc/Code_of_Conduct\">Code of Conduct</a>, adherence to the <a href=\"https://musicbrainz.org/doc/Style\">Style Guidelines</a>, and a high standard of objectivity on edits and votes.",
+        "new_autoeditor_welcome_3": "You have also been given access to the <a href=\"https://community.metabrainz.org/t/about-the-autoeditor-category/43\">Autoeditor category of the forums</a>, and, once you’re confident enough, you can <a href=\"https://musicbrainz.org/doc/Auto-Editor_Election\">start auto-editor elections</a> yourself.",
+        "election_outro": "Happy editing!"
     }
 }
