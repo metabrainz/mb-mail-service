@@ -176,5 +176,15 @@
         "election_thanks": "Thank you to everyone who took part.",
         "not_forever_reminder": "Remember that editors can be proposed multiple times - many auto-editors are elected in repeat elections, after being asked to improve some aspects of their editing.",
         "election_outro": "Happy editing!"
+    },
+    "election_cancelled": {
+        "title": "Auto-editor election: { candidate_name }",
+        "salute": "Hey auto-editors!",
+        "opening_message": "The election has been cancelled!",
+        "cancelled_message": "The auto-editor election for <a href={candidate_url}>{ candidate_name }</a> <strong>has been cancelled</strong> by the proposer.",
+        "see_results_message": "See the full results.",
+        "election_thanks": "Thank you to everyone who took part.",
+        "not_forever_reminder": "Remember that editors can be proposed multiple times - many auto-editors are elected in repeat elections, after being asked to improve some aspects of their editing.",
+        "election_outro": "Happy editing!"
     }
 }
