@@ -126,5 +126,65 @@
         "title": "Your { playlist_name } playlist is ready",
         "info": "Your { playlist_name } playlist has been updated. Give it a listen!",
         "button_text": "Listen Now"
+    },
+    "election_start": {
+        "title": "Auto-editor election: { candidate_name }",
+        "salute": "Hey auto-editors!",
+        "opening_message": "There is a new election going on!",
+        "candidate": "<strong>Candidate</strong>: <a href={candidate_url}>{ candidate_name }</a>",
+        "proposer": "<strong>Proposer</strong>: <a href={proposer_url}>{ proposer_name }</a>",
+        "election_rules_1": "There is a 1 week window for 2 seconders to step forward",
+        "election_rules_2": "Once the seconders have been found, a 1 week voting period begins",
+        "election_rules_3": "The proposer may withdraw the proposal at any time",
+        "election_rules_link_text": "Read more about the election process.",
+        "autoeditor_link_text": "Read more about what we expect from our auto-editors.",
+        "participate": "To vote or discuss, please visit our forum:"
+    },
+    "election_open": {
+        "title": "Auto-editor election: { candidate_name }",
+        "salute": "Hey auto-editors!",
+        "opening_message": "Voting in this election is now open!",
+        "candidate": "<strong>Candidate</strong>: <a href={candidate_url}>{ candidate_name }</a>",
+        "proposer": "<strong>Proposer</strong>: <a href={proposer_url}>{ proposer_name }</a>",
+        "seconder_1": "<strong>First seconder</strong>: <a href={seconder_1_url}>{ seconder_1_name }</a>",
+        "seconder_2": "<strong>Second seconder</strong>: <a href={seconder_2_url}>{ seconder_2_name }</a>",
+        "election_rules_1": "Voting will remain open for 1 week",
+        "election_rules_2": "The proposer may withdraw the proposal at any time",
+        "election_rules_link_text": "Read more about the election process.",
+        "autoeditor_link_text": "Read more about what we expect from our auto-editors.",
+        "participate": "To vote or discuss, please visit our forum:"
+    },
+    "election_accepted": {
+        "title": "Auto-editor election: { candidate_name }",
+        "salute": "Hey auto-editors!",
+        "opening_message": "Voting in the latest election has closed!",
+        "accepted_message": "Candidate <a href={candidate_url}>{ candidate_name }</a> <strong>has been accepted</strong> as an auto-editor.",
+        "see_results_message": "See the full results.",
+        "election_thanks": "Thank you to everyone who took part.",
+        "new_autoeditor_welcome_intro": "And { candidate_name }, congratulations on becoming an auto-editor! With great power comes great responsibility - please familiarise yourself with the below.",
+        "new_autoeditor_welcome_1": "Your new privileges, as well as your obligations as an auto-editor, can be found <a href=\"https://musicbrainz.org/doc/Editor#Auto-editor\">here</a>.",
+        "new_autoeditor_welcome_2": "In summary, you have more voting rights, and we expect familiarity with the <a href=\"https://musicbrainz.org/doc/Code_of_Conduct\">Code of Conduct</a>, adherence to the <a href=\"https://musicbrainz.org/doc/Style\">Style Guidelines</a>, and a high standard of objectivity on edits and votes.",
+        "new_autoeditor_welcome_3": "You have also been given access to the <a href=\"https://community.metabrainz.org/t/about-the-autoeditor-category/43\">Autoeditor category of the forums</a>, and, once you’re confident enough, you can <a href=\"https://musicbrainz.org/doc/Auto-Editor_Election\">start auto-editor elections</a> yourself.",
+        "election_outro": "Happy editing!"
+    },
+    "election_rejected": {
+        "title": "Auto-editor election: { candidate_name }",
+        "salute": "Hey auto-editors!",
+        "opening_message": "Voting in the latest election has closed!",
+        "rejected_message": "Candidate <a href={candidate_url}>{ candidate_name }</a> <strong>has not been accepted</strong> as an auto-editor.",
+        "see_results_message": "See the full results.",
+        "election_thanks": "Thank you to everyone who took part.",
+        "not_forever_reminder": "Remember that editors can be proposed multiple times - many auto-editors are elected in repeat elections, after being asked to improve some aspects of their editing.",
+        "election_outro": "Happy editing!"
+    },
+    "election_cancelled": {
+        "title": "Auto-editor election: { candidate_name }",
+        "salute": "Hey auto-editors!",
+        "opening_message": "The election has been cancelled!",
+        "cancelled_message": "The auto-editor election for <a href={candidate_url}>{ candidate_name }</a> <strong>has been cancelled</strong> by the proposer.",
+        "see_results_message": "See the full results.",
+        "election_thanks": "Thank you to everyone who took part.",
+        "not_forever_reminder": "Remember that editors can be proposed multiple times - many auto-editors are elected in repeat elections, after being asked to improve some aspects of their editing.",
+        "election_outro": "Happy editing!"
     }
 }
