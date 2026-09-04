@@ -45,6 +45,9 @@ axum-prometheus = "0.9.0"
 git-testament = "0.2.6"
 html-escape = "0.2.13"
 
+[patch.crates-io]
+syn_derive = { git = "https://github.com/StarGazerM/syn_derive.git" }
+
 [dev-dependencies]
 expect-test = "1.5.1"
 axum-test = "18.0.0"
