@@ -29,27 +29,27 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - uses: actions-rust-lang/setup-rust-toolchain@166cdcfd11aee3cb47222f9ddb555ce30ddb9659 # v1.17.0
         with:
           components: llvm-tools-preview,rustfmt,clippy
           cache: false
-      - uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
         with:
           cache-on-failure: true
-      - uses: taiki-e/install-action@v2
+      - uses: taiki-e/install-action@e67fa11c4b9316fa714ddf0abed07a0c3143b95b # v2.87.4
         with:
           tool: cargo-deny,nextest,cargo-llvm-cov
-      - uses: actions/setup-python@v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: 3.x
       - name: Install pre-commit & gitlint
         run: python -m pip install pre-commit gitlint
       - run: python -m pip freeze --local
-      - uses: actions/cache@v6
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.cache/pre-commit
           key: pre-commit-3|${{ env.pythonLocation }}|${{ hashFiles('.pre-commit-config.yaml') }}
@@ -59,17 +59,17 @@ jobs:
         run: gitlint --commits ${{ env.FROM_REF }}..${{ env.TO_REF }}
         if: always()
       - name: Formatting
-        uses: clechasseur/rs-cargo@v5.0.8
+        uses: clechasseur/rs-cargo@9a5c570d3347f8dee3916c8871f3ffaf38909956 # v5.0.8
         with:
           command: fmt
           args: --check
       - name: Check
-        uses: clechasseur/rs-cargo@v5.0.8
+        uses: clechasseur/rs-cargo@9a5c570d3347f8dee3916c8871f3ffaf38909956 # v5.0.8
         with:
           command: check
           args: --all-targets --all-features --locked
       - name: Linting
-        uses: clechasseur/rs-cargo@v5.0.8
+        uses: clechasseur/rs-cargo@9a5c570d3347f8dee3916c8871f3ffaf38909956 # v5.0.8
         with:
           command: clippy
           args: --all-targets --all-features --locked
@@ -82,13 +82,13 @@ jobs:
       - name: Replace workspace in lcov
         run: perl -i -pe's%\Q${{ github.workspace }}\E%WORKSPACE%g' lcov-${{ matrix.os }}.info
       - name: Upload code coverage to GitHub
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: code-coverage-${{ matrix.os }}
           path: lcov-${{ matrix.os }}.info
         continue-on-error: true
       - name: Publish Test Report
-        uses: mikepenz/action-junit-report@v6
+        uses: mikepenz/action-junit-report@a9170d5795813c01ab4901ffb045b52bab4ab09d # v6.5.0
         if: success() || failure()
         with:
           report_paths: 'target/nextest/ci/junit.xml'
@@ -106,22 +106,22 @@ jobs:
     steps:
     - name: Install LCOV
       if: success() || failure()
-      uses: hrishikesh-kadam/setup-lcov@v1
-    - uses: actions/checkout@v7
+      uses: hrishikesh-kadam/setup-lcov@6c1aa0cc9e1c02f9f58f01ac599f1064ccc83470 # v1.1.0
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       with:
         persist-credentials: false
     - name: Download code coverage from GitHub
-      uses: actions/download-artifact@v8
+      uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
       with:
         merge-multiple: true
         pattern: code-coverage-*
-    - uses: taiki-e/install-action@v2
+    - uses: taiki-e/install-action@e67fa11c4b9316fa714ddf0abed07a0c3143b95b # v2.87.4
       with:
         tool: grcov
     - name: Replace placeholder in lcov
       run: find lcov-*.info -type f -print0 | xargs -0 -I {} sh -c 'sed "s%WORKSPACE%${{ github.workspace }}%g" {} > ${{ runner.temp }}/{}; grcov ${{ runner.temp }}/{} -s . --guess-directory-when-missing > {}'
     - name: Report code coverage
-      uses: zgosalvez/github-actions-report-lcov@v7
+      uses: zgosalvez/github-actions-report-lcov@00810fe31a127d403ad812ab09e1250e97638b8c # v7.2.0
       if: success() || failure()
       with:
         coverage-files: lcov-*.info
