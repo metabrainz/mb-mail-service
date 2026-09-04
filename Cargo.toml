@@ -50,7 +50,7 @@ syn_derive = { git = "https://github.com/StarGazerM/syn_derive.git" }
 
 [dev-dependencies]
 expect-test = "1.5.1"
-axum-test = "18.0.0"
+axum-test = "21.0.0"
 
 [profile.release]
 lto = true
