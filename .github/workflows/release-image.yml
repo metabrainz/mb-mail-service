@@ -106,7 +106,7 @@ jobs:
       # It will not push images generated from a pull request
       - name: Build and push Docker image
         id: push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v7
         with:
           context: .
           push: true
