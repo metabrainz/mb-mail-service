@@ -97,5 +97,34 @@
         "title": "La llista de reproducció { playlist_name } està a punt",
         "info": "La llista de reproducció { playlist_name } s'ha actualitzat. Escolteu-la ara!",
         "button_text": "Escolta-ho ara"
+    },
+    "cb_review": {
+        "title": "{ from_name } ha escrit una ressenya",
+        "info": "{ from_name } ha escrit una ressenya de { entity_name } a CritiqueBrainz.",
+        "button_text": "Llegeix la ressenya"
+    },
+    "follow": {
+        "title": "{ from_name } ara us segueix",
+        "info": "{ from_name } ara us segueix a ListenBrainz!",
+        "button_text": "Visualitza el perfil"
+    },
+    "notification": {
+        "title": "Missatge de { from_name }",
+        "info": "{ from_name } us ha enviat el missatge següent:"
+    },
+    "recording_recommendation": {
+        "title": "{ from_name } ha recomanat una pista",
+        "info": "{ from_name } ha recomanat la pista següent, doneu-hi un cop d'ull!",
+        "button_text": "Escolta-ho ara"
+    },
+    "recording_pin": {
+        "title": "{ from_name } ha fixat una pista",
+        "info": "{ from_name } ha fixat la pista següent, doneu-hi un cop d'ull!",
+        "button_text": "Escolta-ho ara"
+    },
+    "thanks": {
+        "title": "{ from_name } us ha donat les gràcies per una recomanació",
+        "info": "{ from_name } us ha donat les gràcies per recomanar la pista següent!",
+        "button_text": "Escolta-ho ara"
     }
 }
