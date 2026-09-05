@@ -1802,7 +1802,6 @@ dependencies = [
  "dashmap",
  "expect-test",
  "futures",
- "futures-util",
  "git-testament",
  "html-escape",
  "html2text",
