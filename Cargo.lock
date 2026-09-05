@@ -1799,7 +1799,6 @@ dependencies = [
  "axum-prometheus",
  "axum-test",
  "config",
- "convert_case 0.8.0",
  "dashmap",
  "expect-test",
  "futures",
