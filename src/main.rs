@@ -57,11 +57,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
     .leak();
 
-    let _guard = sentry::init(sentry::ClientOptions {
-        release: Some(std::borrow::Cow::Borrowed(sentry_release)),
-        session_mode: sentry::SessionMode::Request,
-        ..sentry::ClientOptions::default()
-    });
+    let _guard = sentry::init(
+        sentry::ClientOptions::new()
+            .session_mode(sentry::SessionMode::Request)
+            .maybe_release(Some(std::borrow::Cow::Borrowed(sentry_release)))
+            .default_integrations(true),
+    );
 
     let config = Config::builder()
         .add_source(
