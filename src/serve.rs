@@ -47,7 +47,7 @@ use metrics::counter;
     ),
     components(schemas(crate::send::SendTemplateItem, crate::send::SendResponse)),
     tags(
-        (name = "mb-mail-service", description = "MusicBrains Mail Service API")
+        (name = "mb-mail-service", description = "MusicBrainz Mail Service API")
     )
 )]
 struct ApiDoc;
@@ -336,11 +336,11 @@ mod tests {
     async fn test_server() -> Result<TestServer, Box<dyn Error>> {
         let mailer = mailer(Default::default());
 
-        let server = axum_test::TestServer::builder()
+        let server = TestServer::builder()
             .mock_transport()
-            .build(service(mailer).await)?;
+            .try_build(service(mailer).await);
 
-        Ok(server)
+        Ok(server?)
     }
 
     #[tokio::test]
