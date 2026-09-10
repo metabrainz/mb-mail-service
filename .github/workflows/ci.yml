@@ -40,7 +40,7 @@ jobs:
       - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
         with:
           cache-on-failure: true
-      - uses: taiki-e/install-action@c3ec0de9ae7f1019cea21aa96aa0a895b9552063 # v2.87.9
+      - uses: taiki-e/install-action@fa23953489c080190314742a9b907f8e97c6767c # v2.87.10
         with:
           tool: cargo-deny,nextest,cargo-llvm-cov
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
@@ -115,7 +115,7 @@ jobs:
       with:
         merge-multiple: true
         pattern: code-coverage-*
-    - uses: taiki-e/install-action@c3ec0de9ae7f1019cea21aa96aa0a895b9552063 # v2.87.9
+    - uses: taiki-e/install-action@fa23953489c080190314742a9b907f8e97c6767c # v2.87.10
       with:
         tool: grcov
     - name: Replace placeholder in lcov
