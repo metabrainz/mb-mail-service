@@ -8,6 +8,11 @@ mod cb_review;
 mod edit_note;
 mod editor_message;
 mod editor_report;
+mod election_accepted;
+mod election_cancelled;
+mod election_open;
+mod election_rejected;
+mod election_start;
 mod email_in_use;
 mod follow;
 mod lost_username;
@@ -50,6 +55,11 @@ pub fn get(template_id: &str) -> Option<Template> {
         "recording-pin" => Some(recording_pin::recording_pin),
         "recording-recommendation" => Some(recording_recommendation::recording_recommendation),
         "thanks" => Some(thanks::thanks),
+        "election-start" => Some(election_start::election_start),
+        "election-open" => Some(election_open::election_open),
+        "election-accepted" => Some(election_accepted::election_accepted),
+        "election-rejected" => Some(election_rejected::election_rejected),
+        "election-cancelled" => Some(election_cancelled::election_cancelled),
         _ => {
             tracing::warn!("Unknown email template requested: {}", template_id);
             None
