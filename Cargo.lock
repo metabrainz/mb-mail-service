@@ -2043,7 +2043,7 @@ dependencies = [
 [[package]]
 name = "mrmx"
 version = "0.1.0"
-source = "git+https://github.com/JadedBlueEyes/mrmx.git#0804c3b4fcbf3667b5c3c5c0f4ef154976eafc67"
+source = "git+https://github.com/JadedBlueEyes/mrmx.git#88e1327632bc3e917132c8b495d00741a6ae3a49"
 dependencies = [
  "mrml",
  "mrmx-macros",
@@ -2052,7 +2052,7 @@ dependencies = [
 [[package]]
 name = "mrmx-macros"
 version = "0.1.0"
-source = "git+https://github.com/JadedBlueEyes/mrmx.git#0804c3b4fcbf3667b5c3c5c0f4ef154976eafc67"
+source = "git+https://github.com/JadedBlueEyes/mrmx.git#88e1327632bc3e917132c8b495d00741a6ae3a49"
 dependencies = [
  "convert_case 0.9.0",
  "manyhow",
@@ -2968,9 +2968,9 @@ dependencies = [
 
 [[package]]
 name = "rustls"
-version = "0.23.44"
+version = "0.23.45"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6725596c3f2c3a0aef021139e145d4eafe314a6623e4680ca83852b2c67ab2ba"
+checksum = "0d41d731c7d2f962d1ccc364cec258de3c0e93b38c2fb3ba97ac74513048d634"
 dependencies = [
  "log",
  "once_cell",
