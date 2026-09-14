@@ -72,11 +72,21 @@ pub(crate) fn election_start(params: Value, l: Locale) -> Result<Mjml, TemplateE
                     </p>
                 </mj-text>
 
+                <mj-wrapper mj-class="wrapper">
+                    <mj-text>
+                        <p><strong>{ Text::from(tl!(l, election_start.participate )).into() }</strong></p>
+                        <p>
+                            <a href={election_url}>{ Text::from(encode_text(election_url)).into()}</a>
+                        </p>
+                    </mj-text>
+                </mj-wrapper>
+
                 <mj-text>
-                    <p><strong>{ Text::from(tl!(l, election_start.participate )).into() }</strong></p>
-                    <p>
-                        <a href={election_url}>{ Text::from(encode_text(election_url)).into()}</a>
-                    </p>
+                    <p><em>{ Text::from(tl!(l, metabrainz_signoff)).into() }</em></p>
+                </mj-text>
+                <mj-divider padding="10px 15px" border-color="#F5F5F5" border-width="3px" />
+                <mj-text font-size="12px" color="#8D8D8D">
+                    <p>{ Text::from(tl!(l, do_not_reply)).into() }</p>
                 </mj-text>
             </mj-column>
         </mj-section>

@@ -59,6 +59,14 @@ pub(crate) fn election_rejected(params: Value, l: Locale) -> Result<Mjml, Templa
                 <mj-text>
                     <p>{ Text::from(tl!(l, election_rejected.election_outro )).into() }</p>
                 </mj-text>
+
+                <mj-text>
+                    <p><em>{ Text::from(tl!(l, metabrainz_signoff)).into() }</em></p>
+                </mj-text>
+                <mj-divider padding="10px 15px" border-color="#F5F5F5" border-width="3px" />
+                <mj-text font-size="12px" color="#8D8D8D">
+                    <p>{ Text::from(tl!(l, do_not_reply)).into() }</p>
+                </mj-text>
             </mj-column>
         </mj-section>
         </mj-body>
