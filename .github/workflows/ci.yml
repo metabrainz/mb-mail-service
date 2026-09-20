@@ -37,7 +37,7 @@ jobs:
         with:
           components: llvm-tools-preview,rustfmt,clippy
           cache-on-failure: true
-      - uses: taiki-e/install-action@9114bf4d891761788c546334fd37538eae1bf8b3 # v2.87.16
+      - uses: taiki-e/install-action@94c31af3204a9f15ab40b35ad084410b905bbc73 # v2.87.17
         with:
           tool: cargo-deny,nextest,cargo-llvm-cov
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
@@ -112,7 +112,7 @@ jobs:
       with:
         merge-multiple: true
         pattern: code-coverage-*
-    - uses: taiki-e/install-action@9114bf4d891761788c546334fd37538eae1bf8b3 # v2.87.16
+    - uses: taiki-e/install-action@94c31af3204a9f15ab40b35ad084410b905bbc73 # v2.87.17
       with:
         tool: grcov
     - name: Replace placeholder in lcov
