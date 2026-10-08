@@ -73,8 +73,8 @@
         },
         "deleted_merged": "已删除和合并的艺术家或厂牌：",
         "deleted_merged_info": "您订阅的部分艺术家、厂牌或收藏集已被合并、删除或设为私有：",
-        "deleted_item": "{ item_type, select, artist {艺术家} label {厂牌} series {系列} collection {收藏} other {未知} } “{ entity }” - { reason }",
-        "deleted_item_with_edit": "{ item_type, select, artist {艺术家} label {厂牌} series {系列} collection {收藏} other {未知} } “{ entity }” - { reason } 由 #{ edit_id }",
+        "deleted_item": "{item_type, select, artist {艺术家} label {厂牌} series {系列} collection {收藏} other {未知} } \"{entity}\" - {reason}",
+        "deleted_item_with_edit": "{ item_type, select, artist {Artist} label {Label} series {Series} collection {Collection} other {Unknown} } “{ entity }” - { reason } 由 #{ edit_id }",
         "deleted_default_reason": "已删除或设为私有",
         "entity": "{ name }",
         "entity_with_comment": "{ name }（{ comment }）",
@@ -86,5 +86,105 @@
         "about": "这是一条通知，告知您已为在 MusicBrainz 网站上订阅的艺术家、厂牌、合集和编辑者添加了编辑内容。 ",
         "edit_subscriptions": "点击此处查看或编辑您的订阅。"
     },
-    "change_notification_settings": "点击此处更改邮件通知设置。"
+    "change_notification_settings": "点击此处更改邮件通知设置。",
+    "lb_notification_about": "你收到这封电子邮件是因为你的 ListenBrainz 账户启用了电子邮件通知。",
+    "cb_review": {
+        "title": "{ from_name } 写了评论",
+        "info": "{ from_name } 在 CritiqueBrainz 上写了 { entity_name } 的评论。",
+        "button_text": "阅读评论"
+    },
+    "follow": {
+        "title": "{ from_name } 现在正在关注你",
+        "info": "{ from_name } 在 ListenBrainz 上现在正在关注你！",
+        "button_text": "查看个人资料"
+    },
+    "notification": {
+        "title": "来自 { from_name } 的消息",
+        "info": "{ from_name } 发送了你以下消息："
+    },
+    "personal_recommendation": {
+        "title": "{ from_name } 为你推荐了一首曲目",
+        "info": "{ from_name } 为你推荐了以下曲目，快去听听吧！",
+        "button_text": "立即收听"
+    },
+    "recording_recommendation": {
+        "title": "{ from_name } 推荐了一首曲目",
+        "info": "{ from_name } 推荐了以下音轨，快去看看！",
+        "button_text": "立即收听"
+    },
+    "recording_pin": {
+        "title": "{ from_name } 固定了音轨",
+        "info": "{ from_name } 已固定以下音轨，快去看看！",
+        "button_text": "立即收听"
+    },
+    "thanks": {
+        "title": "{ from_name } 感谢你推荐",
+        "info": "{ from_name } 感谢你推荐以下音轨！",
+        "button_text": "立即收听"
+    },
+    "playlist_notification": {
+        "title": "你的 { playlist_name } 播放列表已准备好",
+        "info": "你的 { playlist_name } 播放列表已更新。去收听一下吧！",
+        "button_text": "立即收听"
+    },
+    "election_start": {
+        "title": "自动编辑选举：{ candidate_name }",
+        "salute": "嘿，自动编辑们！",
+        "opening_message": "有一场新的选举正在进行！",
+        "candidate": "<strong>候选人</strong>：<a href=\"{candidate_url}\">{ candidate_name }</a>",
+        "proposer": "<strong>提议人</strong>：<a href=\"{proposer_url}\">{ proposer_name }</a>",
+        "election_rules_1": "有 1 周的时间供 2 支持者表态",
+        "election_rules_2": "一旦找到支持者，将开始 1 周的投票期",
+        "election_rules_3": "提议人可以随时撤回提议",
+        "election_rules_link_text": "了解更多关于选举流程的信息。",
+        "autoeditor_link_text": "了解更多关于我们期望自动编辑器的信息。",
+        "participate": "请访问我们的论坛进行投票或讨论："
+    },
+    "election_open": {
+        "title": "自动编辑选举：{ candidate_name }",
+        "salute": "嘿，自动编辑们！",
+        "opening_message": "本次选举的投票现已开放！",
+        "candidate": "<strong>候选人</strong>：<a href=\"{candidate_url}\">{ candidate_name }</a>",
+        "proposer": "<strong>提议人</strong>：<a href=\"{proposer_url}\">{ proposer_name }</a>",
+        "seconder_1": "<strong>第一支持者</strong>：<a href=\"{seconder_1_url}\">{ seconder_1_name }</a>",
+        "seconder_2": "<strong>第二支持者</strong>：<a href=\"{seconder_2_url}\">{ seconder_2_name }</a>",
+        "election_rules_1": "投票将开放 1 周",
+        "election_rules_2": "提议人可以随时撤回提议",
+        "election_rules_link_text": "了解更多关于选举流程的信息。",
+        "autoeditor_link_text": "了解更多关于我们期望自动编辑器的信息。",
+        "participate": "请访问我们的论坛进行投票或讨论："
+    },
+    "election_accepted": {
+        "title": "自动编辑选举：{ candidate_name }",
+        "salute": "嘿，自动编辑们！",
+        "opening_message": "最新选举的投票已经结束！",
+        "accepted_message": "候选人 <a href=\"{candidate_url}\">{ candidate_name }</a> <strong>已被接受</strong> 为自动编辑器。",
+        "see_results_message": "查看完整结果。",
+        "election_thanks": "感谢所有参与的人。",
+        "new_autoeditor_welcome_intro": "{ candidate_name }，恭喜你成为自动编辑器！权力越大，责任越大 - 请熟悉以下内容。",
+        "election_outro": "祝你编辑愉快！",
+        "new_autoeditor_welcome_1": "作为一名自动编辑者，您的新权限以及应尽的义务可以在<a href=\"https://musicbrainz.org/doc/Editor#Auto-editor\">此处</a>找到。",
+        "new_autoeditor_welcome_2": "总而言之，您拥有更多的投票权，我们期望您熟悉<a href=\"https://musicbrainz.org/doc/Code_of_Conduct\">行为准则</a>，遵守<a href=\"https://musicbrainz.org/doc/Style\">风格指南</a>，并在编辑和投票时保持高标准的客观性。",
+        "new_autoeditor_welcome_3": "您还获得了访问<a href=\"https://community.metabrainz.org/t/about-the-autoeditor-category/43\">论坛自动编辑者版块</a>的权限，并且，一旦您有足够的信心，您可以自己<a href=\"https://musicbrainz.org/doc/Auto-Editor_Election\">发起自动编辑者选举</a>。"
+    },
+    "election_rejected": {
+        "title": "自动编辑选举：{ candidate_name }",
+        "salute": "嘿，自动编辑们！",
+        "opening_message": "最新选举的投票已经结束！",
+        "rejected_message": "候选人 <a href=\"{candidate_url}\">{ candidate_name }</a> <strong>未被接受</strong> 为自动编辑。",
+        "see_results_message": "查看完整结果。",
+        "election_thanks": "感谢所有参与的人。",
+        "not_forever_reminder": "请记住，编辑可以被多次提名——许多自动编辑是在重复选举中当选的，前提是他们被要求改进编辑的一些方面。",
+        "election_outro": "祝你编辑愉快！"
+    },
+    "election_cancelled": {
+        "title": "自动编辑选举：{ candidate_name }",
+        "salute": "嘿，自动编辑们！",
+        "opening_message": "选举已被取消！",
+        "cancelled_message": "自动编辑选举 <a href=\"{candidate_url}\">{ candidate_name }</a> <strong>已被提名者取消</strong>。",
+        "see_results_message": "查看完整结果。",
+        "election_thanks": "感谢所有参与的人。",
+        "not_forever_reminder": "请记住，编辑可以被多次提名——许多自动编辑是在重复选举中当选的，前提是他们被要求改进编辑的一些方面。",
+        "election_outro": "祝你编辑愉快！"
+    }
 }
