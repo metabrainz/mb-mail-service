@@ -39,7 +39,7 @@ metrics = "0.24.1"
 axum-prometheus = "0.10.0"
 # metrics-exporter-prometheus = { version = "0.15.3", default-features = false, features = ["http-listener"] }
 git-testament = "0.2.6"
-html-escape = "0.2.13"
+html-escape = "0.3.0"
 
 [patch.crates-io]
 syn_derive = { git = "https://github.com/StarGazerM/syn_derive.git" }
