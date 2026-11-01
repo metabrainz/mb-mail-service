@@ -1,7 +1,11 @@
 use config::Config;
 use git_testament::{git_testament, render_testament};
 use render::EngineError;
+use sentry::integrations::tracing::{BreadcrumbLayer, ErrorLayer, SpanLayer};
 use tracing::warn;
+use tracing::Level;
+use tracing_subscriber::filter::{filter_fn, LevelFilter};
+use tracing_subscriber::prelude::*;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 mod components;
@@ -85,7 +89,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 .unwrap_or_else(|_| "debug,html5ever=warn,lettre::transport::smtp::client::async_connection=warn,runtime=warn,tokio::task=warn".into()),
         )
         .with(tracing_subscriber::fmt::layer().without_time())
-        .with(sentry::integrations::tracing::layer())
+        .with(SpanLayer::new().with_filter(LevelFilter::INFO))
+        .with(
+            BreadcrumbLayer::new().with_filter(filter_fn(|metadata| {
+                matches!(*metadata.level(), Level::WARN | Level::INFO)
+            })),
+        )
+        .with(ErrorLayer::new().with_filter(LevelFilter::ERROR))
         .init();
 
     if !_guard.is_enabled() {
