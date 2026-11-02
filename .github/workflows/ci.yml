@@ -118,7 +118,7 @@ jobs:
     - name: Replace placeholder in lcov
       run: find lcov-*.info -type f -print0 | xargs -0 -I {} sh -c 'sed "s%WORKSPACE%${{ github.workspace }}%g" {} > ${{ runner.temp }}/{}; grcov ${{ runner.temp }}/{} -s . --guess-directory-when-missing > {}'
     - name: Report code coverage
-      uses: zgosalvez/github-actions-report-lcov@1f890959536bc7cc4f8ac36e78626797c41f6ac1 # v7.2.2
+      uses: zgosalvez/github-actions-report-lcov@7e6043a0e3ae37bc6e45291401ddea852fc750e5 # v7.2.3
       if: success() || failure()
       with:
         coverage-files: lcov-*.info
