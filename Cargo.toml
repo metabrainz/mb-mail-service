@@ -56,3 +56,6 @@ codegen-units = 1
 debug = true
 split-debuginfo = "packed"
 strip = true
+
+[lints.cargo]
+unused_dependencies = "allow" # currently seems to wrongly claim axum-prometheus is unused
