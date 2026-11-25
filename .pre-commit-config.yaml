@@ -73,6 +73,6 @@ repos:
         pass_filenames: false
         stages: ["pre-push"]
   - repo: https://github.com/crate-ci/typos
-    rev: v1.36.2
+    rev: v1.52.2
     hooks:
       - id: typos
